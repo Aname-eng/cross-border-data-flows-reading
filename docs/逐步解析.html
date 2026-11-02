@@ -1,0 +1,1757 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>生产、贸易与跨境数据流动：逐步解析</title>
+<link rel="stylesheet" href="styles.css">
+<style>
+@page { size: A4; margin: 20mm 18mm 22mm; }
+body { background: white; }
+.pdf-cover { min-height: 86vh; display:flex; flex-direction:column; justify-content:center; max-width:52rem; margin:auto; break-after:page; }
+.pdf-cover h1 { font-family:'Noto Serif SC','Songti SC',serif; font-size:3.1rem; line-height:1.25; margin:.7rem 0 1.2rem; }
+.pdf-cover p { color:#5d6965; }
+.pdf-cover .rule { width:7rem; height:5px; background:#b85d3d; margin-bottom:2rem; }
+.pdf-body { max-width:52rem; margin:auto; }
+.pdf-body > h1:first-child { display:none; }
+@media print {
+  .pdf-cover { min-height:245mm; }
+  .prose h1,.prose h2 { break-after:avoid; }
+  .prose h2 { break-before:page; }
+  .prose h3,.prose h4 { break-after:avoid; }
+  .prose table,.prose pre,.prose blockquote,.prose .math.display { break-inside:avoid; }
+  a { color:inherit; text-decoration:none; }
+}
+</style>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre','code']}};</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head><body>
+<section class="pdf-cover"><div class="rule"></div><p class="eyebrow">云鹰读书会 · 完整解析</p><h1>生产、贸易与<br>跨境数据流动</h1><p>模型推导、文献脉络与可扩展方向</p><p>Qing Chang · Lin William Cong · Liyong Wang · Longtian Zhang</p><p>本版逐字保留既有解析，只改变排版。</p></section>
+<article class="prose pdf-body"><h1 id="analysis-生产贸易与跨境数据流动模型推导文献脉络与可扩展方向">生产、贸易与跨境数据流动：模型推导、文献脉络与可扩展方向</h1>
+<p><strong>Qing Chang、Lin William Cong、Liyong Wang、Longtian Zhang，<em>Production, Trade, and Cross-Border Data Flows</em></strong><br />
+云鹰读书会解析｜资料检索截至 2026 年 10 月 28 日</p>
+<h2 id="analysis-先把论文版本和核心问题说清楚">先把论文版本和核心问题说清楚</h2>
+<p>这篇研究最有价值的想法，是把<strong>原始数据的提供地、工作数据的使用地和商品的消费地分开</strong>。同一批原始记录能够服务两国，但两国各自使用的工作数据需要分别清洗。数据流动因而同时改变生产率、数据行业的劳动需求、消费者的隐私损失和商品贸易条件。仅仅比较“开放后 GDP 是否提高”，不足以判断哪个国家愿意开放。</p>
+<p>目录中标为“2023”的原始 PDF，实际是作者于 <strong>2026 年 1 月 4 日在 AFA 年会使用的 33 页报告</strong>。报告末页注明全文见 NBER Working Paper 31416。NBER 页面记载：初版发行于 2023 年 6 月，最近列出的修订日期为 2025 年 3 月；本次下载的当前全文共 50 页，包含正文、参考文献和附录。以下公式采用这份全文，涉及原报告时另外注明幻灯片页码。</p>
+<p><strong>截至本次检索，能够确认的身份是 NBER 工作论文，不能将它写成“已在顶级期刊发表”。</strong> NBER 封面也明确说明工作论文未经过该系列所称的同行评审。后文回答的是：这项研究哪些设计有优秀理论论文的价值，哪些证据还不足以支撑更强的判断。[S1–S3]</p>
+<h3 id="analysis-阅读路径">阅读路径</h3>
+<ul>
+<li>想逐式复原模型：读第 1—9 节；公式对应表在第 14 节。</li>
+<li>想理解文献继承与贡献：读第 10—11 节。</li>
+<li>想以它为起点做研究：先读第 7.6 节的有限最优条件，再读第 12 节的三个模型扩展。</li>
+<li>想准备演讲：使用 <a href="assets/公式讲解.pdf"><code>课件/公式讲解.pdf</code></a>，源文件为 <a href="课件/公式讲解.tex"><code>公式讲解.tex</code></a>。课件只讲原模型及必要的公式条件，未加入文献评价和研究扩展。</li>
+</ul>
+<p>全文把三种内容分开：<strong>原文设定</strong>、<strong>由这些设定补出的推导</strong>、<strong>本解析提出的新模型</strong>。原文图表中的数值结论注明出处；另行计算的教学例子不与作者的数值模拟混用。</p>
+<hr />
+<h2 id="analysis-模型中有三种数据不能混作一个变量">1. 模型中有三种“数据”，不能混作一个变量</h2>
+<h3 id="analysis-主体符号与量纲">1.1 主体、符号与量纲</h3>
+<p>时间离散且无限，国家为本国 H 和外国 F，品种为 <span class="math inline">\(i\in[0,1]\)</span>。原文的星号表示“在外国使用”，下标 H/F 表示“在何处生成”。例如，<span class="math inline">\(\varphi_{H,t}^{*}\)</span> 是本国生成、外国使用的工作数据，不是外国生成的数据。[S2，§2]</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>符号</th>
+<th>含义</th>
+<th>性质</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="math inline">\(C_t,N_t,D_t\)</span></td>
+<td>家庭消费、总劳动供给、出售的原始数据</td>
+<td>当期流量</td>
+</tr>
+<tr>
+<td><span class="math inline">\(n_t,l_{H,t},l_{H,t}^{*}\)</span></td>
+<td>商品生产、国内数据加工、出口数据加工的劳动</td>
+<td>相互竞争的劳动用途</td>
+</tr>
+<tr>
+<td><span class="math inline">\(K_t,I_t\)</span></td>
+<td>实物资本存量、当期投资</td>
+<td><span class="math inline">\(I_t\)</span> 在下期转化为资本</td>
+</tr>
+<tr>
+<td><span class="math inline">\(\varphi_{H,t},\varphi_{F,t}\)</span></td>
+<td>本国企业购买的本国、外国工作数据</td>
+<td>当期加工后的流量</td>
+</tr>
+<tr>
+<td><span class="math inline">\(\varphi_t\)</span></td>
+<td>本国企业将两种来源合成后的工作数据</td>
+<td>数据投资流量</td>
+</tr>
+<tr>
+<td><span class="math inline">\(\Phi_{i,t}\)</span></td>
+<td>企业已经积累、可用于当期生产的数据</td>
+<td>预定存量</td>
+</tr>
+<tr>
+<td><span class="math inline">\(Y_{H,i,t},Y_{H,i,t}^{*}\)</span></td>
+<td>本国企业向本国、外国销售的商品</td>
+<td>两个销售方向</td>
+</tr>
+<tr>
+<td><span class="math inline">\(Y_{F,i,t},Y_{F,i,t}^{*}\)</span></td>
+<td>外国企业向本国、外国销售的商品</td>
+<td>两个销售方向</td>
+</tr>
+<tr>
+<td><span class="math inline">\(T_{i,t}\equiv Y_{H,i,t}+Y_{H,i,t}^{*}\)</span></td>
+<td>本国企业总产量</td>
+<td>本解析新增简写</td>
+</tr>
+<tr>
+<td><span class="math inline">\(Y_{i,t}\)</span></td>
+<td>本国批发商合成的第 <span class="math inline">\(i\)</span> 种商品</td>
+<td>有别于生产企业总产量</td>
+</tr>
+<tr>
+<td><span class="math inline">\(Y_t\)</span></td>
+<td>本国最终品</td>
+<td>国内吸收的最终品</td>
+</tr>
+<tr>
+<td><span class="math inline">\(P_t,P_{i,t}\)</span></td>
+<td>最终品价格、批发合成品价格</td>
+<td>本国 <span class="math inline">\(P_t=1\)</span></td>
+</tr>
+<tr>
+<td><span class="math inline">\(q_t\equiv P_{\varphi,t}\)</span></td>
+<td>数据合成流量的单位价格</td>
+<td>不是当期存量租金</td>
+</tr>
+<tr>
+<td><span class="math inline">\(P_{D,t},w_t,r_t\)</span></td>
+<td>原始数据价格、工资、资本租金</td>
+<td>用一致的商品单位计价</td>
+</tr>
+<tr>
+<td><span class="math inline">\(\Pi,\pi_t\)</span></td>
+<td>隐私损失的尺度、随机冲击</td>
+<td>大写 <span class="math inline">\(\Pi\)</span> 不是企业利润</td>
+</tr>
+<tr>
+<td><span class="math inline">\(\xi\)</span></td>
+<td>数据在资本复合项中的重要性</td>
+<td>最终产出对 <span class="math inline">\(\Phi\)</span> 的弹性为 <span class="math inline">\(\alpha\xi\)</span></td>
+</tr>
+<tr>
+<td><span class="math inline">\(\rho,m,\omega\)</span></td>
+<td>品种间、国内/进口商品间、两国数据间的替代弹性</td>
+<td>三者不同</td>
+</tr>
+</tbody>
+</table>
+<p>企业利润沿用原文的 <span class="math inline">\(F_t\)</span>，不要与 F 国下标混淆。为缩短公式，定义</p>
+<p><span class="math display">\[
+\kappa\equiv\Pi(1+b\mathbb I),\qquad
+\mu_{\rho}\equiv\frac{\rho}{\rho-1},\qquad
+\mu_m\equiv\frac m{m-1}.
+\]</span></p>
+<p>采用 <span class="math inline">\(0&lt;\beta&lt;1\)</span>、<span class="math inline">\(0&lt;\alpha,\gamma,\chi&lt;1\)</span>、<span class="math inline">\(\rho,m&gt;1\)</span>、<span class="math inline">\(\omega&gt;0\)</span>、<span class="math inline">\(\xi\ge0\)</span>，价格、生产率和隐私尺度为正。涉及对数与内点推导时，各项投入为正；零采购和零数据作用的边界分别处理。</p>
+<p><span class="math inline">\(\mathbb I=1\)</span> 表示该国允许数据出口，<span class="math inline">\(\mathbb I=0\)</span> 表示不出口。只进口、不出口的国家不应自动承担这项额外出口隐私损失。</p>
+<h3 id="analysis-一期内的顺序">1.2 一期内的顺序</h3>
+<ol type="1">
+<li>期初给定 <span class="math inline">\(K_t,\Phi_t\)</span>，观察生产率、隐私和跨境成本冲击。</li>
+<li>家庭提供劳动和原始数据；企业用期初资本和数据存量生产。</li>
+<li>数据商买入 <span class="math inline">\(D_t\)</span>，分别用 <span class="math inline">\(l_{H,t}\)</span> 和 <span class="math inline">\(l_{H,t}^{*}\)</span> 清洗国内用和出口用数据。</li>
+<li>企业购买并合成 <span class="math inline">\(\varphi_t\)</span>，家庭作投资决策。</li>
+<li>两类存量更新：</li>
+</ol>
+<p><span class="math display">\[
+K_{t+1}=(1-\delta_K)K_t+I_t,\qquad
+\Phi_{i,t+1}=(1-\delta_\Phi)\Phi_{i,t}+\varphi_t.
+\]</span></p>
+<p>因此，<strong>当期多买工作数据首先增加 <span class="math inline">\(\Phi_{t+1}\)</span>，并不直接增加 <span class="math inline">\(\Phi_t\)</span></strong>。数据采购的一阶条件是资产定价式，不能写成当期边际产出等于 <span class="math inline">\(q_t\)</span>。</p>
+<h3 id="analysis-非竞争性究竟放在哪里">1.3 非竞争性究竟放在哪里</h3>
+<p>本国数据商的两项技术为</p>
+<p><span class="math display">\[
+\varphi_{H,t}=BD_t^\gamma l_{H,t}^{1-\gamma},\qquad
+\varphi_{H,t}^{*}=BD_t^\gamma(l_{H,t}^{*})^{1-\gamma},
+\quad B&gt;0,\quad0&lt;\gamma&lt;1.
+\]</span></p>
+<p>两式各自使用完整的 <span class="math inline">\(D_t\)</span>，没有 <span class="math inline">\(D_H+D_H^{*}=D\)</span> 这种分配约束。这就是原始数据在两个目的地之间的非竞争性。相反，劳动满足</p>
+<p><span class="math display">\[
+N_t=n_t+l_{H,t}+l_{H,t}^{*},
+\]</span></p>
+<p>同一个劳动小时不能重复用于三项活动。工作数据流还可同时授权给单位测度的多个生产企业；<span class="math inline">\(\Phi_{i,t}\)</span> 则是企业自己的数据状态。原文脚注 8 明确区分可共享的流量与企业层面的存量。[S2，p.8]</p>
+<hr />
+<h2 id="analysis-用一个-ces-推导贯通三个市场">2. 用一个 CES 推导贯通三个市场</h2>
+<p>下面先推导一般形式，后面的商品和数据需求直接逐项代入，避免每次凭记忆套公式。</p>
+<h3 id="analysis-目标用最低成本获得一单位复合品">2.1 目标：用最低成本获得一单位复合品</h3>
+<p>设</p>
+<p><span class="math display">\[
+Q=\left[\sum_j a_j^{1/\varepsilon}x_j^{(\varepsilon-1)/\varepsilon}\right]^{\varepsilon/(\varepsilon-1)},
+\quad a_j&gt;0,\quad\varepsilon&gt;0,\quad\varepsilon\ne1.
+\]</span></p>
+<p>给定目标 <span class="math inline">\(\bar Q&gt;0\)</span> 和价格 <span class="math inline">\(p_j&gt;0\)</span>，解</p>
+<p><span class="math display">\[
+\min_{x_j\ge0}\sum_jp_jx_j\quad\text{s.t.}\quad Q\ge\bar Q.
+\]</span></p>
+<p>因增加任何投入都增加 <span class="math inline">\(Q\)</span>，最优点约束取等号。令 <span class="math inline">\(s=(\varepsilon-1)/\varepsilon\)</span>，<span class="math inline">\(S=\sum_ja_j^{1/\varepsilon}x_j^s\)</span>，则 <span class="math inline">\(Q=S^{1/s}\)</span>。</p>
+<p><strong>第一步：求复合品对单项投入的偏导。</strong></p>
+<p><span class="math display">\[
+\frac{\partial Q}{\partial x_j}
+=\frac1sS^{1/s-1}a_j^{1/\varepsilon}s x_j^{s-1}
+=a_j^{1/\varepsilon}Q^{1/\varepsilon}x_j^{-1/\varepsilon}.
+\]</span></p>
+<p>最后一个等号用了 <span class="math inline">\(S=Q^s\)</span>、<span class="math inline">\(s-1=-1/\varepsilon\)</span>，以及 <span class="math inline">\(s(1/s-1)=1/\varepsilon\)</span>。</p>
+<p><strong>第二步：写拉格朗日条件。</strong> 令约束的乘子为 <span class="math inline">\(P\)</span>：</p>
+<p><span class="math display">\[
+\mathcal L=\sum_jp_jx_j+P(\bar Q-Q),
+\]</span></p>
+<p><span class="math display">\[
+p_j=P\,a_j^{1/\varepsilon}Q^{1/\varepsilon}x_j^{-1/\varepsilon}.
+\]</span></p>
+<p>两边除以 <span class="math inline">\(P\)</span>、再取 <span class="math inline">\(-\varepsilon\)</span> 次幂，得到</p>
+<p><span class="math display">\[
+\boxed{x_j=a_j\left(\frac{p_j}{P}\right)^{-\varepsilon}Q.}
+\tag{C1}
+\]</span></p>
+<p><strong>第三步：反求 <span class="math inline">\(P\)</span>。</strong> 将 C1 代回 CES：</p>
+<p><span class="math display">\[
+\begin{aligned}
+Q^s
+&amp;=\sum_j a_j^{1/\varepsilon}
+\left[a_j(p_j/P)^{-\varepsilon}Q\right]^s\\
+&amp;=Q^s P^{\varepsilon-1}\sum_j a_jp_j^{1-\varepsilon}.
+\end{aligned}
+\]</span></p>
+<p>这里 <span class="math inline">\(a_j\)</span> 的总指数为 <span class="math inline">\(1/\varepsilon+s=1\)</span>。约去 <span class="math inline">\(Q^s&gt;0\)</span>：</p>
+<p><span class="math display">\[
+1=P^{\varepsilon-1}\sum_ja_jp_j^{1-\varepsilon},
+\]</span></p>
+<p><span class="math display">\[
+\boxed{P=\left[\sum_j a_jp_j^{1-\varepsilon}\right]^{1/(1-\varepsilon)}.}
+\tag{C2}
+\]</span></p>
+<p><strong>第四步：核对最小成本。</strong></p>
+<p><span class="math display">\[
+\begin{aligned}
+\sum_jp_jx_j
+&amp;=QP^\varepsilon\sum_j a_jp_j^{1-\varepsilon}\\
+&amp;=QP^\varepsilon P^{1-\varepsilon}=PQ.
+\end{aligned}
+\]</span></p>
+<p>所以乘子 <span class="math inline">\(P\)</span> 正是单位成本，而不只是一个求解工具。其支出份额为</p>
+<p><span class="math display">\[
+\boxed{s_j\equiv\frac{p_jx_j}{PQ}
+=\frac{a_jp_j^{1-\varepsilon}}{\sum_k a_kp_k^{1-\varepsilon}},
+\qquad\sum_js_j=1.}
+\tag{C3}
+\]</span></p>
+<h3 id="analysis-最终品将求和换成积分">2.2 最终品：将求和换成积分</h3>
+<p>原文最终品技术为</p>
+<p><span class="math display">\[
+Y_t=\left[\int_0^1Y_{i,t}^{(\rho-1)/\rho}\,di\right]^{\rho/(\rho-1)}.
+\]</span></p>
+<p>将 C1—C2 中的 <span class="math inline">\(x_j,Q,p_j,\varepsilon,a_j\)</span> 分别替换成 <span class="math inline">\(Y_{i,t},Y_t,P_{i,t},\rho,1\)</span>，并将求和换为积分：</p>
+<p><span class="math display">\[
+Y_{i,t}=\left(\frac{P_{i,t}}{P_t}\right)^{-\rho}Y_t,
+\qquad
+P_t=\left[\int_0^1P_{i,t}^{1-\rho}\,di\right]^{1/(1-\rho)}.
+\tag{C4}
+\]</span></p>
+<p>竞争和规模报酬不变使最终品价格等于单位成本。选择本国最终品为计价物后，<span class="math inline">\(P_t=1\)</span>，才得到原文 A.1—A.2：</p>
+<p><span class="math display">\[
+Y_{i,t}=P_{i,t}^{-\rho}Y_t,\qquad
+\left[\int_0^1P_{i,t}^{1-\rho}\,di\right]^{1/(1-\rho)}=1.
+\]</span></p>
+<p><strong><span class="math inline">\(P_t=1\)</span> 不意味着企业偏离对称均衡定价时，每个 <span class="math inline">\(P_{i,t}\)</span> 都被固定为 1。</strong> 品种对称时可以在均衡点得到 <span class="math inline">\(P_{i,t}=1\)</span>；求一家企业的价格导数时，仍须保留它对该品种复合价格的影响。</p>
+<h3 id="analysis-批发品本国商品与进口商品再合成">2.3 批发品：本国商品与进口商品再合成</h3>
+<p>原文式 (6)、演讲稿第 14 页为</p>
+<p><span class="math display">\[
+Y_{i,t}=\left[Y_{H,i,t}^{(m-1)/m}+Y_{F,i,t}^{(m-1)/m}\right]^{m/(m-1)}.
+\]</span></p>
+<p>本国买家支付的两项价格是 <span class="math inline">\(p_H=P_{H,i,t}\)</span> 和 <span class="math inline">\(p_F=d_PP_{F,i,t}\)</span>。取 C1—C2 的权重均为 1：</p>
+<p><span class="math display">\[
+P_{i,t}=\left[P_{H,i,t}^{1-m}+(d_PP_{F,i,t})^{1-m}\right]^{1/(1-m)},
+\tag{C5}
+\]</span></p>
+<p><span class="math display">\[
+\boxed{
+Y_{H,i,t}=\left(\frac{P_{H,i,t}}{P_{i,t}}\right)^{-m}Y_{i,t},\quad
+Y_{F,i,t}=\left(\frac{d_PP_{F,i,t}}{P_{i,t}}\right)^{-m}Y_{i,t}.}
+\tag{C6}
+\]</span></p>
+<p>在品种对称且 <span class="math inline">\(P_{i,t}=1\)</span> 的均衡点，C6 化为原文 A.3。外国市场必须保留其价格指数：</p>
+<p><span class="math display">\[
+Y_{H,i,t}^{*}
+=\left(\frac{d_P^{*}P_{H,i,t}^{*}}{P_{i,t}^{*}}\right)^{-m}Y_{i,t}^{*}.
+\]</span></p>
+<p>若把 <span class="math inline">\(P_{H,i,t}^{*}\)</span> 定义为已含贸易楔子的到岸价格，则不再额外乘 <span class="math inline">\(d_P^{*}\)</span>。正文与附录的价格记号要按离岸/到岸口径统一，不能让同一楔子出现两次或完全消失。</p>
+<h3 id="analysis-数据合成权重是-chi1omega不是-chi">2.4 数据合成：权重是 <span class="math inline">\(\chi^{1/\omega}\)</span>，不是 <span class="math inline">\(\chi\)</span></h3>
+<p>原文式 (9)、演讲稿第 15 页：</p>
+<p><span class="math display">\[
+\varphi_t=\left[\chi^{1/\omega}\varphi_{H,t}^{(\omega-1)/\omega}
++(1-\chi)^{1/\omega}\varphi_{F,t}^{(\omega-1)/\omega}\right]^{\omega/(\omega-1)}.
+\]</span></p>
+<p>记 <span class="math inline">\(p_{H,t}=P_{\varphi,H,t}\)</span>，<span class="math inline">\(p_{F,t}=\tau_{D,t}P_{\varphi,F,t}\)</span>。在当前全文中，本国进口所面对的 <span class="math inline">\(\tau_{D,t}=d_D^{*}f_t\)</span>，星号表示外国设置的数据出口壁垒；原演讲稿把它简写为 <span class="math inline">\(d_Df_t\)</span>。[S2，p.11，脚注 11；S3，p.16]</p>
+<p>将 C1—C2 取 <span class="math inline">\(\varepsilon=\omega\)</span>、<span class="math inline">\(a_H=\chi\)</span>、<span class="math inline">\(a_F=1-\chi\)</span>：</p>
+<p><span class="math display">\[
+\boxed{q_t=\left[\chi p_{H,t}^{1-\omega}+(1-\chi)p_{F,t}^{1-\omega}\right]^{1/(1-\omega)},}
+\tag{C7}
+\]</span></p>
+<p><span class="math display">\[
+\boxed{\varphi_{H,t}=\chi(p_{H,t}/q_t)^{-\omega}\varphi_t,\quad
+\varphi_{F,t}=(1-\chi)(p_{F,t}/q_t)^{-\omega}\varphi_t.}
+\tag{C8}
+\]</span></p>
+<p>两式相除，<span class="math inline">\(q_t\)</span> 和总采购量 <span class="math inline">\(\varphi_t\)</span> 消去：</p>
+<p><span class="math display">\[
+\frac{\varphi_{F,t}}{\varphi_{H,t}}
+=\frac{1-\chi}{\chi}\left(\frac{p_{F,t}}{p_{H,t}}\right)^{-\omega}.
+\tag{C9}
+\]</span></p>
+<p>所以，在其他价格不变时，进口有效价格提高 1%，进口/国内工作数据量之比下降 <span class="math inline">\(\omega\)</span>%。这只是<strong>条件需求</strong>；一般均衡中工资、原始数据供给和源头价格也会变化。</p>
+<p><strong>边界情形。</strong> 当 <span class="math inline">\(\omega\to1\)</span> 时，不能把原式直接代入而除以零。令 <span class="math inline">\(r=(\omega-1)/\omega\)</span>、<span class="math inline">\(u=\varphi_H/\chi\)</span>、<span class="math inline">\(v=\varphi_F/(1-\chi)\)</span>，则原式恰好为</p>
+<p><span class="math display">\[
+\varphi=[\chi u^r+(1-\chi)v^r]^{1/r},\qquad
+\ln\varphi=\frac{\ln[\chi e^{r\ln u}+(1-\chi)e^{r\ln v}]}r.
+\]</span></p>
+<p><span class="math inline">\(r\to0\)</span> 时分子、分母都趋于零。分子的导数为</p>
+<p><span class="math display">\[
+\frac{\chi e^{r\ln u}\ln u+(1-\chi)e^{r\ln v}\ln v}
+{\chi e^{r\ln u}+(1-\chi)e^{r\ln v}},
+\]</span></p>
+<p>分母导数为 1。令 <span class="math inline">\(r\to0\)</span>，得到</p>
+<p><span class="math display">\[
+\lim_{\omega\to1}\ln\varphi
+=\chi\ln(\varphi_H/\chi)+(1-\chi)\ln[\varphi_F/(1-\chi)],
+\]</span></p>
+<p><span class="math display">\[
+\varphi=(\varphi_H/\chi)^\chi[\varphi_F/(1-\chi)]^{1-\chi},
+\qquad q=p_H^\chi p_F^{1-\chi}.
+\]</span></p>
+<p>这是带归一化常数的 Cobb–Douglas。<span class="math inline">\(\omega\to0^+\)</span> 对应 <span class="math inline">\(r\to-\infty\)</span>。令 <span class="math inline">\(m_0=\min\{u,v\}\)</span>，<span class="math inline">\(a_0\)</span> 为取得该最小值的项的权重，则对 <span class="math inline">\(r&lt;0\)</span>，有 <span class="math inline">\(a_0m_0^r\le\chi u^r+(1-\chi)v^r\le m_0^r\)</span>。取负指数 <span class="math inline">\(1/r\)</span> 会反转不等号，得到 <span class="math inline">\(m_0\le\varphi\le m_0a_0^{1/r}\)</span>；两端都趋于 <span class="math inline">\(m_0\)</span>，故复合量趋向 <span class="math inline">\(\min\{\varphi_H/\chi,\varphi_F/(1-\chi)\}\)</span>。<span class="math inline">\(\omega\to\infty\)</span> 时 <span class="math inline">\(r\to1\)</span>，直接代入得到 <span class="math inline">\(\chi u+(1-\chi)v=\varphi_H+\varphi_F\)</span>。</p>
+<p><strong>关闭数据进口是制度切换。</strong> 原文的纯商品贸易基准直接规定 <span class="math inline">\(\varphi=\varphi_H\)</span>。这与保留 C7—C8、只令 <span class="math inline">\(\varphi_F=0\)</span> 不同：若 <span class="math inline">\(\omega&gt;1\)</span>，后者给出 <span class="math inline">\(\varphi=\chi^{1/(\omega-1)}\varphi_H\)</span>；若 <span class="math inline">\(\omega&lt;1\)</span>，缺一项会使互补型复合量趋向零。因此，福利比较包含原文规定的聚合技术切换，不能一概解释为同一个 CES 内沿可行集合连续撤销禁令。</p>
+<hr />
+<h2 id="analysis-家庭三项当期条件与两类跨期条件">3. 家庭：三项当期条件与两类跨期条件</h2>
+<h3 id="analysis-先消去实物投资">3.1 先消去实物投资</h3>
+<p>原文效用为</p>
+<p><span class="math display">\[
+\max E_0\sum_{t=0}^{\infty}\beta^t
+\left[\frac{C_t^{1-\sigma}}{1-\sigma}
+-\Omega\frac{N_t^{1+\eta}}{1+\eta}
+-\kappa\pi_tD_t^2\right],
+\quad0&lt;\beta&lt;1,\ \sigma&gt;0,\ \eta&gt;0.
+\tag{H1}
+\]</span></p>
+<p>当 <span class="math inline">\(\sigma=1\)</span> 时，用 <span class="math inline">\(\ln C_t\)</span> 取代 CRRA 项的极限形式。下文推导先用 <span class="math inline">\(\sigma\ne1\)</span>。</p>
+<p>封闭经济的预算为</p>
+<p><span class="math display">\[
+C_t+I_t+B_t=w_tN_t+r_tK_t+R_{t-1}B_{t-1}+P_{D,t}D_t+F_t.
+\]</span></p>
+<p>由 <span class="math inline">\(I_t=K_{t+1}-(1-\delta_K)K_t\)</span>，预算可改写为</p>
+<p><span class="math display">\[
+C_t+K_{t+1}+B_t
+=w_tN_t+(r_t+1-\delta_K)K_t+R_{t-1}B_{t-1}+P_{D,t}D_t+F_t.
+\tag{H2}
+\]</span></p>
+<p>这一步使选择 <span class="math inline">\(K_{t+1}\)</span> 的成本和下一期回报直接显露出来。</p>
+<h3 id="analysis-拉格朗日函数与当期一阶条件">3.2 拉格朗日函数与当期一阶条件</h3>
+<p>令 <span class="math inline">\(\lambda_t\)</span> 为预算约束的效用乘子，写</p>
+<p><span class="math display">\[
+\mathcal L=E_0\sum_t\beta^t\{u_t+
+\lambda_t[w_tN_t+(r_t+1-\delta_K)K_t+R_{t-1}B_{t-1}
++P_{D,t}D_t+F_t-C_t-K_{t+1}-B_t]\}.
+\]</span></p>
+<p><strong>消费。</strong> 对 <span class="math inline">\(C_t\)</span> 求偏导：</p>
+<p><span class="math display">\[
+C_t^{-\sigma}-\lambda_t=0
+\quad\Longrightarrow\quad\boxed{\lambda_t=C_t^{-\sigma}.}
+\]</span></p>
+<p><strong>劳动。</strong> 对 <span class="math inline">\(N_t\)</span> 求偏导：</p>
+<p><span class="math display">\[
+-\Omega N_t^\eta+\lambda_tw_t=0.
+\]</span></p>
+<p>代入 <span class="math inline">\(\lambda_t=C_t^{-\sigma}\)</span>，再乘 <span class="math inline">\(C_t^\sigma\)</span>：</p>
+<p><span class="math display">\[
+\boxed{w_t=\Omega C_t^\sigma N_t^\eta.}
+\tag{H3}
+\]</span></p>
+<p>工资要补偿劳动的边际效用损失。这里的 <span class="math inline">\(N_t\)</span> 是总劳动，不能换成仅商品部门的 <span class="math inline">\(n_t\)</span>。</p>
+<p><strong>原始数据。</strong> 对 <span class="math inline">\(D_t\)</span> 求偏导：</p>
+<p><span class="math display">\[
+-2\kappa\pi_tD_t+\lambda_tP_{D,t}=0,
+\]</span></p>
+<p><span class="math display">\[
+\boxed{P_{D,t}=2\kappa\pi_tD_tC_t^\sigma,\qquad
+D_t=\frac{P_{D,t}}{2\kappa\pi_tC_t^\sigma}.}
+\tag{H4}
+\]</span></p>
+<p>固定 <span class="math inline">\(P_D,C\)</span> 时，隐私顾虑越强，家庭供数越少。收到的数据报酬是交易收入；隐私损失是效用成本，两者不能在社会福利中重复扣除。</p>
+<p>原文没有显式加入 <span class="math inline">\(D_t\le\bar d C_t\)</span>。因此，“消费副产品”是经济解释，基准的一阶条件采用供数约束不绑定的区域。若加上该约束及乘子 <span class="math inline">\(\zeta_t\ge0\)</span>，则条件变成</p>
+<p><span class="math display">\[
+C_t^{-\sigma}-\lambda_t+\zeta_t\bar d=0,\quad
+-2\kappa\pi_tD_t+\lambda_tP_{D,t}-\zeta_t=0,
+\]</span></p>
+<p><span class="math display">\[
+D_t\le\bar d C_t,\quad\zeta_t(\bar d C_t-D_t)=0.
+\]</span></p>
+<p>只有 <span class="math inline">\(\zeta_t=0\)</span> 时才退回 H3—H4 及前述消费边际效用。这也说明显式加入数据生成约束会同时改变消费与供数决策。</p>
+<h3 id="analysis-债券-euler-方程">3.3 债券 Euler 方程</h3>
+<p><span class="math inline">\(t\)</span> 期多买一单位 <span class="math inline">\(B_t\)</span>，当前预算减少一单位，下期预算增加 <span class="math inline">\(R_t\)</span>：</p>
+<p><span class="math display">\[
+-\beta^t\lambda_t+\beta^{t+1}E_t[\lambda_{t+1}R_t]=0.
+\]</span></p>
+<p>定义<strong>随机贴现因子</strong></p>
+<p><span class="math display">\[
+M_{t,t+1}\equiv\beta\frac{\lambda_{t+1}}{\lambda_t}
+=\beta\left(\frac{C_{t+1}}{C_t}\right)^{-\sigma}.
+\tag{H5}
+\]</span></p>
+<p>两边除以 <span class="math inline">\(\beta^t\lambda_t&gt;0\)</span>：</p>
+<p><span class="math display">\[
+1=E_t[M_{t,t+1}R_t].
+\]</span></p>
+<p>如果 <span class="math inline">\(R_t\)</span> 是在 <span class="math inline">\(t\)</span> 期已知的无风险回报，便可移出期望：</p>
+<p><span class="math display">\[
+\boxed{1=R_tE_t[M_{t,t+1}].}
+\tag{H6}
+\]</span></p>
+<h3 id="analysis-资本-euler-方程随机回报必须放在期望内">3.4 资本 Euler 方程：随机回报必须放在期望内</h3>
+<p><span class="math inline">\(t\)</span> 期增加 <span class="math inline">\(K_{t+1}\)</span>，当前成本一单位；下一期获得租金 <span class="math inline">\(r_{t+1}\)</span>，并留下 <span class="math inline">\(1-\delta_K\)</span> 单位资本：</p>
+<p><span class="math display">\[
+-\lambda_t+\beta E_t[\lambda_{t+1}(r_{t+1}+1-\delta_K)]=0,
+\]</span></p>
+<p><span class="math display">\[
+\boxed{1=E_t[M_{t,t+1}(r_{t+1}+1-\delta_K)].}
+\tag{H7}
+\]</span></p>
+<p>在确定性稳态，<span class="math inline">\(M=\beta\)</span>，于是</p>
+<p><span class="math display">\[
+1=\beta(\bar r+1-\delta_K),\qquad
+\boxed{\bar r=\beta^{-1}-1+\delta_K.}
+\tag{H8}
+\]</span></p>
+<p>原文 A.1—A.2 将 <span class="math inline">\(\beta E_t[C_{t+1}^{-\sigma}/C_t^{-\sigma}]\)</span> 与 <span class="math inline">\(1/(r_{t+1}+1-\delta_K)\)</span> 并列。若下一期租金随机，严格条件应为 H7；只有在相关回报可提前确定时，才能化成这种倒数形式。</p>
+<h3 id="analysis-跨国风险分担还需要资产市场假设">3.5 跨国风险分担还需要资产市场假设</h3>
+<p>令外国最终品的共同计价物价格为 <span class="math inline">\(P_t^{*}\)</span>。外国多一单位消费的共同货币边际价值为 <span class="math inline">\((C_t^{*})^{-\sigma}/P_t^{*}\)</span>；本国为 <span class="math inline">\(C_t^{-\sigma}\)</span>。</p>
+<p>若两国能够交易完整的状态证券，或采用等价的 Pareto 风险分担安排，设其固定权重为 <span class="math inline">\(\theta_H,\theta_F&gt;0\)</span>，则</p>
+<p><span class="math display">\[
+\theta_HC_t^{-\sigma}
+=\theta_F\frac{(C_t^{*})^{-\sigma}}{P_t^{*}}.
+\]</span></p>
+<p>整理得</p>
+<p><span class="math display">\[
+\boxed{P_t^{*}=\frac{\theta_F}{\theta_H}
+\left(\frac{C_t^{*}}{C_t}\right)^{-\sigma}.}
+\tag{H9}
+\]</span></p>
+<p>原文 p.13 使用 <span class="math inline">\(\theta_H=\theta_F\)</span> 的归一化。仅仅写“两种无风险债券”不能推导出每个状态下的 H9；不完整资产市场下，还须解净外部资产的运动和相应偿付条件。这项区别直接影响冲击后两国消费如何共同调整。</p>
+<p>最优无限期路径还要满足无庞氏约束和横截条件，例如 <span class="math inline">\(\lim_{T\to\infty}E_0[\beta^T\lambda_TK_{T+1}]=0\)</span>，防止通过期末未清偿债务伪造消费收益。</p>
+<hr />
+<h2 id="analysis-商品生产企业数据的回报为什么在下一期出现">4. 商品生产企业：数据的回报为什么在下一期出现</h2>
+<h3 id="analysis-生产函数先展开指数">4.1 生产函数先展开指数</h3>
+<p>原文式 (4)、开放式 (7) 为</p>
+<p><span class="math display">\[
+T_{i,t}=A_t(\Phi_{i,t}^{\xi}k_{i,t})^\alpha n_{i,t}^{1-\alpha}
+=A_t\Phi_{i,t}^{\alpha\xi}k_{i,t}^{\alpha}n_{i,t}^{1-\alpha}.
+\tag{F1}
+\]</span></p>
+<p>其中 <span class="math inline">\(0&lt;\alpha&lt;1\)</span>、<span class="math inline">\(\xi\ge0\)</span>。对三项投入求导：</p>
+<p><span class="math display">\[
+\frac{\partial T}{\partial k}=\alpha\frac Tk,\qquad
+\frac{\partial T}{\partial n}=(1-\alpha)\frac Tn,\qquad
+\frac{\partial T}{\partial\Phi}=\alpha\xi\frac T\Phi.
+\tag{F2}
+\]</span></p>
+<p>所以 <span class="math inline">\(\xi\)</span> 不是数据最终产出弹性。<span class="math inline">\(\xi=1\)</span>、<span class="math inline">\(\alpha=1/3\)</span> 时，产出对数据存量的弹性是 <span class="math inline">\(1/3\)</span>。</p>
+<p>固定 <span class="math inline">\(\Phi\)</span> 时，对 <span class="math inline">\(k,n\)</span> 的规模报酬为 <span class="math inline">\(\alpha+(1-\alpha)=1\)</span>；若把 <span class="math inline">\(\Phi\)</span> 也同比例放大，总指数为 <span class="math inline">\(1+\alpha\xi\)</span>。不能把“给定非竞争性数据的生产”与“所有投入同时扩张”混为同一个规模报酬命题。</p>
+<h3 id="analysis-给定数据存量的成本最小化">4.2 给定数据存量的成本最小化</h3>
+<p>设当期总产量为 <span class="math inline">\(T\)</span>，解</p>
+<p><span class="math display">\[
+\min_{k,n}rk+wn\quad\text{s.t.}\quad
+A\Phi^{\alpha\xi}k^\alpha n^{1-\alpha}\ge T.
+\]</span></p>
+<p>以 <span class="math inline">\(MC\)</span> 为约束乘子，拉格朗日函数为</p>
+<p><span class="math display">\[
+\mathcal L=rk+wn+MC[T-A\Phi^{\alpha\xi}k^\alpha n^{1-\alpha}].
+\]</span></p>
+<p>利用 F2：</p>
+<p><span class="math display">\[
+r=MC\alpha T/k,\quad w=MC(1-\alpha)T/n,
+\]</span></p>
+<p><span class="math display">\[
+\boxed{rk=\alpha MC\,T,\qquad wn=(1-\alpha)MC\,T.}
+\tag{F3}
+\]</span></p>
+<p>把 <span class="math inline">\(k=\alpha MC T/r\)</span>、<span class="math inline">\(n=(1-\alpha)MC T/w\)</span> 代回 F1：</p>
+<p><span class="math display">\[
+T=A\Phi^{\alpha\xi}
+(\alpha MC T/r)^\alpha[(1-\alpha)MC T/w]^{1-\alpha}.
+\]</span></p>
+<p><span class="math inline">\(MC\)</span> 与 <span class="math inline">\(T\)</span> 的总指数都为 1；约去 <span class="math inline">\(T&gt;0\)</span> 后反解：</p>
+<p><span class="math display">\[
+\boxed{MC=\frac1{A\Phi^{\alpha\xi}}
+\left(\frac r\alpha\right)^\alpha
+\left(\frac w{1-\alpha}\right)^{1-\alpha}.}
+\tag{F4}
+\]</span></p>
+<p>这项 <span class="math inline">\(MC\)</span> 是当前生产的边际成本。购买新数据的费用 <span class="math inline">\(q\varphi\)</span> 属于面向未来的投入，尚未包含在 <span class="math inline">\(rk+wn\)</span> 中。</p>
+<h3 id="analysis-封闭经济加成每一步都来自需求弹性">4.3 封闭经济加成：每一步都来自需求弹性</h3>
+<p>封闭经济需求 <span class="math inline">\(Y_i=p_i^{-\rho}Y\)</span>。给定当期 <span class="math inline">\(MC\)</span>，企业选择 <span class="math inline">\(p_i\)</span> 最大化</p>
+<p><span class="math display">\[
+\pi_i=(p_i-MC)p_i^{-\rho}Y.
+\]</span></p>
+<p>求导：</p>
+<p><span class="math display">\[
+\frac{\partial\pi_i}{\partial p_i}
+=p_i^{-\rho}Y-\rho(p_i-MC)p_i^{-\rho-1}Y.
+\]</span></p>
+<p>令其为零，乘 <span class="math inline">\(p_i^{\rho+1}/Y&gt;0\)</span>：</p>
+<p><span class="math display">\[
+p_i-\rho(p_i-MC)=0,
+\]</span></p>
+<p><span class="math display">\[
+(\rho-1)p_i=\rho MC,
+\qquad\boxed{p_i=\mu_\rho MC.}
+\tag{F5}
+\]</span></p>
+<p>因为 <span class="math inline">\(\rho&gt;1\)</span>，利润在 <span class="math inline">\(p\downarrow MC\)</span> 时为零、在 <span class="math inline">\(p\to\infty\)</span> 时趋零，唯一驻点给出正的最大可变利润。对称均衡 <span class="math inline">\(p_i=P=1\)</span>，故 <span class="math inline">\(MC=(\rho-1)/\rho\)</span>。</p>
+<h3 id="analysis-开放经济原文-mm-1-加成的适用条件">4.4 开放经济：原文 <span class="math inline">\(m/(m-1)\)</span> 加成的适用条件</h3>
+<p>附录 A.3 给出</p>
+<p><span class="math display">\[
+P_{H,i,t}=P_{H,i,t}^{*}=\mu_mMC_t.
+\tag{F6，原文附录形式}
+\]</span></p>
+<p>它的推导是：将两个市场分别视为 <span class="math inline">\(y_d=Z_dp_d^{-m}\)</span>，在企业调价时把 <span class="math inline">\(Z_d\)</span> 固定，则</p>
+<p><span class="math display">\[
+\frac{d[(p_d-MC)Z_dp_d^{-m}]}{dp_d}
+=Z_dp_d^{-m-1}[(1-m)p_d+mMC]=0,
+\]</span></p>
+<p><span class="math display">\[
+p_d=\frac m{m-1}MC.
+\]</span></p>
+<p>两个目的地的需求弹性同为 <span class="math inline">\(m\)</span>，加成便相同。这里的价格须同为企业收到的、同币值的价格。</p>
+<p><strong>若严格按原文两层 CES 合并需求，单个品种内的价格指数也会变化。</strong> 将 C4 代入 C6，在 <span class="math inline">\(P_t=1\)</span> 下：</p>
+<p><span class="math display">\[
+y_H=p_H^{-m}P_i^{m-\rho}Y.
+\]</span></p>
+<p>定义本国产品在该品种内的支出份额</p>
+<p><span class="math display">\[
+s_H=\frac{p_H^{1-m}}{p_H^{1-m}+p_F^{1-m}}.
+\]</span></p>
+<p>由 C5，记 <span class="math inline">\(S=p_H^{1-m}+p_F^{1-m}\)</span>，有 <span class="math inline">\(P_i=S^{1/(1-m)}\)</span>。逐步求导：</p>
+<p><span class="math display">\[
+\frac{\partial P_i}{\partial p_H}
+=\frac1{1-m}S^{1/(1-m)-1}(1-m)p_H^{-m}
+=P_i^m p_H^{-m}.
+\]</span></p>
+<p>再乘 <span class="math inline">\(p_H/P_i\)</span>，得</p>
+<p><span class="math display">\[
+\frac{\partial\ln P_i}{\partial\ln p_H}
+=p_H^{1-m}P_i^{m-1}
+=\frac{p_H^{1-m}}S=s_H.
+\]</span></p>
+<p>对需求取对数、求导：</p>
+<p><span class="math display">\[
+\begin{aligned}
+\frac{\partial\ln y_H}{\partial\ln p_H}
+&amp;=-m+(m-\rho)s_H,\\
+\boxed{\varepsilon_H
+=-\frac{\partial\ln y_H}{\partial\ln p_H}
+=m(1-s_H)+\rho s_H.}
+\end{aligned}
+\tag{F7}
+\]</span></p>
+<p>将一般利润导数 <span class="math inline">\(y+(p-MC)y&#39;=0\)</span> 除以 <span class="math inline">\(y&gt;0\)</span>：</p>
+<p><span class="math display">\[
+1-\varepsilon_H\frac{p_H-MC}{p_H}=0,
+\qquad
+\boxed{p_H=\frac{\varepsilon_H}{\varepsilon_H-1}MC.}
+\tag{F8}
+\]</span></p>
+<p>F8 是随份额变化的隐式定价条件。<span class="math inline">\(s_H\to0\)</span> 时才趋向 <span class="math inline">\(m/(m-1)\)</span>；<span class="math inline">\(s_H\to1\)</span> 时趋向 <span class="math inline">\(\rho/(\rho-1)\)</span>；<span class="math inline">\(m=\rho\)</span> 时两者一致。基准 <span class="math inline">\(m=5,\rho=21,s_H=1/2\)</span> 给出 <span class="math inline">\(\varepsilon_H=13\)</span>、加成 <span class="math inline">\(13/12\)</span>，而固定 <span class="math inline">\(m\)</span> 加成为 <span class="math inline">\(5/4\)</span>。</p>
+<p>这项差别决定如何做严格复现：<strong>复述作者数值结果时保留其附录定价；自行实现完整嵌套模型时，采用 F7—F8 或明确补上固定品种需求的行为假设。</strong> 两种闭合不能混用。相关代数与例子由附带脚本核对。</p>
+<h3 id="analysis-数据采购的-bellman-推导">4.5 数据采购的 Bellman 推导</h3>
+<p>先把当期最优经营利润记为 <span class="math inline">\(\mathcal R_t(\Phi_t)\)</span>，其中已经扣除资本租金和商品生产工资。企业选择 <span class="math inline">\(\varphi_t\)</span>，问题为</p>
+<p><span class="math display">\[
+V_t(\Phi_t)=\max_{\varphi_t\ge0}
+\left\{\mathcal R_t(\Phi_t)-q_t\varphi_t
++E_t[M_{t,t+1}V_{t+1}(\Phi_{t+1})]\right\},
+\]</span></p>
+<p><span class="math display">\[
+\Phi_{t+1}=(1-\delta_\Phi)\Phi_t+\varphi_t.
+\]</span></p>
+<p><strong>第一步：对当期采购求导。</strong> 因 <span class="math inline">\(\partial\Phi_{t+1}/\partial\varphi_t=1\)</span>，内点条件是</p>
+<p><span class="math display">\[
+q_t=E_t[M_{t,t+1}V_{\Phi,t+1}].
+\tag{F9}
+\]</span></p>
+<p><strong>第二步：写状态变量的包络条件。</strong> 数据存量提高使当期产量增加 <span class="math inline">\(\alpha\xi T_t/\Phi_t\)</span>。将额外产出按生产约束影子价值 <span class="math inline">\(MC_t\)</span> 计值：</p>
+<p><span class="math display">\[
+\mathcal R_{\Phi,t}=MC_t\alpha\xi T_t/\Phi_t.
+\]</span></p>
+<p>未来还留下 <span class="math inline">\(1-\delta_\Phi\)</span> 单位存量，因此</p>
+<p><span class="math display">\[
+\begin{aligned}
+V_{\Phi,t}
+&amp;=\alpha\xi MC_tT_t/\Phi_t
++(1-\delta_\Phi)E_t[M_{t,t+1}V_{\Phi,t+1}]\\
+&amp;=\alpha\xi MC_tT_t/\Phi_t+(1-\delta_\Phi)q_t.
+\end{aligned}
+\tag{F10}
+\]</span></p>
+<p><strong>第三步：将下一期包络条件代入 F9。</strong></p>
+<p><span class="math display">\[
+\boxed{q_t=E_t\left[M_{t,t+1}
+\left(\alpha\xi MC_{t+1}\frac{T_{t+1}}{\Phi_{t+1}}
++(1-\delta_\Phi)q_{t+1}\right)\right].}
+\tag{F11}
+\]</span></p>
+<p>左侧为今天买一单位新数据的支出，右侧为下一期边际生产收益和留存价值的贴现和。封闭经济 <span class="math inline">\(T=Y_i\)</span>，开放经济 <span class="math inline">\(T=Y_{H,i}+Y_{H,i}^{*}\)</span>。</p>
+<p>原附录将一个已经取条件期望的贴现项写到收益期望之外。严格的随机式是 F11，因为一般有 <span class="math inline">\(E_t[MX]\ne E_t[M]E_t[X]\)</span>。确定性稳态下二者均退为 <span class="math inline">\(\beta X\)</span>，不存在这项区别。</p>
+<p>若最优 <span class="math inline">\(\varphi_t=0\)</span>，条件改为</p>
+<p><span class="math display">\[
+q_t\ge E_t[M_{t,t+1}V_{\Phi,t+1}],\qquad
+\varphi_t\{q_t-E_t[M_{t,t+1}V_{\Phi,t+1}]\}=0.
+\]</span></p>
+<p>即零采购时边际支出不低于边际收益。还需要数据资产横截条件，排除未实现收益支撑的泡沫路径。</p>
+<h3 id="analysis-稳态的数据使用者成本">4.6 稳态的数据使用者成本</h3>
+<p>令 <span class="math inline">\(q,MC,T,\Phi\)</span> 在确定性稳态恒定。F11 变成</p>
+<p><span class="math display">\[
+q=\beta[\alpha\xi MC\,T/\Phi+(1-\delta_\Phi)q].
+\]</span></p>
+<p>移项、除以 <span class="math inline">\(\beta\)</span>：</p>
+<p><span class="math display">\[
+[\beta^{-1}-1+\delta_\Phi]q=\alpha\xi MC\,T/\Phi.
+\]</span></p>
+<p>定义</p>
+<p><span class="math display">\[
+u_\Phi\equiv\beta^{-1}-1+\delta_\Phi&gt;0,
+\]</span></p>
+<p><span class="math display">\[
+\boxed{u_\Phi q\Phi=\alpha\xi MC\,T.}
+\tag{F12}
+\]</span></p>
+<p>又因 <span class="math inline">\(\varphi=\delta_\Phi\Phi\)</span>：</p>
+<p><span class="math display">\[
+\boxed{q\varphi=s_\varphi MC\,T,\qquad
+s_\varphi\equiv\frac{\alpha\xi\delta_\Phi}{u_\Phi}.}
+\tag{F13}
+\]</span></p>
+<p><strong>采购流量支出份额 <span class="math inline">\(s_\varphi\)</span> 不等于产出弹性 <span class="math inline">\(\alpha\xi\)</span>。</strong> 折旧和贴现决定维持数据存量需要购买多少新数据。</p>
+<hr />
+<h2 id="analysis-数据商同一批原始数据两个加工目的地">5. 数据商：同一批原始数据，两个加工目的地</h2>
+<h3 id="analysis-按原文附录的价格接受条件求导">5.1 按原文附录的价格接受条件求导</h3>
+<p>记本国两种工作数据的企业端销售价格为 <span class="math inline">\(p_H,p_H^{*}\)</span>。先对单位测度的对称企业加总，得到原文 A.5 的收入与成本：</p>
+<p><span class="math display">\[
+\max_{D,l_H,l_H^{*}}
+\left\{p_HBD^\gamma l_H^{1-\gamma}
++p_H^{*}BD^\gamma(l_H^{*})^{1-\gamma}
+-P_DD-w(l_H+l_H^{*})\right\}.
+\tag{D1}
+\]</span></p>
+<p>若不预先施加企业对称性，应把两个收入项写作 <span class="math inline">\(\int_0^1p_{i,H}\varphi_Hdi\)</span> 与 <span class="math inline">\(\int_0^1p_{i,H}^{*}\varphi_H^{*}di\)</span>；对称后积分区间长度为 1，才化为 D1。</p>
+<p><strong>原始数据。</strong> 两项收入都依赖 <span class="math inline">\(D\)</span>，故</p>
+<p><span class="math display">\[
+B\gamma D^{\gamma-1}
+[p_Hl_H^{1-\gamma}+p_H^{*}(l_H^{*})^{1-\gamma}]-P_D=0.
+\]</span></p>
+<p>利用技术定义、乘以 <span class="math inline">\(D\)</span>：</p>
+<p><span class="math display">\[
+\boxed{P_DD=\gamma(p_H\varphi_H+p_H^{*}\varphi_H^{*}).}
+\tag{D2}
+\]</span></p>
+<p>这里出现两项收益相加，正因为原始数据不是在两国之间分掉的。</p>
+<p><strong>国内加工劳动。</strong></p>
+<p><span class="math display">\[
+p_HB(1-\gamma)D^\gamma l_H^{-\gamma}-w=0,
+\]</span></p>
+<p><span class="math display">\[
+\boxed{wl_H=(1-\gamma)p_H\varphi_H.}
+\tag{D3}
+\]</span></p>
+<p><strong>出口加工劳动。</strong></p>
+<p><span class="math display">\[
+p_H^{*}B(1-\gamma)D^\gamma(l_H^{*})^{-\gamma}-w=0,
+\]</span></p>
+<p><span class="math display">\[
+\boxed{wl_H^{*}=(1-\gamma)p_H^{*}\varphi_H^{*}.}
+\tag{D4}
+\]</span></p>
+<p>将两条劳动的原始一阶条件相除，消去共同的 <span class="math inline">\(B,D,w\)</span>：</p>
+<p><span class="math display">\[
+1=\frac{p_H^{*}}{p_H}\left(\frac{l_H^{*}}{l_H}\right)^{-\gamma}
+\quad\Longrightarrow\quad
+\left(\frac{l_H^{*}}{l_H}\right)^\gamma=\frac{p_H^{*}}{p_H}.
+\]</span></p>
+<p>因劳动与价格为正，再取 <span class="math inline">\(1/\gamma\)</span> 次幂：</p>
+<p><span class="math display">\[
+\boxed{\frac{l_H^{*}}{l_H}
+=\left(\frac{p_H^{*}}{p_H}\right)^{1/\gamma}.}
+\tag{D5}
+\]</span></p>
+<p>即便原始数据可重复使用，出口加工仍需额外劳动；外国愿付价格更高时，数据商增加面向外国的加工。</p>
+<h3 id="analysis-为什么没有额外利润项">5.2 为什么没有额外利润项</h3>
+<p>令总数据销售收入为 <span class="math inline">\(\mathcal V=p_H\varphi_H+p_H^{*}\varphi_H^{*}\)</span>。D2—D4 合计给出</p>
+<p><span class="math display">\[
+P_DD+w(l_H+l_H^{*})
+=\gamma\mathcal V+(1-\gamma)\mathcal V=\mathcal V.
+\]</span></p>
+<p>所以利润为零。零利润与这些价格接受的一阶条件、联合技术的规模报酬不变相容。</p>
+<p>原文把数据商称为“受自由进入约束的垄断者”，但附录使用的正是 D2—D4 这种收入价格给定的边际条件。<strong>若数据商能改变价格并内生选择面向两国的需求量，就要把边际收入写入条件；不能再额外套一个未经推导的数据垄断加成。</strong> 因而，这篇论文的数据商适合解释原始/工作数据的转换与跨境配置，未完整刻画平台战略定价、订阅合约和进入博弈。</p>
+<h3 id="analysis-原始数据价格与隐私损失的连接">5.3 原始数据价格与隐私损失的连接</h3>
+<p>由家庭 H4，<span class="math inline">\(P_DD=2\kappa\pi D^2C^\sigma\)</span>；由数据商 D2，<span class="math inline">\(P_DD=\gamma\mathcal V\)</span>。令两者相等：</p>
+<p><span class="math display">\[
+2\kappa\pi D^2C^\sigma=\gamma\mathcal V,
+\]</span></p>
+<p><span class="math display">\[
+\boxed{D^2=\frac{\gamma\mathcal V}{2\kappa\pi C^\sigma}.}
+\tag{D6}
+\]</span></p>
+<p>在给定 <span class="math inline">\(\mathcal V,C\)</span> 的条件下，隐私成本提高降低原始数据贡献；出口需求提高总销售价值则提高供数激励。一般均衡中两国工资和购买价格会共同变化，因此 D6 本身不能推出“数据越密集的国家一定提供越多原始数据”。</p>
+<hr />
+<h2 id="analysis-一般均衡要同时解哪几组条件">6. 一般均衡：要同时解哪几组条件</h2>
+<h3 id="analysis-封闭经济的完整条件组">6.1 封闭经济的完整条件组</h3>
+<p>对称企业下，<span class="math inline">\(\Phi_{i,t}=\Phi_t\)</span>、<span class="math inline">\(k_{i,t}=K_t\)</span>、<span class="math inline">\(n_{i,t}=n_t\)</span>，单位测度的品种令 <span class="math inline">\(Y_i=Y\)</span>。确定性或随机路径必须同时满足：</p>
+<ol type="1">
+<li>家庭条件 H3、H4、H6、H7。</li>
+<li>商品技术 F1、条件要素需求 F3、封闭加成 F5。</li>
+<li>数据投资 Euler F11 与 <span class="math inline">\(\Phi_{t+1}=(1-\delta_\Phi)\Phi_t+\varphi_t\)</span>。</li>
+<li>数据加工 <span class="math inline">\(\varphi_t=BD_t^\gamma l_t^{1-\gamma}\)</span>，以及 D2—D3 的单目的地版本。</li>
+<li>实物资本更新 <span class="math inline">\(K_{t+1}=(1-\delta_K)K_t+I_t\)</span>。</li>
+<li>商品、劳动、资产市场：</li>
+</ol>
+<p><span class="math display">\[
+Y_t=C_t+I_t,\quad N_t=n_t+l_t,\quad B_t=0.
+\]</span></p>
+<ol start="7" type="1">
+<li>最终品价格指数 <span class="math inline">\(P_t=1\)</span>、企业利润归还家庭，以及初始状态、外生冲击过程和横截条件。</li>
+</ol>
+<p>商品企业利润为</p>
+<p><span class="math display">\[
+F_t=Y_t-r_tK_t-w_tn_t-q_t\varphi_t
+=(1-MC_t)Y_t-q_t\varphi_t.
+\]</span></p>
+<p>把它和数据商零利润代回家庭预算，恰好退回 <span class="math inline">\(Y=C+I\)</span>。这项会计恒等式可以检查是否把数据收入重复计入国民收入。</p>
+<h3 id="analysis-开放经济多出四条数据流和两个相对价格系统">6.2 开放经济多出四条数据流和两个相对价格系统</h3>
+<p>本国需联立：本国生产企业总产量 <span class="math inline">\(T_H=Y_H+Y_H^{*}\)</span>、本国批发合成品 <span class="math inline">\(Y\)</span>、数据复合量 <span class="math inline">\(\varphi=\mathcal C(\varphi_H,\varphi_F)\)</span>、本国数据商两项加工技术和 <span class="math inline">\(N=n+l_H+l_H^{*}\)</span>。</p>
+<p>外国则需同时写出：</p>
+<p><span class="math display">\[
+T_F=Y_F+Y_F^{*},\qquad
+\varphi^{*}=\mathcal C^{*}(\varphi_F^{*},\varphi_H^{*}),\qquad
+N^{*}=n^{*}+l_F^{*}+l_F,
+\]</span></p>
+<p><span class="math display">\[
+\varphi_F^{*}=B^{*}(D^{*})^{\gamma}(l_F^{*})^{1-\gamma},\qquad
+\varphi_F=B^{*}(D^{*})^{\gamma}l_F^{1-\gamma}.
+\]</span></p>
+<p>在 <span class="math inline">\(\mathcal C^{*}\)</span> 中，本国/外国的权重应理解为该目的地对本地/进口来源的权重，不能机械照抄下标而交换经济含义。</p>
+<p>本国最终品市场 <span class="math inline">\(Y=C+I\)</span>，外国为 <span class="math inline">\(Y^{*}=C^{*}+I^{*}\)</span>。再加入 C5—C8、两国要素价格、两国数据 Euler、数据商条件、外部资产出清，以及采用的风险分担闭合。两国商品生产的 <span class="math inline">\(MC\)</span>、<span class="math inline">\(q\)</span>、工资须统一到各自实际计价单位；若用本国最终品作为共同计价物，外国本地实物投资的共同货币成本是 <span class="math inline">\(P^{*}I^{*}\)</span>。</p>
+<h3 id="analysis-贸易楔子如何入账会改变福利解释">6.3 贸易楔子如何入账，会改变福利解释</h3>
+<p>原文用价格乘数同时解释关税、限制和冰山成本，但没有展开政府收入或完整运输部门。三者具有不同的资源含义：</p>
+<ul>
+<li><strong>关税</strong>：进口者支付 <span class="math inline">\((1+t)p_Fy_F\)</span>，外国卖方收 <span class="math inline">\(p_Fy_F\)</span>。若关税收入返还家庭，须在预算中加 <span class="math inline">\(t p_Fy_F\)</span>；这笔收入不是世界资源损失。</li>
+<li><strong>字面冰山运输</strong>：外国收到 <span class="math inline">\(y\)</span> 单位，本国须生产 <span class="math inline">\(\tau y\)</span> 单位；生产约束中的出口量与目的地收到量要分别定义。</li>
+<li><strong>合规服务成本</strong>：差额购买审核、存储或安全服务，须把相关商品或劳动计入该部门资源约束。</li>
+</ul>
+<p>原文的 <span class="math inline">\(T=Y_H+Y_H^{*}\)</span> 与进口价格乘数，不能在没有说明时同时解释为“<span class="math inline">\(Y_H^{*}\)</span> 是外国实收量”且“本国按 <span class="math inline">\(\tau Y_H^{*}\)</span> 消耗资源”。本解析按原文给定系统解读图表；第 12 节的新模型则把安全与合规支出明确列为真实资源使用。</p>
+<p>这也是政策结论的适用范围：作者图 5 的“最低商品壁垒最优”是其价格楔子和福利闭合下的数值结果，并非已经证明适用于有税收返还、市场势力和报复策略的一般最优关税定理。</p>
+<h3 id="analysis-五类经济的切换表">6.4 五类经济的切换表</h3>
+<table>
+<thead>
+<tr>
+<th>情形</th>
+<th>商品贸易</th>
+<th>本国数据进口</th>
+<th>本国数据出口</th>
+<th>本国出口隐私指示量</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>封闭经济</td>
+<td>无</td>
+<td>无</td>
+<td>无</td>
+<td><span class="math inline">\(\mathbb I_H=0\)</span></td>
+</tr>
+<tr>
+<td>仅商品贸易</td>
+<td>有</td>
+<td>无</td>
+<td>无</td>
+<td><span class="math inline">\(\mathbb I_H=0\)</span></td>
+</tr>
+<tr>
+<td>单向 H 进口</td>
+<td>有</td>
+<td>有</td>
+<td>无</td>
+<td><span class="math inline">\(\mathbb I_H=0\)</span></td>
+</tr>
+<tr>
+<td>单向 F 进口</td>
+<td>有</td>
+<td>无</td>
+<td>有</td>
+<td><span class="math inline">\(\mathbb I_H=1\)</span></td>
+</tr>
+<tr>
+<td>双向开放</td>
+<td>有</td>
+<td>有</td>
+<td>有</td>
+<td><span class="math inline">\(\mathbb I_H=1\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>单向情形还要相应设置外国的指示量与加工劳动，不能只把某一个贸易数量强制归零、其余方程全部照旧。</p>
+<hr />
+<h2 id="analysis-从方程求稳态候选解再检查有限最优">7. 从方程求稳态候选解，再检查有限最优</h2>
+<p>本节给出一个可解析求解的稳态，既帮助理解模型，也给数值程序提供起始值。取 <span class="math inline">\(\sigma&gt;1\)</span>、<span class="math inline">\(\xi&gt;0\)</span>、<span class="math inline">\(0&lt;\delta_\Phi\le1\)</span>，其余参数为正，且采用封闭经济的内点条件。横线表示稳态；为减少符号，本节省略横线。</p>
+<h3 id="analysis-先确定资本数据投资和消费比例">7.1 先确定资本、数据投资和消费比例</h3>
+<p>由 H8：</p>
+<p><span class="math display">\[
+r=\beta^{-1}-1+\delta_K.
+\]</span></p>
+<p>由 F5 与对称价格 <span class="math inline">\(p=1\)</span>：</p>
+<p><span class="math display">\[
+z\equiv MC=(\rho-1)/\rho.
+\]</span></p>
+<p>由 <span class="math inline">\(rK=\alpha zY\)</span>：</p>
+<p><span class="math display">\[
+K=a_KY,\qquad a_K\equiv\alpha z/r.
+\]</span></p>
+<p>资本不变意味着 <span class="math inline">\(I=\delta_KK\)</span>。代入 <span class="math inline">\(Y=C+I\)</span>：</p>
+<p><span class="math display">\[
+C=cY,\qquad c\equiv1-\delta_Ka_K&gt;0.
+\tag{SS1}
+\]</span></p>
+<p>由于 <span class="math inline">\(r=\beta^{-1}-1+\delta_K&gt;\delta_K\)</span>，<span class="math inline">\(\delta_Ka_K&lt;\alpha z&lt;1\)</span>，所以 <span class="math inline">\(c&gt;0\)</span>。</p>
+<p>数据由 F13 给出</p>
+<p><span class="math display">\[
+q\varphi=s_\varphi zY,\qquad
+s_\varphi=\frac{\alpha\xi\delta_\Phi}{\beta^{-1}-1+\delta_\Phi}.
+\tag{SS2}
+\]</span></p>
+<h3 id="analysis-求劳动在两部门之间的份额">7.2 求劳动在两部门之间的份额</h3>
+<p>商品生产劳动收入 <span class="math inline">\(wn=(1-\alpha)zY\)</span>，数据劳动收入 <span class="math inline">\(wl=(1-\gamma)s_\varphi zY\)</span>。相加：</p>
+<p><span class="math display">\[
+wN=z[(1-\alpha)+(1-\gamma)s_\varphi]Y.
+\]</span></p>
+<p>定义</p>
+<p><span class="math display">\[
+\nu_l\equiv\frac{(1-\gamma)s_\varphi}{(1-\alpha)+(1-\gamma)s_\varphi}\in(0,1).
+\]</span></p>
+<p>两部门工资相同，因此</p>
+<p><span class="math display">\[
+l=\nu_lN,\qquad n=(1-\nu_l)N.
+\tag{SS3}
+\]</span></p>
+<p>把家庭工资 <span class="math inline">\(w=\Omega(cY)^\sigma N^\eta\)</span> 代回总劳动收入：</p>
+<p><span class="math display">\[
+\Omega c^\sigma Y^\sigma N^{1+\eta}
+=z[(1-\alpha)+(1-\gamma)s_\varphi]Y,
+\]</span></p>
+<p><span class="math display">\[
+N^{1+\eta}=a_NY^{1-\sigma},\qquad
+ a_N\equiv\frac{z[(1-\alpha)+(1-\gamma)s_\varphi]}{\Omega c^\sigma},
+\]</span></p>
+<p><span class="math display">\[
+\boxed{N=a_N^{1/(1+\eta)}Y^{(1-\sigma)/(1+\eta)}.}
+\tag{SS4}
+\]</span></p>
+<h3 id="analysis-求原始数据和工作数据">7.3 求原始数据和工作数据</h3>
+<p>由 D6 的单目的地版本：</p>
+<p><span class="math display">\[
+D^2=\frac{\gamma q\varphi}{2\kappa\pi C^\sigma}
+=\frac{\gamma s_\varphi z}{2\kappa\pi c^\sigma}Y^{1-\sigma}.
+\]</span></p>
+<p>定义 <span class="math inline">\(a_D\equiv\gamma s_\varphi z/(2\kappa\pi c^\sigma)&gt;0\)</span>，则</p>
+<p><span class="math display">\[
+\boxed{D=a_D^{1/2}Y^{(1-\sigma)/2}.}
+\tag{SS5}
+\]</span></p>
+<p>数据加工与存量条件依次给出</p>
+<p><span class="math display">\[
+\varphi=BD^\gamma(\nu_lN)^{1-\gamma},\qquad
+\Phi=\varphi/\delta_\Phi.
+\tag{SS6}
+\]</span></p>
+<h3 id="analysis-代回生产函数只留下一个未知量-y">7.4 代回生产函数，只留下一个未知量 <span class="math inline">\(Y\)</span></h3>
+<p>将 SS1、SS3、SS6 代入 F1：</p>
+<p><span class="math display">\[
+Y=A(B/\delta_\Phi)^{\alpha\xi}D^{\gamma\alpha\xi}
+(\nu_lN)^{(1-\gamma)\alpha\xi}(a_KY)^\alpha
+[(1-\nu_l)N]^{1-\alpha}.
+\]</span></p>
+<p>把同底数项合并，并令 <span class="math inline">\(h\equiv1-\alpha+(1-\gamma)\alpha\xi\)</span>：</p>
+<p><span class="math display">\[
+Y^{1-\alpha}=Aa_K^\alpha(B/\delta_\Phi)^{\alpha\xi}
+\nu_l^{(1-\gamma)\alpha\xi}(1-\nu_l)^{1-\alpha}
+D^{\gamma\alpha\xi}N^h.
+\]</span></p>
+<p>再代入 SS4—SS5：</p>
+<p><span class="math display">\[
+D^{\gamma\alpha\xi}=a_D^{\gamma\alpha\xi/2}Y^{(1-\sigma)\gamma\alpha\xi/2},
+\]</span></p>
+<p><span class="math display">\[
+N^h=a_N^{h/(1+\eta)}Y^{(1-\sigma)h/(1+\eta)}.
+\]</span></p>
+<p>所以</p>
+<p><span class="math display">\[
+Y^E=\mathcal A,
+\]</span></p>
+<p><span class="math display">\[
+E\equiv1-\alpha-(1-\sigma)
+\left[\frac{\gamma\alpha\xi}{2}+\frac h{1+\eta}\right],
+\]</span></p>
+<p><span class="math display">\[
+\mathcal A\equiv Aa_K^\alpha(B/\delta_\Phi)^{\alpha\xi}
+\nu_l^{(1-\gamma)\alpha\xi}(1-\nu_l)^{1-\alpha}
+a_D^{\gamma\alpha\xi/2}a_N^{h/(1+\eta)}.
+\]</span></p>
+<p>因 <span class="math inline">\(\sigma&gt;1\)</span>，括号为正，故 <span class="math inline">\(E&gt;1-\alpha&gt;0\)</span>；<span class="math inline">\(\mathcal A&gt;0\)</span>。函数 <span class="math inline">\(Y\mapsto Y^E\)</span> 在 <span class="math inline">\(Y&gt;0\)</span> 上严格递增，从 0 连续趋向无穷，因此存在唯一正解：</p>
+<p><span class="math display">\[
+\boxed{Y=\mathcal A^{1/E}.}
+\tag{SS7}
+\]</span></p>
+<p>随后按 SS1、SS4、SS5、SS3、SS6 回代，最后求</p>
+<p><span class="math display">\[
+w=\Omega C^\sigma N^\eta,\quad
+q=\frac{s_\varphi zY}{\varphi},\quad
+P_D=\frac{\gamma q\varphi}{D}.
+\]</span></p>
+<p>这里证明的是<strong>所列稳态方程有唯一正的代数解</strong>。要把它认定为企业最优的竞争均衡，还须检查第 7.6 节给出的有限最优条件；一阶条件的根本身不能完成这项证明。</p>
+<h3 id="analysis-边界与一个可复算的稳态候选解">7.5 边界与一个可复算的稳态候选解</h3>
+<p><span class="math inline">\(\xi=0\)</span> 时，数据不影响生产；应直接删去数据部门，以 <span class="math inline">\(l=D=\varphi=0\)</span> 求普通封闭生产模型，不能将 <span class="math inline">\(\nu_l=0\)</span> 代入含 <span class="math inline">\(\ln\nu_l\)</span> 的计算式。<span class="math inline">\(\delta_\Phi=0\)</span> 且 <span class="math inline">\(\varphi&gt;0\)</span> 时，<span class="math inline">\(\Phi_{t+1}=\Phi_t+\varphi\)</span> 不可能保持有限水平稳态；<span class="math inline">\(\delta_\Phi=1\)</span> 时，存量完全折旧，但当期采购仍在下期生效。</p>
+<p>教学例子采用原文表 1 的 <span class="math inline">\(\beta=.99,\sigma=2,\eta=1.3,\Omega=1.315,\alpha=1/3,\rho=21,\delta_K=\delta_\Phi=.025,\gamma=.5,B=1\)</span>，再明确选定 <span class="math inline">\(A=\xi=\Pi=\pi=1\)</span>、<span class="math inline">\(\mathbb I=0\)</span>。得到：</p>
+<table>
+<thead>
+<tr>
+<th>变量</th>
+<th style="text-align: right;">数值</th>
+<th>变量</th>
+<th style="text-align: right;">数值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="math inline">\(Y\)</span></td>
+<td style="text-align: right;">3.288417</td>
+<td><span class="math inline">\(C\)</span></td>
+<td style="text-align: right;">2.544890</td>
+</tr>
+<tr>
+<td><span class="math inline">\(K\)</span></td>
+<td style="text-align: right;">29.741082</td>
+<td><span class="math inline">\(N\)</span></td>
+<td style="text-align: right;">0.582750</td>
+</tr>
+<tr>
+<td><span class="math inline">\(n\)</span></td>
+<td style="text-align: right;">0.494670</td>
+<td><span class="math inline">\(l\)</span></td>
+<td style="text-align: right;">0.088080</td>
+</tr>
+<tr>
+<td><span class="math inline">\(D\)</span></td>
+<td style="text-align: right;">0.169414</td>
+<td><span class="math inline">\(\varphi\)</span></td>
+<td style="text-align: right;">0.122155</td>
+</tr>
+<tr>
+<td><span class="math inline">\(\Phi\)</span></td>
+<td style="text-align: right;">4.886216</td>
+<td><span class="math inline">\(q\)</span></td>
+<td style="text-align: right;">6.086730</td>
+</tr>
+</tbody>
+</table>
+<p>数据商零利润、家庭预算、生产、资本需求、劳动需求、供数条件和数据 Euler 的残差均由 <a href="验证/check_math.py"><code>验证/check_math.py</code></a> 检查；完整精度见 <a href="验证/检查结果.json"><code>检查结果.json</code></a>。这些数值是稳态方程的候选解，作者的开放经济图形另按原文报告。</p>
+<h3 id="analysis-正的一阶条件解还需要有限最优的检验">7.6 正的一阶条件解，还需要有限最优的检验</h3>
+<p>若按附录的字面单企业优化理解：企业面对给定的工作数据单价，可以单方面增加自己的采购，且没有额外采购上限或安装成本，则可以检验其问题是否有有限解。先在封闭经济把工资、租金、数据价格与总需求固定为候选稳态的正值，令 <span class="math inline">\(Y&gt;0\)</span>，并记 <span class="math inline">\(a=\alpha\xi\)</span>、<span class="math inline">\(b_\rho=(\rho-1)/\rho\)</span>、<span class="math inline">\(c_0=(r/\alpha)^\alpha[w/(1-\alpha)]^{1-\alpha}/A&gt;0\)</span>。企业逆需求为 <span class="math inline">\(p=(Y/y)^{1/\rho}\)</span>，当前最优经营利润问题是</p>
+<p><span class="math display">\[
+\max_{y\ge0}\left\{Y^{1/\rho}y^{b_\rho}-c_0\Phi^{-a}y\right\}.
+\]</span></p>
+<p>对 <span class="math inline">\(y\)</span> 求导，令边际收入等于边际成本：</p>
+<p><span class="math display">\[
+b_\rho Y^{1/\rho}y^{-1/\rho}=c_0\Phi^{-a},
+\quad
+ y^{1/\rho}=\frac{b_\rho Y^{1/\rho}}{c_0}\Phi^a,
+\]</span></p>
+<p><span class="math display">\[
+y^{opt}=\left(\frac{b_\rho Y^{1/\rho}}{c_0}\right)^\rho\Phi^{a\rho}.
+\]</span></p>
+<p>利用一阶条件乘以 <span class="math inline">\(y\)</span>，可变成本为收入的 <span class="math inline">\(b_\rho\)</span> 倍，故最优经营利润为</p>
+<p><span class="math display">\[
+\begin{aligned}
+\mathcal R(\Phi)
+&amp;=(1-b_\rho)Y^{1/\rho}(y^{opt})^{b_\rho}\\
+&amp;=\underbrace{\frac1\rho Y^{1/\rho}
+\left(\frac{b_\rho Y^{1/\rho}}{c_0}\right)^{\rho-1}}_{c_1&gt;0}
+\Phi^{\alpha\xi(\rho-1)}.
+\end{aligned}
+\]</span></p>
+<p>记 <span class="math inline">\(\vartheta=\alpha\xi(\rho-1)\)</span>。若 <span class="math inline">\(\vartheta&gt;1\)</span>，考虑企业在今天采购 <span class="math inline">\(L\)</span> 单位、以后不再采购的偏离。明天数据存量至少为 <span class="math inline">\(L\)</span>，经营利润至少为 <span class="math inline">\(c_1L^\vartheta\)</span>；后续也可选择不生产，不承担负的经营收益。因此，在确定性价格环境下，此策略的净现值至少为</p>
+<p><span class="math display">\[
+-q_tL+\beta c_1L^\vartheta\ \longrightarrow\ +\infty
+\qquad(L\to\infty).
+\]</span></p>
+<p>每个有限 <span class="math inline">\(L\)</span> 的后续存量按 <span class="math inline">\(1-\delta_\Phi\)</span> 递减，折现后的留存值趋于零；该组偏离不会仅因横截条件而被排除。</p>
+<p>这就证明：<strong>在给定单价、无采购上限的个体购买解释下，<span class="math inline">\(\vartheta&gt;1\)</span> 时上述动态问题没有有限最大值。</strong> 基准 <span class="math inline">\(\alpha=1/3,\rho=21,\xi=1\)</span> 给出 <span class="math inline">\(\vartheta=20/3&gt;1\)</span>，所以第 7.5 节的残差通过不能证明该解释下的企业全局最优。<span class="math inline">\(\vartheta&lt;1\)</span> 消除了这项一次性无限扩张偏离，但完整无限期问题仍需折现与可行性条件；<span class="math inline">\(\vartheta=1\)</span> 时须比较线性收益与采购成本的系数。</p>
+<p>原文将 <span class="math inline">\(\varphi_t\)</span> 写成企业共同购买的非竞争性数据流，并以同质性说明购买量一致。如果其真正含义是每家企业只能使用数据商提供的同一个有限数据包，就需要显式写出个体可购买集或授权约束；不能仅凭对称均衡排除单企业偏离，再继续使用不受限购买的 Bellman 条件。这项合同/可行集解释必须与 F11 同时确定。</p>
+<p>可行的改造包括：限制个体可获取的数据集合并重新推导影子价格；为过量安装加入足够凸的成本；或采用第 12B 节有上界的信息生产率。第 12A 的政策分析和第 12C 的能力积累，都应放在一个已解决有限最优问题的基准上。</p>
+<hr />
+<h2 id="analysis-福利贸易不可行在本文中是什么意思">8. 福利：贸易“不可行”在本文中是什么意思</h2>
+<h3 id="analysis-稳态福利的三项来源">8.1 稳态福利的三项来源</h3>
+<p>对恒定稳态配置，单期效用为</p>
+<p><span class="math display">\[
+\bar u=\frac{\bar C^{1-\sigma}}{1-\sigma}
+-\Omega\frac{\bar N^{1+\eta}}{1+\eta}
+-\Pi(1+b\mathbb I)\bar\pi\bar D^2.
+\]</span></p>
+<p>因为 <span class="math inline">\(\sum_{t=0}^{\infty}\beta^t=1/(1-\beta)\)</span>：</p>
+<p><span class="math display">\[
+\boxed{\bar U=\bar u/(1-\beta).}
+\tag{W1}
+\]</span></p>
+<p>比较情形 <span class="math inline">\(a,b\)</span>，先比较单期福利即可：</p>
+<p><span class="math display">\[
+\begin{aligned}
+(1-\beta)(\bar U^b-\bar U^a)
+={}&amp;\frac{(C^b)^{1-\sigma}-(C^a)^{1-\sigma}}{1-\sigma}\\
+&amp;-\frac\Omega{1+\eta}[(N^b)^{1+\eta}-(N^a)^{1+\eta}]\\
+&amp;-\Pi\bar\pi[(1+b\mathbb I^b)(D^b)^2-(1+b\mathbb I^a)(D^a)^2].
+\end{aligned}
+\tag{W2}
+\]</span></p>
+<p>所以消费提高并不保证福利提高；新增劳动和隐私损失也计入比较。</p>
+<h3 id="analysis-贸易参与约束不是市场均衡不存在">8.2 贸易参与约束，不是市场均衡不存在</h3>
+<p>记封闭经济福利为 <span class="math inline">\(U_H^c,U_F^c\)</span>，纯商品贸易为 <span class="math inline">\(U_H^g,U_F^g\)</span>，某个开放制度为 <span class="math inline">\(U_H^o,U_F^o\)</span>。作者所谓可行区间是</p>
+<p><span class="math display">\[
+\mathcal F_{trade}=\{\xi:U_H^o(\xi)-U_H^c(\xi)&gt;0,
+\quad U_F^o(\xi)-U_F^c(\xi)&gt;0\},
+\]</span></p>
+<p><span class="math display">\[
+\mathcal F_{data}=\{\xi:U_H^o(\xi)-U_H^g(\xi)&gt;0,
+\quad U_F^o(\xi)-U_F^g(\xi)&gt;0\}.
+\tag{W3}
+\]</span></p>
+<p>前者问“两国是否都愿意由封闭转为开放”，后者问“在已有商品贸易后，两国是否都从新增数据流动获益”。某国差值为负，含义是它不满足自愿参与约束；不是已经证明正贸易量均衡不存在。原文也没有另外求解政府的停贸混合策略或内生停贸概率。</p>
+<p>原文表 2 的一个切片：固定外国 <span class="math inline">\(\xi^{*}=1\)</span>、<span class="math inline">\(\omega=5\)</span>，本国 <span class="math inline">\(\xi\)</span> 在 <span class="math inline">\([0,1.75]\)</span> 内扫描，纯商品贸易的双方参与区间为 <span class="math inline">\([0.75,1.22]\)</span>；双向数据开放且本国面对的进口乘数 <span class="math inline">\(d_D^{*}=1\)</span>、外国对应乘数 <span class="math inline">\(d_D=1\)</span> 时，区间为 <span class="math inline">\([0.48,1.61]\)</span>。这是作者表中的数值比较，说明其校准下数据流动扩大可接受的开放范围；它没有给出适用于所有参数的解析阈值。[S2，Table 2，p.21]</p>
+<h3 id="analysis-把后发优势与长期赶超分开">8.3 把“后发优势”与长期赶超分开</h3>
+<p>在作者图 1—4 的比较中，低 <span class="math inline">\(\xi\)</span> 国家通常有较大的开放福利增量；高 <span class="math inline">\(\xi\)</span> 国家则使用更多工作数据、生产更多商品。两项观察并不矛盾：一国可能从较低起点获得较大的福利增量，同时仍没有赶上对方的生产水平。</p>
+<p>原始数据更多流出低 <span class="math inline">\(\xi\)</span> 国家，还可能提高该国的隐私负担。不能用“原始数据出口多”代替“数据加工、算法训练或技术能力强”。<span class="math inline">\(\xi\)</span> 在原模型中外生固定，长期数据使用能力是否追赶并未由模型内生决定。</p>
+<h3 id="analysis-一般均衡解释与其边界">8.4 一般均衡解释与其边界</h3>
+<p>作者的解释是：高 <span class="math inline">\(\xi\)</span> 国生产率高、出口商品相对便宜；为交换较贵的伙伴国商品，需要出口更多实际商品。数据开放又使两国获得新的工作数据来源，并改变数据加工劳动的分配，可能补偿前述损失。[S2，§3.2]</p>
+<p>这是一组<strong>带垄断加成、内生劳动和隐私成本，并在不同开放制度间切换聚合技术</strong>的均衡比较。它并未推翻“无扭曲、同一技术集合下开放贸易可以扩大可行集”的标准命题。第 2.4、4.4、6.3 节的技术归一化、加成和楔子处理会影响福利差值，也是进一步量化时最应固定的三个环节。</p>
+<h3 id="analysis-消费等价福利怎样计算">8.5 消费等价福利怎样计算</h3>
+<p>原文主要比较效用水平。本解析补充消费等价变动，避免将负效用的百分比误称福利增长率。</p>
+<p>设基准单期效用 <span class="math inline">\(u^a=C_a^{1-\sigma}/(1-\sigma)-L_a\)</span>，其中 <span class="math inline">\(L_a\)</span> 包括劳动与隐私损失。定义 <span class="math inline">\(g\)</span> 使“基准劳动与隐私不变、消费永久变为 <span class="math inline">\((1+g)C_a\)</span>”的福利等于制度 <span class="math inline">\(b\)</span>：</p>
+<p><span class="math display">\[
+\frac{[(1+g)C_a]^{1-\sigma}}{1-\sigma}-L_a=u^b.
+\]</span></p>
+<p>移项后乘 <span class="math inline">\(1-\sigma\)</span>，再除以 <span class="math inline">\(C_a^{1-\sigma}\)</span>：</p>
+<p><span class="math display">\[
+(1+g)^{1-\sigma}
+=\frac{(1-\sigma)(u^b+L_a)}{C_a^{1-\sigma}},
+\]</span></p>
+<p><span class="math display">\[
+\boxed{g=\left[\frac{(1-\sigma)(u^b+L_a)}{C_a^{1-\sigma}}\right]^{1/(1-\sigma)}-1.}
+\tag{W4}
+\]</span></p>
+<p>括号须为正；<span class="math inline">\(\sigma=1\)</span> 时改为 <span class="math inline">\(g=\exp(u^b+L_a-\ln C_a)-1\)</span>。这里固定的是基准的劳动与隐私配置，换用另一种基准会改变消费等价的定义，比较时必须一致。</p>
+<p>若开放存在转型过程，应先计算</p>
+<p><span class="math display">\[
+U_0^b=E_0\sum_t\beta^tu_t^b,
+\]</span></p>
+<p>然后令基准恒定配置的福利 <span class="math inline">\(( [(1+g)C_a]^{1-\sigma}/(1-\sigma)-L_a)/(1-\beta)\)</span> 与它相等，即在 W4 中把 <span class="math inline">\(u^b\)</span> 替换为 <span class="math inline">\((1-\beta)U_0^b\)</span>。只比较新旧稳态会漏掉转型期成本。</p>
+<hr />
+<h2 id="analysis-动态分析能从方程推出什么哪些方向要靠数值求解">9. 动态分析：能从方程推出什么，哪些方向要靠数值求解</h2>
+<h3 id="analysis-三类外生冲击">9.1 三类外生冲击</h3>
+<p>对 <span class="math inline">\(X_t\in\{A_t,\pi_t,f_t\}\)</span>，原文均采用</p>
+<p><span class="math display">\[
+\ln X_t-\ln\bar X=\rho_X(\ln X_{t-1}-\ln\bar X)+\sigma_X\varepsilon_{X,t},
+\quad |\rho_X|&lt;1,
+\]</span></p>
+<p>其中创新均值为零、方差为 1。定义帽子为对数偏离 <span class="math inline">\(\hat X_t=\ln X_t-\ln\bar X\)</span>，则</p>
+<p><span class="math display">\[
+\hat X_t=\rho_X\hat X_{t-1}+\sigma_X\varepsilon_{X,t}.
+\]</span></p>
+<p>冲击持续性 <span class="math inline">\(\rho_X\)</span> 不等于商品品种替代弹性 <span class="math inline">\(\rho\)</span>；<span class="math inline">\(\sigma_X\)</span> 也不等于风险厌恶参数 <span class="math inline">\(\sigma\)</span>。</p>
+<h3 id="analysis-先线性化能够直接检查的方程">9.2 先线性化能够直接检查的方程</h3>
+<p>生产函数取对数：</p>
+<p><span class="math display">\[
+\hat T_t=\hat A_t+\alpha\hat K_t+(1-\alpha)\hat n_t+\alpha\xi\hat\Phi_t.
+\tag{L1}
+\]</span></p>
+<p>数据存量方程减去稳态 <span class="math inline">\(\delta_\Phi\bar\Phi=\bar\varphi\)</span>：</p>
+<p><span class="math display">\[
+\bar\Phi\hat\Phi_{t+1}
+=(1-\delta_\Phi)\bar\Phi\hat\Phi_t+\bar\varphi\hat\varphi_t,
+\]</span></p>
+<p>除以 <span class="math inline">\(\bar\Phi&gt;0\)</span>：</p>
+<p><span class="math display">\[
+\boxed{\hat\Phi_{t+1}=(1-\delta_\Phi)\hat\Phi_t+\delta_\Phi\hat\varphi_t.}
+\tag{L2}
+\]</span></p>
+<p>单目的地工作数据技术：</p>
+<p><span class="math display">\[
+\hat\varphi_{H,t}=\gamma\hat D_t+(1-\gamma)\hat l_{H,t}.
+\tag{L3}
+\]</span></p>
+<p>家庭 H3—H4 在制度固定、<span class="math inline">\(\Pi,b\)</span> 不变时：</p>
+<p><span class="math display">\[
+\hat w_t=\sigma\hat C_t+\eta\hat N_t,
+\qquad
+\hat P_{D,t}=\hat\pi_t+\hat D_t+\sigma\hat C_t.
+\tag{L4}
+\]</span></p>
+<p>CES 数据支出份额用 C3 记为 <span class="math inline">\(s_H,s_F\)</span>。由复合品的边际条件可得 <span class="math inline">\(\partial\ln\varphi/\partial\ln\varphi_j=s_j\)</span>，因此一阶近似为</p>
+<p><span class="math display">\[
+\hat\varphi_t=s_H\hat\varphi_{H,t}+s_F\hat\varphi_{F,t},\quad
+\hat q_t=s_H\hat p_{H,t}+s_F\hat p_{F,t}.
+\tag{L5}
+\]</span></p>
+<p>两国数据相对需求 C9 取对数并减稳态：</p>
+<p><span class="math display">\[
+\hat\varphi_{F,t}-\hat\varphi_{H,t}
+=-\omega(\hat p_{F,t}-\hat p_{H,t}).
+\tag{L6}
+\]</span></p>
+<h3 id="analysis-再线性化数据-euler不能漏掉前瞻项">9.3 再线性化数据 Euler，不能漏掉前瞻项</h3>
+<p>记 <span class="math inline">\(\mathcal R_{\Phi,t}=\alpha\xi MC_tT_t/\Phi_t\)</span>，稳态由 F11 满足 <span class="math inline">\(\bar q=\beta[\bar{\mathcal R}_\Phi+(1-\delta_\Phi)\bar q]\)</span>。对 F11 在确定性稳态附近作一阶展开，先保留水平系数：</p>
+<p><span class="math display">\[
+\bar q\hat q_t
+=\beta\bar{\mathcal R}_\Phi E_t(\hat M+\hat{\mathcal R}_{\Phi,t+1})
++\beta(1-\delta_\Phi)\bar qE_t(\hat M+\hat q_{t+1}).
+\]</span></p>
+<p><span class="math inline">\(\hat M\)</span> 的系数之和为 <span class="math inline">\(\beta[\bar{\mathcal R}_\Phi+(1-\delta_\Phi)\bar q]=\bar q\)</span>。两边除以 <span class="math inline">\(\bar q\)</span>，得到</p>
+<p><span class="math display">\[
+\begin{aligned}
+\hat q_t={}&amp;E_t\hat M_{t,t+1}
++\frac{\beta\bar{\mathcal R}_\Phi}{\bar q}
+E_t\hat{\mathcal R}_{\Phi,t+1}
++\beta(1-\delta_\Phi)E_t\hat q_{t+1}.
+\end{aligned}
+\]</span></p>
+<p>由 H5，<span class="math inline">\(\hat M=-\sigma(\hat C_{t+1}-\hat C_t)\)</span>；由 F12，<span class="math inline">\(\bar{\mathcal R}_\Phi/\bar q=u_\Phi\)</span>；由 F2，<span class="math inline">\(\hat{\mathcal R}_\Phi=\widehat{MC}+\hat T-\hat\Phi\)</span>。于是</p>
+<p><span class="math display">\[
+\boxed{\begin{aligned}
+\hat q_t={}&amp;-\sigma E_t(\hat C_{t+1}-\hat C_t)\\
+&amp;+\beta u_\Phi E_t(\widehat{MC}_{t+1}+\hat T_{t+1}-\hat\Phi_{t+1})\\
+&amp;+\beta(1-\delta_\Phi)E_t\hat q_{t+1}.
+\end{aligned}}
+\tag{L7}
+\]</span></p>
+<p>由 <span class="math inline">\(\beta u_\Phi+\beta(1-\delta_\Phi)=1\)</span> 可核对权重。消费增长改变贴现、未来产出改变数据租金、存量提高压低数据边际收益，三项共同决定当期采购。</p>
+<h3 id="analysis-如何读作者的脉冲响应">9.4 如何读作者的脉冲响应</h3>
+<p>本国生产率正冲击直接提高 L1 的 <span class="math inline">\(\hat T\)</span>。开放经济中，本国还可通过相对需求和价格调整吸收外国工作数据。作者图 7 显示：两国初始相近时，开放经济的本国工作数据和存量上升，而封闭/仅商品贸易基准可能下降。图 10 及附录 E.2 又说明，若生产率冲击落在数据利用能力明显较低的国家，这种反转可能消失。[S2，§4.1—4.2]</p>
+<p>隐私冲击首先提高本国 H4 的供数成本，影响本国生成的两条工作数据流；进口成本冲击首先提高本国使用外国工作数据的价格，直接进入 C8。<span class="math inline">\(\omega\)</span> 越大，相对价格变化诱发的来源替换越强，但两类冲击作用于不同源头。[S2，Figures 8—9]</p>
+<p><strong>这些冲击响应的符号不是仅由 F1 或 CES 就能确定的定理。</strong> 要取得图 7—11 的路径，须把全部前瞻条件和市场出清线性化，检查状态/跳跃变量数量和稳定根，再求解理性预期系统。脚本中的稳态残差或一条条件需求弹性不能代替这一步。</p>
+<p>原文 §4.3 比较部分折旧与完全折旧。本解析按 <span class="math inline">\(\delta_\Phi=.025\)</span> 与 <span class="math inline">\(\delta_\Phi=1\)</span> 理解图 7/11；“可积累”不等于“零折旧”。从 L2 已能看到：较低折旧使当期采购对存量的一期影响权重较小，但数据流量自身的波动方向仍由完整均衡决定。</p>
+<hr />
+<h2 id="analysis-文献基础它是怎样拼出开放数据经济的">10. 文献基础：它是怎样拼出开放数据经济的</h2>
+<h3 id="analysis-最直接的起点是数据宏观模型不是-melitz-异质性企业模型">10.1 最直接的起点是数据宏观模型，不是 Melitz 异质性企业模型</h3>
+<p>原文自己的方法说明很明确：消费生成原始数据，主要承接 Ichihashi、Jones–Tonetti 和 Farboodi–Veldkamp；生产中使用非竞争性数据与隐私权衡，主要来自数据宏观文献；商品贸易一侧则接入 CES、垄断竞争和开放经济动态均衡。[S2，pp.2、4—5、10—12]</p>
+<p><strong>它没有沿用 Melitz 的生产率抽样、固定出口成本和内生企业退出。</strong> 模型中每国企业是单位测度、品种对称的，关键异质性是国家层面的 <span class="math inline">\(\xi\)</span>。因此，它回答“数据利用差距怎样影响国家的开放收益”，而不是“同一行业内哪些高生产率企业出口”。</p>
+<p>下面按所继承的模块比较，而不把所有参考文献列成同等重要的来源。</p>
+<h3 id="analysis-jonestonetti2020继承数据非竞争性改变问题和转换环节">10.2 Jones–Tonetti（2020）：继承数据非竞争性，改变问题和转换环节</h3>
+<p>Jones 和 Tonetti 的 <em>Nonrivalry and the Economics of Data</em> 在 AER 发表。其简单模型写成 <span class="math inline">\(Y_i=D_i^{\eta_J}L_i\)</span>，共享的数据包能够同时进入多个企业；完整版让消费生成数据、消费者权衡隐私，并比较不同数据所有权制度。其核心问题是：为什么可重复使用的数据仍可能被企业囤积，哪些所有权安排更有利于分享。[S4，§I—II，pp.2824—2829]</p>
+<p>CCWZ 继承了三个要素：数据是活动副产品、分享不耗尽原记录、供数带来隐私损失。改造有三处：</p>
+<ol type="1">
+<li>在原始数据和生产投入之间增加劳动加工技术 <span class="math inline">\(\varphi=BD^\gamma l^{1-\gamma}\)</span>。</li>
+<li>将可共享投入分成面向两国的工作数据，再在购买国合成。</li>
+<li>将工作数据作为投资流量积累成企业数据状态，以研究跨境冲击传导。</li>
+</ol>
+<p>这样，原来侧重“谁拥有数据”的国内效率问题，变成“谁供原始数据、谁加工、谁使用、谁愿意开放”的国际配置问题。但 CCWZ 直接固定家庭拥有原始数据，没有重做 Jones–Tonetti 的多种产权制度比较。</p>
+<h3 id="analysis-congxiezhang2021承接隐私与加工思想没有继承原来的增长发动机">10.3 Cong–Xie–Zhang（2021）：承接隐私与加工思想，没有继承原来的增长发动机</h3>
+<p><em>Knowledge Accumulation, Privacy, and Growth in a Data Economy</em> 的数据用于研发。其创新方程为</p>
+<p><span class="math display">\[
+\dot{\mathcal N}=\eta_C\mathcal N^{\zeta_C}(\varphi L)^{\xi_C}L_R^{1-\xi_C},
+\]</span></p>
+<p>新产品种类 <span class="math inline">\(\mathcal N\)</span> 是累积知识，历史数据通过创造知识影响未来生产。家庭有隐私损失，供数受到消费活动约束；商品加成还会扭曲研发劳动与数据使用。[S5，§2.1—2.3，式 (1)—(3)、(17)，pp.6481—6483]</p>
+<p>CCWZ 沿用“数据价值要与隐私和处理投入一起分析”的思路，但将中心移到<strong>既有商品生产</strong>。其品种测度固定为 1，<span class="math inline">\(A_t\)</span> 为外生 AR(1) 生产率，<span class="math inline">\(\Phi\)</span> 是可折旧的数据状态，而不是新品种知识存量。因此，CCWZ 的稳态福利提高不能直接读成该国拥有了更高的内生长期增长率。</p>
+<h3 id="analysis-congweixiezhang2022把跨部门复用转为跨国复用">10.4 Cong–Wei–Xie–Zhang（2022）：把跨部门复用转为跨国复用</h3>
+<p><em>Endogenous Growth under Multiple Uses of Data</em> 同时允许生产部门和创新部门使用数据，强调“纵向非竞争性”：一份数据用于当期生产，不妨碍它也用于创新。其数据商汇总消费者记录，向生产者与创新者出售数据集；创新部门通过 <span class="math inline">\(\dot{\mathcal N}=\varepsilon\mathcal N L_R^{1-\xi_C}D^{\xi_C}\)</span> 形成增长。[S6，§2.2—2.4，式 (8)、(11)、(15)—(17)]</p>
+<p>CCWZ 的两项加工技术把同样的复用逻辑放到两个国家：<span class="math inline">\(D\)</span> 同时出现在国内用和出口用工作数据的生产函数中，而两组加工劳动分别支付工资。它增加的是<strong>目的地特定的处理、跨境价格和商品贸易反馈</strong>，没有保留原来的生产/创新双部门增长结构。</p>
+<p>这一区别也限制“去敏后的知识”的解释。2022 年文献把创新视为将原始信息转成可重复使用的知识，并讨论其隐私含义；CCWZ 的工作数据仍伴随出口隐私损失，不能仅因名称为 information 就视为完全匿名、安全的公共知识。</p>
+<h3 id="analysis-farboodiveldkamp共同关注数据状态价值的微观基础不同">10.5 Farboodi–Veldkamp：共同关注数据状态，价值的微观基础不同</h3>
+<p>本地文件虽然以 2021 命名，PDF 首页日期实际是 <strong>2024 年 7 月 9 日</strong>。以下比较采用这个可核对版本，不把其所有内容倒推为 2021 初稿已具备。[S7]</p>
+<p>Farboodi 和 Veldkamp 的 <em>A Model of the Data Economy</em> 用数据改善对未知状态的预测，知识存量是预测精度，交易既产生商品也产生信息。状态不断变化使旧数据贬值；预测误差不可能低于零，且存在不可预测成分，因此数据改善业务流程的收益最终受到限制。[S7，§1—2、§4]</p>
+<p>CCWZ 的 <span class="math inline">\(\Phi^{\alpha\xi}\)</span> 则直接扩大产出，没有显式的信号噪声、贝叶斯更新和不可预测误差下界。它因此更容易嵌入贸易均衡，但不能由“数据数量”直接识别信息精度，也没有在基准中解释数据边际回报何时饱和。</p>
+<p>Veldkamp 与 Chung（2024）的 JEL 综述把数据宏观研究分为业务流程、研发知识、以及数据经劳动加工产生可行动知识等路径，正好帮助定位 CCWZ：它借助加工环节连接数据生成与国际生产，但没有把预测与研发两条收益来源完整合并。[S8，§4]</p>
+<h3 id="analysis-商品贸易模块采用标准-ces-骨架不等于整套新凯恩斯模型">10.6 商品贸易模块：采用标准 CES 骨架，不等于整套新凯恩斯模型</h3>
+<p>品种聚合和固定需求弹性的基础是 Dixit–Stiglitz 的 CES 垄断竞争。原文在国内/进口商品合成处引用 Galí–Monacelli（2005）和 Caldara 等（2020），并从开放经济宏观文献取生产、资本、风险分担和冲击处理的标准模块。[S2，§2.2、§3.1、Appendix A]</p>
+<p>这种继承是模块性的。CCWZ 没有在基准中加入黏性价格、货币政策规则和名义汇率制度，不能称为“把数据放进完整的 Galí–Monacelli 小型开放新凯恩斯模型”。它是两国、实质变量为主、带数据加工与数据积累的动态一般均衡模型。</p>
+<p>同样，数据商与隐私文献提供了经济动机，并不表示 CCWZ 解了 Ichihashi 的消费者战略披露或 Acemoglu 等人的相关隐私外部性模型。原文使用 <span class="math inline">\(\Pi(1+b\mathbb I)\pi D^2\)</span> 这个简约形式承接这些问题，没有显式刻画“我出售的数据泄露你的信息”的外部性。[S2，pp.4—7]</p>
+<h3 id="analysis-与读书会中几类论文的区别">10.7 与读书会中几类论文的区别</h3>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>文献/模型线</th>
+<th>主要研究对象</th>
+<th>与 CCWZ 的关键差别</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Eaton–Kortum（2002）</td>
+<td>地理、技术差异与贸易分工</td>
+<td>技术抽样和地理贸易成本驱动分配；CCWZ 把工作数据形成和隐私纳入生产反馈</td>
+</tr>
+<tr>
+<td>Melitz（2003）及 Chaney（2008）</td>
+<td>企业选择、出口固定成本、集约/扩展边际</td>
+<td>CCWZ 没有生产率分布和企业出口门槛，不能解释企业层面选择</td>
+</tr>
+<tr>
+<td>Arkolakis–Costinot–Rodríguez-Clare（2012）</td>
+<td>一类贸易模型中以少量统计量核算贸易福利</td>
+<td>CCWZ 有内生数据投入、劳动与隐私效用，不能直接只用国内贸易份额和贸易弹性计算完整福利</td>
+</tr>
+<tr>
+<td>Jones–Tonetti（2020）</td>
+<td>非竞争性、所有权与数据分享效率</td>
+<td>CCWZ 增加跨国数据加工、数据存量和商品贸易条件</td>
+</tr>
+<tr>
+<td>Cong 等（2021、2022）</td>
+<td>数据进入研发、知识外溢与长期增长</td>
+<td>CCWZ 聚焦既有生产与国际配置；研发和利用能力未内生化</td>
+</tr>
+<tr>
+<td>Farboodi–Veldkamp（本地 2024 版）</td>
+<td>信息预测、数据积累、估值与测量</td>
+<td>CCWZ 用直接生产函数换取开放经济的可处理性</td>
+</tr>
+<tr>
+<td>Prüfer–Schottmüller（2021）</td>
+<td>数据驱动网络效应与竞争</td>
+<td>CCWZ 的单位测度对称企业不刻画平台倾斜、赢者通吃或用户迁移</td>
+</tr>
+</tbody>
+</table>
+<p>前三类贸易论文及 Prüfer–Schottmüller 的定位依据本地论文开篇与模型介绍，资料位置列于 S14。这个比较不意味着它们都是 CCWZ 直接改写的祖先模型。</p>
+<hr />
+<h2 id="analysis-为什么这项研究值得读优秀在哪里">11. 为什么这项研究值得读，优秀在哪里</h2>
+<h3 id="analysis-最好的设计是让数据的来源与受益者不再重合">11.1 最好的设计是让数据的来源与受益者不再重合</h3>
+<p>如果模型只规定“本国多一项生产投入”，开放数据的收益很容易退化为投入更便宜。CCWZ 则让家庭承担隐私损失、数据商分目的地加工、外国企业使用出口工作数据、本国又通过商品贸易消费外国生产的商品。这几项决策连在一起，才可能出现“某国供出更多原始记录，却在另一国形成更多工作数据和生产活动”的结果。</p>
+<p>原始数据与工作数据的区分因而承担了模型任务：它给不可耗尽的记录加上真实的转换成本，也使国内和出口数据量可以分别确定。这个区分比笼统宣称“数据可复制，所以开放一定有利”更有解释力。</p>
+<h3 id="analysis-它把一个国家的福利收益写成国际参与问题">11.2 它把一个国家的福利收益写成国际参与问题</h3>
+<p>论文不止计算全球总量，还比较两国是否分别愿意由封闭转为开放。数据落后国可能有很大的福利增量，但如果领先国不满足参与约束，双边开放就缺乏共同利益基础。数据开放又可能扩大这个共同获益区间。</p>
+<p>这项问题设置有用，因为贸易与数据协议最终需要参与方接受，而不是只要求世界总产出上升。原文以五种制度环境比较同一个经济问题，使数据进口、出口和双向分享的作用可以分别看到。其“数据鸿沟陷阱”应理解为这种制度参与约束，而非未经证明的所有开放均衡消失。</p>
+<h3 id="analysis-它给出流量与存量的不同冲击预测">11.3 它给出流量与存量的不同冲击预测</h3>
+<p>同一个正生产率冲击，可能提高商品产出，却降低封闭经济的新工作数据采购；开放后，工作数据还可从外国调入。模型因此产生可以区分的预测：新增工作数据采购、既有存量与最终产出的响应不必同向，且依赖两国利用能力的初始差距。</p>
+<p>这些预测把静态的“分享数据有收益”推进为动态的“何时从哪里调入数据”。要验证它们，需要采购或调用量、加工劳动、数据资产和生产率的独立测量；仅用互联网带宽或跨境字节数不足以检验工作数据资本机制。</p>
+<h3 id="analysis-对论文质量的评价也取决于识别出了什么">11.4 对论文质量的评价也取决于识别出了什么</h3>
+<p>它的强项是模型组织和机制比较，数值部分主要展示合理参数下的定性可能性。作者在引言和 §3.1 也说明，数据经济测量不足，尚未进行完整结构校准。[S2，pp.2、14—15]</p>
+<p>因此，目前可以给出的评价是：<strong>它提供了一个值得扩展的开放数据经济理论框架，并指出国家间收益分配与原始/工作数据错位这两个重要问题。</strong> 要把它推进为更有说服力的定量政策论文，决定性的改进包括：明确数据授权与有限最优条件，固定嵌套定价与贸易成本闭合，估计数据来源替代弹性和利用回报、区分隐私保护的收益与合规成本，并验证开放后两国福利的敏感性。</p>
+<p>不能从作者身份、NBER 编号或 AFA 报告资格推出“顶刊为什么录用”。这些事实说明研究进入了学术交流渠道，不能替代发表记录和识别证据。</p>
+<hr />
+<h2 id="analysis-基于后续研究与现实制度怎样改造模型">12. 基于后续研究与现实制度，怎样改造模型</h2>
+<p><strong>先明确第 7.6 节的数据可购买集或回报边界；在此基础上，政策研究优先做扩展 A，把单一数据壁垒拆成安全保护、流动规模与合规固定成本。</strong> 原模型已经有跨国数据需求，但把政策主要放在乘数 <span class="math inline">\(d_D\)</span>，难以区分“增加纯摩擦”与“减少隐私风险”。中国 2024 年规定按数据类别和数量门槛区别处理，美国 2025 年 Data Security Program 对特定敏感数据、特定接收方及交易类别设置限制，也说明政策并非统一提高所有数据的价格。[S11–S12]</p>
+<p>后续学术研究提供另外两条有根据的改造线：Farboodi–Veldkamp 的 2024 版及 Veldkamp–Chung（2024）要求区分数量和有效信息；Lee（2025）把跨境数据放进研发与知识扩散，提示稳态收益与持续增长要分开。[S7–S10]</p>
+<p>下面三个扩展分别给出新增对象、目标、逐步条件、对基准的替换与可检验含义。它们是本解析的建模方案，不是原文已经证明的结论。</p>
+<h3 id="analysis-a.-安全保护可能促进流动连续出口许可与合规成本">12A. 安全保护可能促进流动：连续出口许可与合规成本</h3>
+<h4 id="analysis-a.1-为什么不再只用允许出口的指示变量">A.1 为什么不再只用“允许出口”的指示变量</h4>
+<p>中国《促进和规范数据跨境流动规定》第 3 条对不包含个人信息或重要数据的一些活动豁免相应程序，第 5、7、8 条又按处理者与信息数量等条件区别处理，第 10—11 条保留个人同意和安全义务。[S11]</p>
+<p>OECD/WTO（2025）的报告同时计算合规成本与信任收益。其“全面碎片化使全球 GDP 减少 4.5%”和“开放且有保障的制度使全球 GDP 增加约 1.77%”都是该报告特定反事实模拟，不能拿来标定 CCWZ 的 <span class="math inline">\(b\)</span> 或作为所有安全规则的因果效应。[S10，Executive Summary，pp.8—9]</p>
+<p>对应的模型变化是：让政策既可能提高处理支出，也可能降低跨境隐私风险，而不是只增加 <span class="math inline">\(d_D\)</span>。</p>
+<h4 id="analysis-a.2-新增对象和技术">A.2 新增对象和技术</h4>
+<p>令 <span class="math inline">\(x\in[0,1]\)</span> 是允许出口处理的原始记录比例，<span class="math inline">\(e\ge0\)</span> 是安全保护投入强度。保留原始数据国内复用：</p>
+<p><span class="math display">\[
+\varphi_H=BD^\gamma l_H^{1-\gamma},\qquad
+\varphi_H^{*}=B(xD)^\gamma(l_H^{*})^{1-\gamma}.
+\tag{A1}
+\]</span></p>
+<p>将家庭隐私损失改为</p>
+<p><span class="math display">\[
+\Pi\pi D^2[1+b x^2e^{-se}],\qquad b&gt;0,\ s&gt;0.
+\tag{A2}
+\]</span></p>
+<p><span class="math inline">\(x\)</span> 增加扩大暴露面，<span class="math inline">\(e\)</span> 增加降低风险。安全支出为 <span class="math inline">\(h_e e^2/2\)</span> 单位最终品，<span class="math inline">\(h_e&gt;0\)</span>；跨境合规还有固定成本 <span class="math inline">\(F\ge0\)</span>，仅 <span class="math inline">\(x&gt;0\)</span> 时支付。</p>
+<p>这样，基准的二元额外风险被连续的 <span class="math inline">\(b x^2e^{-se}\)</span> 取代。<span class="math inline">\(x=0\)</span> 时没有出口隐私增量，也不支付 <span class="math inline">\(F\)</span>。</p>
+<h4 id="analysis-a.3-先解给定数据价值下的加工劳动">A.3 先解给定数据价值下的加工劳动</h4>
+<p>考虑一个<strong>条件配置块</strong>：给定两目的地一单位工作数据的价值 <span class="math inline">\(V_H,V_F&gt;0\)</span>，工资 <span class="math inline">\(w&gt;0\)</span> 和消费边际效用 <span class="math inline">\(\lambda&gt;0\)</span>。<span class="math inline">\(V_F\)</span> 已换算为本国同一计价物。它可以是数据商的给定销售价格，或政策评价采用的、包含相应外部收益的影子价值；二者不混同。</p>
+<p>以商品为价值单位，把 A2 除以 <span class="math inline">\(\lambda\)</span>，定义 <span class="math inline">\(k\equiv\Pi\pi/\lambda&gt;0\)</span>，解</p>
+<p><span class="math display">\[
+\max_{D,x,e,l_H,l_H^{*}}
+V_H\varphi_H+V_F\varphi_H^{*}-w(l_H+l_H^{*})
+-kD^2(1+b x^2e^{-se})-\frac{h_e}2e^2-F\mathbf1_{\{x&gt;0\}}.
+\tag{A3}
+\]</span></p>
+<p>这是固定工资、数据价值和边际效用下的配置问题；完整国家福利比较还须重新求解这些价格与原模型各市场。</p>
+<p>对任一目的地 <span class="math inline">\(j\)</span>，令可用原始数据为 <span class="math inline">\(Z_j\)</span>，加工净价值为</p>
+<p><span class="math display">\[
+V_jBZ_j^\gamma l_j^{1-\gamma}-wl_j.
+\]</span></p>
+<p>一阶条件：</p>
+<p><span class="math display">\[
+(1-\gamma)V_jBZ_j^\gamma l_j^{-\gamma}=w.
+\]</span></p>
+<p>移项并取 <span class="math inline">\(1/\gamma\)</span> 次幂：</p>
+<p><span class="math display">\[
+l_j=\left[\frac{(1-\gamma)V_jB}{w}\right]^{1/\gamma}Z_j
+\equiv a_jZ_j.
+\]</span></p>
+<p>因 <span class="math inline">\(wl_j=(1-\gamma)V_j\varphi_j\)</span>，最优加工净价值为</p>
+<p><span class="math display">\[
+V_j\varphi_j-wl_j=\gamma V_j\varphi_j
+=\gamma V_jB a_j^{1-\gamma}Z_j\equiv v_jZ_j.
+\]</span></p>
+<p>代入 <span class="math inline">\(Z_H=D,Z_F=xD\)</span>，A3 减为</p>
+<p><span class="math display">\[
+\boxed{G(D,x,e)=(v_H+v_Fx)D-kD^2(1+b x^2e^{-se})
+-\frac{h_e}2e^2-F\mathbf1_{\{x&gt;0\}}.}
+\tag{A4}
+\]</span></p>
+<p>原始数据的收益可以相加，正是因为国内使用没有耗尽可供出口的数据。</p>
+<h4 id="analysis-a.4-给定-xe求最优原始数据">A.4 给定 <span class="math inline">\(x,e\)</span>，求最优原始数据</h4>
+<p>对 <span class="math inline">\(D\)</span> 求导：</p>
+<p><span class="math display">\[
+G_D=v_H+v_Fx-2kD(1+b x^2e^{-se})=0.
+\]</span></p>
+<p>所以</p>
+<p><span class="math display">\[
+\boxed{D^{opt}(x,e)=\frac{v_H+v_Fx}{2k(1+b x^2e^{-se})}.}
+\tag{A5}
+\]</span></p>
+<p>二阶导数 <span class="math inline">\(G_{DD}=-2k(1+b x^2e^{-se})&lt;0\)</span>，该条件最优解唯一。出口既增加数据的使用价值，也增加隐私成本，两项都在 A5 中出现。</p>
+<h4 id="analysis-a.5-给定-de求出口比例及其边界">A.5 给定 <span class="math inline">\(D,e\)</span>，求出口比例及其边界</h4>
+<p>在 <span class="math inline">\(x&gt;0\)</span> 的分支上，固定成本不影响边际条件：</p>
+<p><span class="math display">\[
+G_x=v_FD-2kbD^2x e^{-se}=0,
+\]</span></p>
+<p><span class="math display">\[
+\boxed{x^{int}=\frac{v_Fe^{se}}{2kbD},\qquad
+x^{opt}=\min\{1,x^{int}\}.}
+\tag{A6}
+\]</span></p>
+<p>因为 <span class="math inline">\(G_{xx}=-2kbD^2e^{-se}&lt;0\)</span>，这是给定出口分支的唯一条件最优比例。若 <span class="math inline">\(x^{int}&gt;1\)</span>，选择上界 <span class="math inline">\(x=1\)</span>；是否实际开通出口，还要比较支付固定成本前后的总收益。</p>
+<p>固定 <span class="math inline">\(D,e\)</span> 时，<span class="math inline">\(x^{int}\)</span> 对 <span class="math inline">\(V_F\)</span> 所决定的净出口价值 <span class="math inline">\(v_F\)</span> 为正，对 <span class="math inline">\(b\)</span> 为负，对安全投入 <span class="math inline">\(e\)</span> 为正。这些都是条件比较静态；全均衡中 <span class="math inline">\(D,w,V_F\)</span> 也会调整。</p>
+<h4 id="analysis-a.6-给定-dx求最优安全投入">A.6 给定 <span class="math inline">\(D,x\)</span>，求最优安全投入</h4>
+<p>对 <span class="math inline">\(e\)</span> 求导：</p>
+<p><span class="math display">\[
+G_e=kbsD^2x^2e^{-se}-h_e e=0.
+\]</span></p>
+<p>移项、乘 <span class="math inline">\(e^{se}\)</span>：</p>
+<p><span class="math display">\[
+e\,e^{se}=\frac{kbsD^2x^2}{h_e}.
+\]</span></p>
+<p>两边乘 <span class="math inline">\(s\)</span>，并使用 Lambert <span class="math inline">\(W\)</span> 函数的定义 <span class="math inline">\(W(z)e^{W(z)}=z\)</span>：</p>
+<p><span class="math display">\[
+\boxed{e^{opt}=\frac1sW\left(\frac{kbs^2D^2x^2}{h_e}\right).}
+\tag{A7}
+\]</span></p>
+<p>当 <span class="math inline">\(xD&gt;0\)</span>，右侧参数为正，取唯一非负实分支；<span class="math inline">\(x=0\)</span> 时 <span class="math inline">\(e=0\)</span>。且</p>
+<p><span class="math display">\[
+G_{ee}=-kbs^2D^2x^2e^{-se}-h_e&lt;0,
+\]</span></p>
+<p>给定 <span class="math inline">\(D,x\)</span> 的安全最优解唯一。该条件唯一性不自动构成 <span class="math inline">\(D,x,e\)</span> 联合问题的全局凹性证明；联合最优还需比较分支和边界。</p>
+<h4 id="analysis-a.7-固定合规成本如何产生不开通">A.7 固定合规成本如何产生“不开通”</h4>
+<p>将 A5 代回 A4，得到开通出口前的最优净价值</p>
+<p><span class="math display">\[
+\widetilde G(x,e)=\frac{(v_H+v_Fx)^2}{4k(1+b x^2e^{-se})}
+-\frac{h_e}2e^2.
+\tag{A8}
+\]</span></p>
+<p>无出口的最优值为 <span class="math inline">\(G_0=v_H^2/(4k)\)</span>。令</p>
+<p><span class="math display">\[
+\Delta\equiv\max_{0\le x\le1,e\ge0}\widetilde G(x,e)-G_0.
+\]</span></p>
+<p>若 <span class="math inline">\(\Delta&gt;F\)</span>，存在净收益为正的出口选择；若 <span class="math inline">\(\Delta&lt;F\)</span>，不支付固定成本、保持 <span class="math inline">\(x=e=0\)</span>；等号时存在无差异。由于 <span class="math inline">\(x\)</span> 有界且安全成本随 <span class="math inline">\(e^2\)</span> 增长，目标在 <span class="math inline">\(e\to\infty\)</span> 时趋向负无穷，最大值可在有限范围内求取。</p>
+<p><strong>模型改变后的结论</strong>是：制度互认可能通过降低 <span class="math inline">\(F\)</span> 使跨境关系由无到有；更有效的安全技术可能通过降低剩余风险，允许更大的出口比例。安全规则的资源成本和风险降低收益应同时计入，不能把两者都称为“阻碍流动”。</p>
+<h4 id="analysis-a.8-接回动态一般均衡">A.8 接回动态一般均衡</h4>
+<p>把 A1 作为两国数据商的加工技术；把 A2 替换家庭原来的出口隐私项；这里选择政府提供安全与合规服务、以总额税融资的闭合。令 <span class="math inline">\(\mathcal T_t=h_ee_t^2/2+F\mathbf1_{\{x_t&gt;0\}}\)</span>，家庭预算右侧扣除 <span class="math inline">\(\mathcal T_t\)</span>；把同额真实支出加到对应国家资源约束：</p>
+<p><span class="math display">\[
+Y_t=C_t+I_t+\frac{h_e}2e_t^2+F\mathbf1_{\{x_t&gt;0\}}.
+\]</span></p>
+<p>政府选择 <span class="math inline">\(x_t,e_t\)</span> 时，家庭把政策给定，供数条件为 <span class="math inline">\(P_{D,t}=2\Pi\pi_t[1+bx_t^2e^{-se_t}]D_tC_t^\sigma\)</span>。数据商沿用给定政策下的变动投入条件，并保持零利润；政府则以两国均衡条件为约束比较政策福利。A3—A8 提供给定价格下的配置基准，不替代政府考虑全均衡价格反馈后的最优政策。</p>
+<p>这项融资安排使固定成本有明确承担者。若改为数据商自己支付 <span class="math inline">\(F\)</span>，原来的规模报酬不变、变动投入一阶条件与零利润将不足以覆盖固定成本，须加入固定授权费或重新设计非线性价格。若改由家庭选择出口许可，则另给许可收入并重新求家庭的 <span class="math inline">\(D,x\)</span> 条件，不能同时把同一许可选择权交给政府。</p>
+<p>可检验预测是：降低固定程序成本主要增加开通跨境数据业务的主体数，降低单位摩擦主要增加已开通主体的交易量；安全保护有效时，隐私风险下降与数据使用上升可以同时发生。数量门槛附近的政策差异有助于区分这两个边际，但识别仍需处理企业规避门槛和数据类别差异。</p>
+<h3 id="analysis-b.-跨境字节数不等于有效信息数据质量饱和与算力互补">12B. 跨境字节数不等于有效信息：数据质量、饱和与算力互补</h3>
+<h4 id="analysis-b.1-后续文献改变了什么判断">B.1 后续文献改变了什么判断</h4>
+<p>Farboodi–Veldkamp 的 2024 版把信息价值建在预测误差下降上，旧数据因预测对象变化而贬值；Veldkamp–Chung（2024，§4.1）强调预测改进存在边界。它们支持将原文恒定弹性 <span class="math inline">\(\Phi^{\alpha\xi}\)</span> 改为有限的预测生产率收益，但没有要求采用下面某个特定函数。[S7–S8]</p>
+<p>本扩展给出一种可解析、可估计的替换：质量不同的数据先换成有效单位，数据与算力再共同决定有上界的生产率。</p>
+<h4 id="analysis-b.2-先将外国数据换成有效单位">B.2 先将外国数据换成有效单位</h4>
+<p>令 <span class="math inline">\(\upsilon_F&gt;0\)</span> 表示一单位外国工作数据对本国任务的有效质量，可包含语言适配、行业覆盖和记录准确度。设</p>
+<p><span class="math display">\[
+z_F=\upsilon_F\varphi_F,\qquad
+\varphi=\left[\chi^{1/\omega}\varphi_H^{(\omega-1)/\omega}
++(1-\chi)^{1/\omega}z_F^{(\omega-1)/\omega}\right]^{\omega/(\omega-1)}.
+\]</span></p>
+<p>取得一单位 <span class="math inline">\(z_F\)</span> 需要购买 <span class="math inline">\(1/\upsilon_F\)</span> 单位原外国数据，所以其有效单价是 <span class="math inline">\(\widetilde p_F=p_F/\upsilon_F\)</span>。按 C7—C8：</p>
+<p><span class="math display">\[
+q=\left[\chi p_H^{1-\omega}+(1-\chi)(p_F/\upsilon_F)^{1-\omega}\right]^{1/(1-\omega)},
+\]</span></p>
+<p><span class="math display">\[
+z_F=(1-\chi)\left(\frac{p_F/\upsilon_F}{q}\right)^{-\omega}\varphi.
+\]</span></p>
+<p>原始外国工作数据量为 <span class="math inline">\(\varphi_F=z_F/\upsilon_F\)</span>，故</p>
+<p><span class="math display">\[
+\boxed{\frac{\varphi_F}{\varphi_H}
+=\frac{1-\chi}{\chi}\,\upsilon_F^{\omega-1}(p_F/p_H)^{-\omega}.}
+\tag{B1}
+\]</span></p>
+<p>对 <span class="math inline">\(\ln\upsilon_F\)</span> 求导：</p>
+<p><span class="math display">\[
+\frac{\partial\ln(\varphi_F/\varphi_H)}{\partial\ln\upsilon_F}=\omega-1,
+\qquad
+\frac{\partial\ln(z_F/\varphi_H)}{\partial\ln\upsilon_F}=\omega.
+\]</span></p>
+<p>因此，外国数据质量改善总会提高其相对有效使用量；但当 <span class="math inline">\(\omega&lt;1\)</span> 时，达到更高有效用量可能反而需要更少的原始外国数据。这给出一个直接的测量结论：物理流量下降不必表示信息利用下降。</p>
+<h4 id="analysis-b.3-再替换生产函数中的无限数据乘数">B.3 再替换生产函数中的无限数据乘数</h4>
+<p>令 <span class="math inline">\(\mathcal M_t\ge0\)</span> 为算力服务，价格为 <span class="math inline">\(c_M&gt;0\)</span>。设</p>
+<p><span class="math display">\[
+\boxed{T_t=A_tK_t^\alpha n_t^{1-\alpha}
+\exp\left[\zeta\frac{\Phi_t}{k_0+\Phi_t}
+\frac{\mathcal M_t}{m_0+\mathcal M_t}\right],}
+\tag{B2}
+\]</span></p>
+<p>其中 <span class="math inline">\(k_0,m_0,\zeta&gt;0\)</span>。<span class="math inline">\(\Phi\)</span> 仍按原文方式积累；改变的是其生产率映射，而不是将存量悄悄换成当期数据流。</p>
+<p>因为两个分式都在 <span class="math inline">\([0,1)\)</span>，有</p>
+<p><span class="math display">\[
+1\le\exp\left[\zeta\frac\Phi{k_0+\Phi}\frac{\mathcal M}{m_0+\mathcal M}\right]&lt;e^\zeta.
+\]</span></p>
+<p>所以，在 <span class="math inline">\(\zeta\)</span> 固定时，单靠不断堆积数据和算力，不能让这一生产率乘数无限增长。在第 7.6 节固定价格的单企业问题中，令该乘数为 <span class="math inline">\(G\)</span>，重新优化商品产量后的经营利润为 <span class="math inline">\(c_1G^{\rho-1}\le c_1e^{\zeta(\rho-1)}\)</span>；数据采购和算力支出均非负，确定性无限期利润的上界因而为 <span class="math inline">\(c_1e^{\zeta(\rho-1)}/(1-\beta)\)</span>。这排除了无限采购数据带来无界超线性收益的偏离。其他技术进步仍可带来增长。</p>
+<h4 id="analysis-b.4-逐步求两项边际收益">B.4 逐步求两项边际收益</h4>
+<p>对 B2 取对数：</p>
+<p><span class="math display">\[
+\ln T=\ln A+\alpha\ln K+(1-\alpha)\ln n
++\zeta\frac\Phi{k_0+\Phi}\frac{\mathcal M}{m_0+\mathcal M}.
+\]</span></p>
+<p>先求分式导数：</p>
+<p><span class="math display">\[
+\frac{d[\Phi/(k_0+\Phi)]}{d\Phi}
+=\frac{k_0+\Phi-\Phi}{(k_0+\Phi)^2}
+=\frac{k_0}{(k_0+\Phi)^2}.
+\]</span></p>
+<p>于是</p>
+<p><span class="math display">\[
+\frac{\partial\ln T}{\partial\Phi}
+=\zeta\frac{k_0}{(k_0+\Phi)^2}\frac{\mathcal M}{m_0+\mathcal M},
+\]</span></p>
+<p><span class="math display">\[
+\boxed{\frac{\partial T}{\partial\Phi}
+=T\zeta\frac{k_0}{(k_0+\Phi)^2}\frac{\mathcal M}{m_0+\mathcal M}.}
+\tag{B3}
+\]</span></p>
+<p>算力分式的导数为 <span class="math inline">\(d[\mathcal M/(m_0+\mathcal M)]/d\mathcal M=m_0/(m_0+\mathcal M)^2\)</span>。将它乘上 <span class="math inline">\(T\zeta\Phi/(k_0+\Phi)\)</span>，得到</p>
+<p><span class="math display">\[
+\boxed{\frac{\partial T}{\partial\mathcal M}
+=T\zeta\frac\Phi{k_0+\Phi}\frac{m_0}{(m_0+\mathcal M)^2}.}
+\tag{B4}
+\]</span></p>
+<p>对 <span class="math inline">\(\ln T\)</span> 求交叉导数：</p>
+<p><span class="math display">\[
+\boxed{\frac{\partial^2\ln T}{\partial\Phi\partial\mathcal M}
+=\frac{\zeta k_0m_0}{(k_0+\Phi)^2(m_0+\mathcal M)^2}&gt;0.}
+\tag{B5}
+\]</span></p>
+<p>所以两者具有对数互补性。产出水平的交叉导数也为正，因为 <span class="math inline">\(T_{\Phi\mathcal M}=T[(\ln T)_\Phi(\ln T)_{\mathcal M}+(\ln T)_{\Phi\mathcal M}]\)</span>，括号两项都非负且在正投入时为正。</p>
+<p>数据弹性现在变为</p>
+<p><span class="math display">\[
+\frac{\partial\ln T}{\partial\ln\Phi}
+=\zeta\frac{k_0\Phi}{(k_0+\Phi)^2}\frac{\mathcal M}{m_0+\mathcal M}.
+\tag{B6}
+\]</span></p>
+<p><span class="math inline">\(\Phi\to0\)</span> 或 <span class="math inline">\(\Phi\to\infty\)</span> 时该弹性均趋于零，不再被外生固定为 <span class="math inline">\(\alpha\xi\)</span>。</p>
+<h4 id="analysis-b.5-算力选择与新的数据-euler">B.5 算力选择与新的数据 Euler</h4>
+<p>给定当前状态，企业购买算力，条件是 <span class="math inline">\(MC_tT_{\mathcal M,t}=c_M\)</span>：</p>
+<p><span class="math display">\[
+\boxed{c_M=MC_tT_t\zeta\frac{\Phi_t}{k_0+\Phi_t}
+\frac{m_0}{(m_0+\mathcal M_t)^2}.}
+\tag{B7}
+\]</span></p>
+<p>这是包含 <span class="math inline">\(T_t(\mathcal M_t)\)</span> 的隐式条件，不能把 <span class="math inline">\(T_t\)</span> 当常数后声称已显式解出最优算力。还要比较 <span class="math inline">\(\mathcal M=0\)</span> 与所有内点候选；本函数的互补性不保证企业利润全局凹。</p>
+<p>沿用 F9—F11 的 Bellman 步骤，仅将数据边际产出替换为 B3：</p>
+<p><span class="math display">\[
+\boxed{q_t=E_t\left[M_{t,t+1}\left(
+MC_{t+1}T_{t+1}\zeta\frac{k_0}{(k_0+\Phi_{t+1})^2}
+\frac{\mathcal M_{t+1}}{m_0+\mathcal M_{t+1}}
++(1-\delta_\Phi)q_{t+1}\right)\right].}
+\tag{B8}
+\]</span></p>
+<p>若算力服务每单位消耗 <span class="math inline">\(c_M\)</span> 单位最终品、竞争供应且零利润，国内资源约束需改为 <span class="math inline">\(Y=C+I+c_M\mathcal M\)</span>。采用两国模型时，应分别记录算力的生产地与使用地；若算力也跨境进口，则另加算力贸易和相应支付，不把它自动并入工作数据贸易。</p>
+<p><strong>新的经济含义</strong>是：算力不足的国家即便获得低价数据，其生产收益也可能有限；任务不适配的外国数据未必能填补国内有效信息缺口。该模型允许检验跨境数据成本下降的生产率效果是否随初始算力、任务匹配和数据丰富度而变化。</p>
+<h3 id="analysis-c.-内生利用能力从一次性后发收益到持续追赶">12C. 内生利用能力：从一次性后发收益到持续追赶</h3>
+<h4 id="analysis-c.1-后续文献提供的方向">C.1 后续文献提供的方向</h4>
+<p>原文结论提出让 <span class="math inline">\(\xi\)</span> 随使用反馈变化，但没有给出运动方程。直接写“多用数据使 <span class="math inline">\(\xi\)</span> 上升”还存在单位问题：<span class="math inline">\(\partial\ln T/\partial\xi=\alpha\ln\Phi\)</span> 会随数据单位改变。因此，更清楚的办法是另设有明确积累技术的能力存量 <span class="math inline">\(H\)</span>，并将数据量按固定基准归一化。</p>
+<p>Lee（2025）的 <em>Trade and Growth with Digital Data</em> 采用多国框架，数据由国内消费和外国可达数据形成存量，并进入研发生产函数。其 §2.3 在知识生产中区分全球知识可得性与国家数据可达性。这支持把数据进口与本国吸收能力、研发投入共同建模；该文是 KIEP Working Paper 25-02，不能写成已经发表的顶刊结果。[S9，§2.1—2.3]</p>
+<h4 id="analysis-c.2-新增能力状态与资源约束">C.2 新增能力状态与资源约束</h4>
+<p>令 <span class="math inline">\(H_t&gt;0\)</span> 为企业的组织、算法适配或技术能力，<span class="math inline">\(R_t\ge0\)</span> 为当期最终品计价的训练/研发投入：</p>
+<p><span class="math display">\[
+T_t=A_tK_t^\alpha n_t^{1-\alpha}
+(\Phi_t/\Phi_0)^{\alpha\xi}(H_t/H_0)^\nu,
+\quad\Phi_0,H_0&gt;0,\quad\nu&gt;0,
+\tag{C1E}
+\]</span></p>
+<p><span class="math display">\[
+\boxed{H_{t+1}=(1-\delta_H)H_t+\zeta_HR_t^a\Phi_t^{1-a},
+\quad0&lt;a&lt;1,\ \zeta_H&gt;0.}
+\tag{C2E}
+\]</span></p>
+<p>研究这个扩展时，可先采用满足 <span class="math inline">\((\alpha\xi+\nu)(\rho-1)&lt;1\)</span> 的封闭基准：重新优化商品产量后的经营利润正比于 <span class="math inline">\(\Phi^{\alpha\xi(\rho-1)}H^{\nu(\rho-1)}\)</span>，两个状态的指数和小于 1，消除了联合同比扩张的超线性回报。该限制要求重新标定 <span class="math inline">\(\xi,\nu\)</span>，不能沿用 <span class="math inline">\(\xi=1,\rho=21\)</span> 的教学候选值。若采用授权上限等其他闭合，则需连同其乘子一起重推边界条件。</p>
+<p><span class="math inline">\(\Phi_0,H_0\)</span> 是固定的跨情形统一量纲基准。现有数据同时服务当前生产和能力积累，不因用于训练而从生产存量中扣除，因而保留非竞争性。<span class="math inline">\(R_t\)</span> 则是有真实机会成本的投入，资源约束变为</p>
+<p><span class="math display">\[
+Y_t=C_t+I_t+R_t.
+\]</span></p>
+<p>若研发使用劳动而非最终品，应相应改成劳动分配约束；这里选择最终品投入，是为了只新增一个清楚的资源渠道。</p>
+<h4 id="analysis-c.3-定义两个影子价值避免时间错位">C.3 定义两个影子价值，避免时间错位</h4>
+<p>设企业值函数为 <span class="math inline">\(V_t(\Phi_t,H_t)\)</span>，数据流价格仍为 <span class="math inline">\(q_t\)</span>。定义</p>
+<p><span class="math display">\[
+q_t=E_t[M_{t,t+1}V_{\Phi,t+1}],\qquad
+v_t\equiv E_t[M_{t,t+1}V_{H,t+1}].
+\]</span></p>
+<p><span class="math inline">\(v_t\)</span> 是今天选择新增一单位 <span class="math inline">\(H_{t+1}\)</span> 的价值。其单位是“当期商品/下期能力”，不是当期能力租金。</p>
+<p>企业在 Bellman 式中扣除 <span class="math inline">\(R_t\)</span> 和 <span class="math inline">\(q_t\varphi_t\)</span>，并使用原数据存量方程与 C2E。</p>
+<h4 id="analysis-c.4-先求最优研发投入">C.4 先求最优研发投入</h4>
+<p>因为 <span class="math inline">\(\partial H_{t+1}/\partial R_t=\zeta_H aR_t^{a-1}\Phi_t^{1-a}\)</span>，对 <span class="math inline">\(R_t\)</span> 的一阶条件为</p>
+<p><span class="math display">\[
+-1+v_t\zeta_H aR_t^{a-1}\Phi_t^{1-a}=0.
+\]</span></p>
+<p>移项得到 <span class="math inline">\(R_t^{1-a}=v_t\zeta_Ha\Phi_t^{1-a}\)</span>，取正的 <span class="math inline">\(1/(1-a)\)</span> 次幂：</p>
+<p><span class="math display">\[
+\boxed{R_t=(\zeta_Ha v_t)^{1/(1-a)}\Phi_t.}
+\tag{C3E}
+\]</span></p>
+<p>在给定正影子价格 <span class="math inline">\(v_t\)</span> 的当期配置问题 <span class="math inline">\(\max_R\{-R+v_t\zeta_HR^a\Phi_t^{1-a}\}\)</span> 中，二阶导数为 <span class="math inline">\(v_t\zeta_Ha(a-1)R^{a-2}\Phi_t^{1-a}&lt;0\)</span>，条件最优解唯一，且 <span class="math inline">\(R\downarrow0\)</span> 时边际收益趋于无穷。完整动态问题中，<span class="math inline">\(v_t\)</span> 也随未来状态决定，所以 C3E 必须与下一条能力 Euler 联立，不能单独当作已显式求出的全局最优研发路径。</p>
+<h4 id="analysis-c.5-能力本身的-euler-方程">C.5 能力本身的 Euler 方程</h4>
+<p>当期能力边际产出为 <span class="math inline">\(T_{H,t}=\nu T_t/H_t\)</span>。包络条件给出</p>
+<p><span class="math display">\[
+V_{H,t}=\nu MC_tT_t/H_t+(1-\delta_H)v_t.
+\]</span></p>
+<p>将下一期包络条件代入 <span class="math inline">\(v_t\)</span> 的定义：</p>
+<p><span class="math display">\[
+\boxed{v_t=E_t\left[M_{t,t+1}\left(
+\nu MC_{t+1}\frac{T_{t+1}}{H_{t+1}}
++(1-\delta_H)v_{t+1}\right)\right].}
+\tag{C4E}
+\]</span></p>
+<p>这条方程和数据 Euler 对称，但能力的新增技术不是一单位投入等于一单位存量，而由 C2E 与 C3E 决定。</p>
+<h4 id="analysis-c.6-数据现在还产生训练能力的收益">C.6 数据现在还产生训练能力的收益</h4>
+<p>数据状态增加一单位，产生三项价值：当前生产的 <span class="math inline">\(\alpha\xi MC_tT_t/\Phi_t\)</span>、当前训练形成下一期能力的收益，以及留存到下期的数据价值。</p>
+<p>先对 C2E 的新增能力项求导：</p>
+<p><span class="math display">\[
+\frac{\partial[\zeta_HR_t^a\Phi_t^{1-a}]}{\partial\Phi_t}
+=\zeta_H(1-a)R_t^a\Phi_t^{-a}.
+\]</span></p>
+<p>所以数据包络条件为</p>
+<p><span class="math display">\[
+V_{\Phi,t}=\alpha\xi MC_tT_t/\Phi_t
++v_t\zeta_H(1-a)R_t^a\Phi_t^{-a}
++(1-\delta_\Phi)q_t.
+\]</span></p>
+<p>将下一期版本代入 <span class="math inline">\(q_t\)</span> 定义：</p>
+<p><span class="math display">\[
+\boxed{\begin{aligned}
+q_t=E_t\Bigg[M_{t,t+1}\Bigg(&amp;\alpha\xi MC_{t+1}\frac{T_{t+1}}{\Phi_{t+1}}\\
+&amp;+v_{t+1}\zeta_H(1-a)R_{t+1}^a\Phi_{t+1}^{-a}\\
+&amp;+(1-\delta_\Phi)q_{t+1}\Bigg)\Bigg].
+\end{aligned}}
+\tag{C5E}
+\]</span></p>
+<p>相对原文 F11，第二行就是新增的数据能力回报。它来自包络定理，不是在原数据价格上任意加一个“学习溢价”。</p>
+<h4 id="analysis-c.7-稳态下利用能力为何不只由数据进口量决定">C.7 稳态下，利用能力为何不只由数据进口量决定</h4>
+<p>若 <span class="math inline">\(0&lt;\delta_H\le1\)</span>，能力稳态满足</p>
+<p><span class="math display">\[
+\delta_HH=\zeta_HR^a\Phi^{1-a}.
+\]</span></p>
+<p>将 C3E 代入右侧：</p>
+<p><span class="math display">\[
+\begin{aligned}
+\delta_HH
+&amp;=\zeta_H[(\zeta_Ha v)^{1/(1-a)}\Phi]^a\Phi^{1-a}\\
+&amp;=\zeta_H^{1/(1-a)}(av)^{a/(1-a)}\Phi.
+\end{aligned}
+\]</span></p>
+<p><span class="math display">\[
+\boxed{\frac H\Phi=\frac{\zeta_H^{1/(1-a)}(av)^{a/(1-a)}}{\delta_H}.}
+\tag{C6E}
+\]</span></p>
+<p>给定能力影子价值 <span class="math inline">\(v\)</span>，训练效率 <span class="math inline">\(\zeta_H\)</span> 越高、能力折旧越低，同样的数据存量对应越高的能力。开放可能降低数据价格、提高 <span class="math inline">\(\Phi\)</span>，但若本国训练效率低，能力差距未必随原始数据流量增长而收窄。</p>
+<p>这里仍是能力水平与转型路径模型；没有给出在所有其他状态固定时持续正增长的平衡增长路径。若要研究长期增长率，应进一步明确研发知识外溢、技术前沿与规模报酬，像 Lee（2025）或 Cong 等的增长模型那样重新求解增长条件，而不是把新的水平稳态改称“增长”。</p>
+<h4 id="analysis-c.8-可以区分的经验预测">C.8 可以区分的经验预测</h4>
+<p>扩展后的企业在获得外国工作数据后，既可能立即降低经营成本，也可能增加训练/研发投入，随后提高本国能力。因此，数据开放与组织培训、算法适配之间应出现互补；同样的进口数据量在初始研发效率不同的国家可能产生不同的生产率路径。</p>
+<p>要区分一次性生产率效应和能力积累，应分别观察数据采购、训练/研发支出、任务适配能力及后续产出，而非将所有数字投资合成单一指标。</p>
+<h3 id="analysis-三项扩展如何选择">12.4 三项扩展如何选择</h3>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr>
+<th>研究问题</th>
+<th>优先扩展</th>
+<th>相对原文新增的决定性对象</th>
+<th>能回答的新问题</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>保护规则到底促进还是阻碍流动</td>
+<td>A</td>
+<td>出口规模、安全技术、固定合规成本</td>
+<td>信任收益能否超过资源成本；开通边际与使用边际是否不同</td>
+</tr>
+<tr>
+<td>获得更多记录是否一定更有生产价值</td>
+<td>B</td>
+<td>任务质量、算力、信息饱和</td>
+<td>物理数据量下降是否仍可提高有效使用；谁受算力约束</td>
+</tr>
+<tr>
+<td>后发福利增益能否变成能力追赶</td>
+<td>C</td>
+<td>训练投入与能力存量</td>
+<td>数据开放何时伴随本国吸收能力形成</td>
+</tr>
+</tbody>
+</table>
+<p>B 的有界生产率可直接修复第 7.6 节识别出的有限最优问题。基准确定后，三个扩展最好逐一加入、分别比较同一基准；一开始把所有新机制合并，会使数据价格、隐私、安全、算力与学习的作用难以识别。若做第一篇后续论文，A 与现有制度最直接对应，也最容易提出区分固定成本和单位成本的可检验预测。</p>
+<hr />
+<h2 id="analysis-数学检验证据与演讲使用">13. 数学检验、证据与演讲使用</h2>
+<h3 id="analysis-已提供的可运行检验">13.1 已提供的可运行检验</h3>
+<p>在本目录运行：</p>
+<div class="sourceCode" id="analysis-cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="analysis-cb1-1"><a href="#analysis-cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> 验证/check_math.py</span></code></pre></div>
+<p>脚本使用 SymPy、NumPy 和 SciPy，输出 <a href="验证/检查结果.json"><code>验证/检查结果.json</code></a>。检验对象包括：家庭边际条件、生产函数偏导、数据商两目的地收入分摊、数据稳态成本、完整嵌套 CES 需求弹性、不同替代弹性下 CES 原始/对偶与支出恒等式、一个封闭稳态的完整关键残差，以及三个扩展的关键偏导和条件选择。</p>
+<p>本次运行通过 <strong>51 项检验</strong>，覆盖所列符号恒等式和指定数值用例；一般性论证见正文。第 7.6 节说明，稳态残差通过与企业全局最优是两项不同的检验。开放经济的脉冲响应和福利区间采用作者报告值。本次数学检查使用 SymPy 和数值残差，未运行 Lean 形式验证。</p>
+<h3 id="analysis-讲课时最值得反复提醒的四件事">13.2 讲课时最值得反复提醒的四件事</h3>
+<ol type="1">
+<li><span class="math inline">\(D\)</span>、<span class="math inline">\(\varphi\)</span>、<span class="math inline">\(\Phi\)</span> 分别是原始记录、新工作数据和已有存量。</li>
+<li>原始数据可以复用，清洗劳动不能复用。</li>
+<li><span class="math inline">\(\rho,m,\omega\)</span> 属于不同层次，不能把加成和替代弹性互换。</li>
+<li>双方愿意开放、总产出提高、长期追赶，是三个不同判断。</li>
+</ol>
+<p>完整推导留在本 Markdown；课件把相邻代数步骤拆开，主讲消费供数、CES、企业数据投资、数据商和稳态，较长的稳态解及公式条件放在附录。其结构参考了同学课件中“先设定、再逐式推导、最后解释均衡含义”的做法。</p>
+<hr />
+<h2 id="analysis-原式解析课件覆盖表">14. 原式—解析—课件覆盖表</h2>
+<table>
+<thead>
+<tr>
+<th>原文/报告对象</th>
+<th>本解析位置</th>
+<th>课件模块</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>效用式 (1)，报告 p.11—12</td>
+<td>§3.1—3.2</td>
+<td>家庭：消费、劳动、供数</td>
+</tr>
+<tr>
+<td>家庭预算和资本式 (2)</td>
+<td>§3.1、3.3—3.4</td>
+<td>预算与资本 Euler</td>
+</tr>
+<tr>
+<td>数据积累式 (3)/(8)</td>
+<td>§1.2、4.5—4.6、9.2</td>
+<td>流量/存量与数据 Euler</td>
+</tr>
+<tr>
+<td>封闭生产式 (4)</td>
+<td>§4.1—4.3</td>
+<td>技术、要素份额、封闭加成</td>
+</tr>
+<tr>
+<td>数据加工式 (5)</td>
+<td>§5、7</td>
+<td>数据商单目的地条件</td>
+</tr>
+<tr>
+<td>商品 CES 式 (6)</td>
+<td>§2.1—2.3</td>
+<td>CES 通用推导与商品合成</td>
+</tr>
+<tr>
+<td>开放生产式 (7)</td>
+<td>§4.1、4.4—4.5</td>
+<td>两市场产量与条件定价</td>
+</tr>
+<tr>
+<td>数据 CES 式 (9)</td>
+<td>§2.4</td>
+<td>数据来源、价格指数、相对需求</td>
+</tr>
+<tr>
+<td>国内/出口加工式 (10)—(11)</td>
+<td>§1.3、5.1—5.3</td>
+<td>数据复用与加工劳动</td>
+</tr>
+<tr>
+<td>附录 A.1—A.2 最终品条件</td>
+<td>§2.2</td>
+<td>品种需求与价格指数</td>
+</tr>
+<tr>
+<td>附录 A.3 批发需求</td>
+<td>§2.3、4.4</td>
+<td>批发需求与嵌套弹性条件</td>
+</tr>
+<tr>
+<td>附录 A.4 数据采购成本</td>
+<td>§2.4</td>
+<td>CES 数据需求</td>
+</tr>
+<tr>
+<td>附录 A.5 数据商</td>
+<td>§5</td>
+<td>原始数据价值、劳动条件、零利润</td>
+</tr>
+<tr>
+<td>风险分担与市场出清，正文 p.13</td>
+<td>§3.5、6</td>
+<td>资产闭合与一般均衡</td>
+</tr>
+<tr>
+<td>三种 AR(1) 冲击，报告 p.11、15—16</td>
+<td>§9</td>
+<td>线性化与动态解释</td>
+</tr>
+<tr>
+<td>表 1 校准与稳态</td>
+<td>§7.5—7.6、8.2</td>
+<td>校准、可复算候选解与有限最优条件</td>
+</tr>
+<tr>
+<td>福利/参与区间，图 1—6、表 2</td>
+<td>§8</td>
+<td>福利公式与参与条件</td>
+</tr>
+<tr>
+<td>图 7—11、附录 B—E</td>
+<td>§9.4</td>
+<td>数据状态线性化；图形符号以原文为准</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="analysis-参考资料与可核对来源">参考资料与可核对来源</h2>
+<p>以下 S 编号同时用于正文和 <a href="research/来源台账.csv"><code>research/来源台账.csv</code></a>。页码未注明“PDF”时均指论文印刷页码；全文的 Appendix A 对应 PDF 第 39—42 页。</p>
+<ul>
+<li><strong>S1</strong>：NBER，<em>Production, Trade, and Cross-Border Data Flows</em> 元数据页，初发 2023-06、修订 2025-03。https://www.nber.org/papers/w31416 。本地存档：<code>research/NBER元数据.html</code>。</li>
+<li><strong>S2</strong>：Qing Chang、Lin William Cong、Liyong Wang、Longtian Zhang，<em>Production, Trade, and Cross-Border Data Flows</em>，NBER WP 31416，2023、2025 修订。https://doi.org/10.3386/w31416 。全文：https://www.nber.org/system/files/working_papers/w31416/w31416.pdf 。本地：<code>research/NBER-w31416-当前版.pdf</code>。初版另存 <code>research/NBER-w31416-2023初版.pdf</code>。</li>
+<li><strong>S3</strong>：同作者，2026-01-04 AFA 年会演讲稿，33 页。即用户提供的上级目录原始 PDF；本地提取与关键页图像在 <code>research/</code>。</li>
+<li><strong>S4</strong>：Charles I. Jones、Christopher Tonetti（2020），<em>Nonrivalry and the Economics of Data</em>，<strong>American Economic Review</strong> 110(9)，2819–2858。https://doi.org/10.1257/aer.20191330 。使用读书会本地论文全文；重点 §I—II。</li>
+<li><strong>S5</strong>：Lin William Cong、Danxia Xie、Longtian Zhang（2021），<em>Knowledge Accumulation, Privacy, and Growth in a Data Economy</em>，<strong>Management Science</strong> 67(10)，6480–6492。https://doi.org/10.1287/mnsc.2021.3986 。作者站正式期刊 PDF：https://www.linwilliamcong.com/_files/ugd/555f73_a0379c56ad82463d9afce0d1486dc019.pdf 。本地：<code>research/Cong-Xie-Zhang-2021.pdf</code>。</li>
+<li><strong>S6</strong>：Lin William Cong、Wenshi Wei、Danxia Xie、Longtian Zhang（2022），<em>Endogenous Growth under Multiple Uses of Data</em>，<strong>Journal of Economic Dynamics and Control</strong> 141，104395。https://doi.org/10.1016/j.jedc.2022.104395 。作者站 PDF：https://www.linwilliamcong.com/_files/ugd/555f73_427409d11ba24fdb8cc1d4d8fda7884d.pdf 。本地：<code>research/Cong-et-al-2022.pdf</code>。</li>
+<li><strong>S7</strong>：Maryam Farboodi、Laura Veldkamp，<em>A Model of the Data Economy</em>，本地全文首页为 <strong>2024-07-09 版本</strong>；NBER WP 28427 首发于 2021。使用用户提供的第 11 篇论文，提取见 <code>research/Farboodi-Veldkamp-2021.txt</code>。版本系列：https://www.nber.org/papers/w28427 。</li>
+<li><strong>S8</strong>：Laura Veldkamp、Cindy Chung（2024），<em>Data and the Aggregate Economy</em>，<strong>Journal of Economic Literature</strong> 62(2)，458–484。https://doi.org/10.1257/jel.20221580 。正式排版作者站 PDF：https://business.columbia.edu/sites/default/files-efs/imce-uploads/lveldkamp/papers/data-and-the-aggregate-economy.pdf 。本地：<code>research/Veldkamp-Chung-2024.pdf</code>。</li>
+<li><strong>S9</strong>：Kyu Yub Lee（2025），<em>Trade and Growth with Digital Data</em>，KIEP Working Paper <strong>25-02</strong>。https://www.kiep.go.kr/galleryDownload.es?bid=0001&amp;list_no=12083&amp;seq=1 。本地：<code>research/Lee-2025.pdf</code>；重点 §2.1—2.3，印刷 pp.14—19。</li>
+<li><strong>S10</strong>：OECD/WTO（2025），<em>Economic Implications of Data Regulation: Balancing Openness and Trust</em>，2025-02-10。https://doi.org/10.1787/aa285504-en 。本地：<code>research/OECD-WTO-2025.pdf</code>；Executive Summary、§3—4。报告是政策模拟，不能当作 CCWZ 的估计结果。</li>
+<li><strong>S11</strong>：国家互联网信息办公室（2024），《促进和规范数据跨境流动规定》，2024-03-22 公布并施行，重点第 3、5、7、8、10—11 条。https://www.cac.gov.cn/2024-03/22/c_1712776611775634.htm 。本地：<code>research/网信办-2024.md</code>。</li>
+<li><strong>S12</strong>：U.S. Department of Justice，<em>Data Security Program</em> 官方说明，项目 2025-04-08 生效，部分尽调、审计和报告义务 2025-10-05 生效。https://www.justice.gov/nsd/data-security 。本地：<code>research/DOJ-Data-Security.md</code>。</li>
+<li><strong>S13</strong>：CCWZ 直接引用的标准和微观基础：Dixit–Stiglitz（1977），<em>Monopolistic Competition and Optimum Product Diversity</em>；Galí–Monacelli（2005），<em>Monetary Policy and Exchange Rate Volatility in a Small Open Economy</em>；Ichihashi（2020），<em>Online Privacy and Information Disclosure by Consumers</em>；Acemoglu、Makhdoumi、Malekian、Ozdaglar（2022），<em>Too Much Data: Prices and Inefficiencies in Data Markets</em>。本文仅据 CCWZ 正文与参考文献说明其继承角色，没有声称重新证明这些论文的微观结论。</li>
+<li><strong>S14</strong>：读书会本地对照文献：Eaton–Kortum（2002）、Melitz（2003）、Chaney（2008）、Arkolakis–Costinot–Rodríguez-Clare（2012）、Prüfer–Schottmüller（2021）。各自开篇及模型定位的节录见 <code>research/同领域比较-原文节录.txt</code>。这些来源用于同领域比较，不均视为 CCWZ 的直接模型祖先。</li>
+</ul>
+<p>本次检索围绕模型继承和上述扩展，覆盖原文直接机制、2024—2025 年相关研究与官方制度资料；没有把该清单称为数据经济全部文献。关于发表身份，以 NBER 和作者研究页可核对的工作论文记录为准。</p>
+</article>
+</body></html>

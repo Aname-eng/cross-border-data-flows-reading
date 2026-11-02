@@ -1,0 +1,76 @@
+{
+  "calibration": {
+    "alpha": 0.3333333333333333,
+    "xi": 1.0,
+    "rho": 21.0,
+    "m": 5.0,
+    "beta": 0.99
+  },
+  "derived_exponents": {
+    "closed_alpha_xi_rho_minus_1": 6.666666666666666,
+    "open_alpha_xi_m_minus_1": 1.3333333333333333
+  },
+  "symbolic_profit_phi_elasticity": "a*(e - 1)",
+  "unbounded_thresholds": {
+    "closed": true,
+    "open": true
+  },
+  "baseline_bounded_search": [
+    {
+      "upper": 5,
+      "argmax": 4.999996371653242,
+      "value": 1804.2272264515702
+    },
+    {
+      "upper": 10,
+      "argmax": 9.99999478487821,
+      "value": 183796.27876691698
+    },
+    {
+      "upper": 20,
+      "argmax": 19.99999335625205,
+      "value": 18673557.506081592
+    },
+    {
+      "upper": 40,
+      "argmax": 39.999995714505005,
+      "value": 1897120027.2490504
+    },
+    {
+      "upper": 80,
+      "argmax": 79.99999436918134,
+      "value": 192735432132.44244
+    },
+    {
+      "upper": 160,
+      "argmax": 159.99999315950757,
+      "value": 19580702989003.652
+    }
+  ],
+  "repairs": {
+    "bounded_service": {
+      "argmax": 10.478391093017597,
+      "value": 5.991114339254546
+    },
+    "convex_installation": {
+      "cost_exponent": 7.5,
+      "required_to_exceed": 6.666666666666666,
+      "argmax": 22.115088005379643,
+      "value": 4055475.273932673
+    },
+    "license_capacity": {
+      "cap": 3.0,
+      "argmax": 2.9999965472915617,
+      "value": 57.048234556880146
+    }
+  },
+  "checks": {
+    "symbolic_power_is_a_times_e_minus_1": true,
+    "closed_calibration_is_superlinear": true,
+    "open_calibration_is_superlinear": true,
+    "bounded_service_max_is_interior_to_search": true,
+    "convex_cost_dominates_tail": true,
+    "convex_cost_max_is_interior_to_search": true,
+    "capacity_respects_bound": true
+  }
+}

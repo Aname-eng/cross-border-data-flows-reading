@@ -1,0 +1,6 @@
+beautifulsoup4>=4.12
+matplotlib>=3.8
+numpy>=1.26
+pypdf>=5.0
+scipy>=1.12
+sympy>=1.12
