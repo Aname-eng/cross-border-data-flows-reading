@@ -34,16 +34,20 @@ checks["markdown_has_no_control_characters"] = all(
 
 index = (DOCS / "index.html").read_text(encoding="utf-8")
 soup = BeautifulSoup(index, "html.parser")
-checks["single_page_has_four_entry_sections"] = all(
+checks["single_page_has_five_content_sections"] = all(
     soup.select_one(selector) is not None
-    for selector in ["#report", "#finite-optimum", "#routes", "#full-analysis"]
+    for selector in ["#report", "#literature", "#finite-optimum", "#routes", "#full-analysis"]
+)
+checks["single_page_has_auditable_literature_lineage"] = all(
+    text in soup.select_one("#literature").get_text()
+    for text in ["Jones–Tonetti", "王永进", "Lee（2025）", "OpenAlex", "引用不等于扩展"]
 )
 checks["single_page_has_three_route_panels"] = len(soup.select("[data-route-panel]")) == 3
 checks["single_page_has_route_controls"] = len(soup.select("[data-route-choice]")) == 4
 checks["single_page_embeds_full_analysis"] = "原式—解析—课件覆盖表" in soup.get_text()
 checks["single_page_has_no_template_markers"] = not any(
     marker in index
-    for marker in ["{{REPORT}}", "{{FINITE_OPTIMUM}}", "{{FULL_ANALYSIS}}", "{{ROUTE_A}}"]
+    for marker in ["{{REPORT}}", "{{LITERATURE_LINEAGE}}", "{{FINITE_OPTIMUM}}", "{{FULL_ANALYSIS}}", "{{ROUTE_A}}"]
 )
 checks["single_page_has_no_control_characters"] = all(
     ord(char) >= 32 or char in "\n\r\t" for char in index
@@ -51,7 +55,7 @@ checks["single_page_has_no_control_characters"] = all(
 checks["finite_optimum_figure_exists"] = (DOCS / "assets" / "finite-optimum-repairs.svg").exists()
 checks["evidence_downloads_exist"] = all(
     (DOCS / "assets" / name).exists()
-    for name in ["source-ledger.csv", "claim-evidence-matrix.csv", "finite-optimum-check.json"]
+    for name in ["source-ledger.csv", "claim-evidence-matrix.csv", "citation-lineage.csv", "finite-optimum-check.json"]
 )
 
 model_results = json.loads((ROOT / "research" / "finite-optimum-check.json").read_text(encoding="utf-8"))

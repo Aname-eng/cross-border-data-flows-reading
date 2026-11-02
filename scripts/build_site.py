@@ -52,6 +52,7 @@ def source_table() -> str:
 
 fragments = {
     "{{REPORT}}": md_to_html(CONTENT / "完整汇报.md", "report"),
+    "{{LITERATURE_LINEAGE}}": md_to_html(CONTENT / "文献脉络与扩展文献.md", "literature"),
     "{{FINITE_OPTIMUM}}": md_to_html(CONTENT / "有限最优复核与修复.md", "finite"),
     "{{EXTENSION_OVERVIEW}}": md_to_html(CONTENT / "扩展现实基础.md", "extensions"),
     "{{ROUTE_A}}": md_to_html(CONTENT / "routes" / "路线A-安全许可与合规.md", "route-a"),
@@ -64,7 +65,7 @@ analysis_lines = len((CONTENT / "论文解析.md").read_text(encoding="utf-8").s
 page = TEMPLATE.read_text(encoding="utf-8").replace("{{ANALYSIS_LINES}}", str(analysis_lines))
 for marker, value in fragments.items():
     page = page.replace(marker, value)
-leftovers = [part for part in ("{{REPORT}}", "{{FINITE_OPTIMUM}}", "{{FULL_ANALYSIS}}") if part in page]
+leftovers = [part for part in ("{{REPORT}}", "{{LITERATURE_LINEAGE}}", "{{FINITE_OPTIMUM}}", "{{FULL_ANALYSIS}}") if part in page]
 if leftovers:
     raise SystemExit(f"Unreplaced markers: {leftovers}")
 DOCS.mkdir(parents=True, exist_ok=True)
@@ -75,6 +76,7 @@ ASSETS.mkdir(parents=True, exist_ok=True)
 for source, name in [
     (ROOT / "research" / "source-ledger.csv", "source-ledger.csv"),
     (ROOT / "research" / "claim-evidence-matrix.csv", "claim-evidence-matrix.csv"),
+    (ROOT / "research" / "citation-lineage.csv", "citation-lineage.csv"),
     (ROOT / "research" / "finite-optimum-check.json", "finite-optimum-check.json"),
     (ROOT / "deliverables" / "公式讲解.pdf", "公式讲解.pdf"),
 ]:

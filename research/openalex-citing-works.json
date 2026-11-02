@@ -1,0 +1,204 @@
+[
+  {
+    "id": "W4390450433",
+    "title": "Endogenous growth and human capital accumulation in a data economy",
+    "year": 2023,
+    "doi": "https://doi.org/10.1016/j.strueco.2023.12.015",
+    "authors": [
+      "Qing Hua Chang",
+      "Mengtao Wu",
+      "Longtian Zhang"
+    ],
+    "abstract": "",
+    "locations": [
+      {
+        "landing": "https://doi.org/10.1016/j.strueco.2023.12.015",
+        "pdf": null,
+        "source": "Structural Change and Economic Dynamics",
+        "version": "publishedVersion"
+      },
+      {
+        "landing": "https://doi.org/10.2139/ssrn.4248918",
+        "pdf": null,
+        "source": "SSRN Electronic Journal",
+        "version": "acceptedVersion"
+      },
+      {
+        "landing": "http://www.sciencedirect.com/science/article/pii/S0954349X23001893",
+        "pdf": null,
+        "source": "RePEc: Research Papers in Economics",
+        "version": "submittedVersion"
+      }
+    ]
+  },
+  {
+    "id": "W4408986266",
+    "title": "Trade Theories in the Digital Age",
+    "year": 2025,
+    "doi": "https://doi.org/10.1111/cwe.12581",
+    "authors": [
+      "Yongjin Wang",
+      "Wenbin Wang"
+    ],
+    "abstract": "Abstract The digital economy is overtaking the industrial economy and reshaping every subfield of economics. As a result, widely accepted conclusions and policy implications of international trade theories are becoming outdated. This paper endeavors to delineate some of the potential directions in which digital technologies may disrupt and overturn traditional trade theories. It also provides frameworks that enable the conceptualization and analysis of international trade in the digital age. The advance of digital technology has given rise to novel industries and numerous supporting infrastructures and has instigated a fundamental transformation of traditional industries. This transformation is evident across multiple dimensions, including factors of production, product attributes, production technology, market structures, business models, and consumer search behaviors.",
+    "locations": [
+      {
+        "landing": "https://doi.org/10.1111/cwe.12581",
+        "pdf": null,
+        "source": "China & World Economy",
+        "version": "publishedVersion"
+      }
+    ]
+  },
+  {
+    "id": "W4401691394",
+    "title": "Limiting heterogeneity in cross-border data flow: Impact on domestic value chains stability and the role of innovation",
+    "year": 2024,
+    "doi": "https://doi.org/10.1371/journal.pone.0308716",
+    "authors": [
+      "Yang Liu",
+      "Yuan Zhang",
+      "Rui Jiang",
+      "Jing Cheng",
+      "Jingjing Dai"
+    ],
+    "abstract": "Amidst growing skepticism towards globalization and rising digital trade, this study investigates the impact of Restrictions on Cross-Border Data Flows (RCDF) on Domestic Value Chains (DVCs) stability. As global value chains participation declines, the stability of DVCs-integral to internal economic dynamics-becomes crucial. This study situates within a framework exploring the role of innovation and RCDF in the increasingly interconnected global trade. Using a panel data fixed effect model, our analysis provides insights into the varying effects of RCDF on DVCs stability across countries with diverse economic structures and technological advancement levels. This approach allows for a nuanced understanding of the interplay between digital trade policies, value chain stability, and innovation. RCDF tend to disrupt DVCs by negatively impacting innovation, which necessitates proactive policy measures to mitigate these effects. In contrast, low-income countries experience a less detrimental impact; RCDF may even aid in integrating their DVCs into Global Value Chains, enhancing economic stability. It underscores the need for dynamic, adaptable policies and global collaboration to harmonize digital trade standards, thus offering guidance for policy-making in the context of an interconnected global economy.",
+    "locations": [
+      {
+        "landing": "https://doi.org/10.1371/journal.pone.0308716",
+        "pdf": null,
+        "source": "PLoS ONE",
+        "version": "publishedVersion"
+      },
+      {
+        "landing": "https://www.ncbi.nlm.nih.gov/pmc/articles/11332934",
+        "pdf": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11332934/pdf/pone.0308716.pdf",
+        "source": "PubMed Central",
+        "version": "publishedVersion"
+      },
+      {
+        "landing": "https://pubmed.ncbi.nlm.nih.gov/39159215",
+        "pdf": null,
+        "source": "PubMed",
+        "version": "publishedVersion"
+      },
+      {
+        "landing": "https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0308716",
+        "pdf": null,
+        "source": "RePEc: Research Papers in Economics",
+        "version": "submittedVersion"
+      },
+      {
+        "landing": "https://doaj.org/article/97f7683877764dc7a18db7a30d24571d",
+        "pdf": null,
+        "source": "DOAJ (DOAJ: Directory of Open Access Journals)",
+        "version": "submittedVersion"
+      }
+    ]
+  },
+  {
+    "id": "W4391691011",
+    "title": "A Generalized Model of Growth in the Data Economy",
+    "year": 2022,
+    "doi": "https://doi.org/10.21203/rs.3.rs-3932547/v1",
+    "authors": [
+      "Danxia Xie",
+      "Longtian Zhang"
+    ],
+    "abstract": "Abstract In this paper, we develop a generalized model to describe the long-run effects of various data types. In addition to the conventional data types generated from consumption activities, we introduce two new types---producer data and nature data---generated from the production process and nature, respectively. To utilize these data, labor is required to collect and clean them; however, we assume no privacy concerns as in previous studies that solely focus on consumer data. Our investigation delves into the balanced growth path and find that the economy's growth rate is higher than that derived from the model using consumer data alone---a revelation previously unreported in existing studies. Moreover, we extend our analysis to incorporate all data types and present a comprehensive picture of the transformations of different growth regimes. Our framework has novel and crucial implications for understanding the developing trend of the data economy. JEL Classification: O33, O38, and O41",
+    "locations": [
+      {
+        "landing": "http://dx.doi.org/10.21203/rs.3.rs-3932547/v1",
+        "pdf": "https://www.researchsquare.com/article/rs-3932547/latest.pdf",
+        "source": "Research Square",
+        "version": "acceptedVersion"
+      },
+      {
+        "landing": "https://doi.org/10.2139/ssrn.4033576",
+        "pdf": null,
+        "source": "SSRN Electronic Journal",
+        "version": "acceptedVersion"
+      }
+    ]
+  },
+  {
+    "id": "W4406168975",
+    "title": "Data Economy to the Rescue of Our Empty Planet?",
+    "year": 2025,
+    "doi": "https://doi.org/10.2139/ssrn.5062219",
+    "authors": [
+      "Qing Hua Chang",
+      "Lin William Cong",
+      "Hanming Fang",
+      "Longtian Zhang"
+    ],
+    "abstract": "",
+    "locations": [
+      {
+        "landing": "https://doi.org/10.2139/ssrn.5062219",
+        "pdf": null,
+        "source": "SSRN Electronic Journal",
+        "version": "acceptedVersion"
+      }
+    ]
+  },
+  {
+    "id": "W7139934759",
+    "title": "Who Controls the Data, Who Controls the Money? Corporate Financing in the AI Era",
+    "year": 2026,
+    "doi": "https://doi.org/10.2139/ssrn.6448667",
+    "authors": [
+      "Zhenyu Ma",
+      "Ning Wang"
+    ],
+    "abstract": "",
+    "locations": [
+      {
+        "landing": "https://doi.org/10.2139/ssrn.6448667",
+        "pdf": null,
+        "source": "SSRN Electronic Journal",
+        "version": "acceptedVersion"
+      }
+    ]
+  },
+  {
+    "id": "W7171094137",
+    "title": "Cross-Border Data Flows and Corporate Innovation Strategies: Evidence from China",
+    "year": 2026,
+    "doi": "https://doi.org/10.2139/ssrn.7180188",
+    "authors": [
+      "Liang Dong",
+      "Yulin Ma",
+      "Zhihao Wang",
+      "Fengyun Zhang"
+    ],
+    "abstract": "",
+    "locations": [
+      {
+        "landing": "https://doi.org/10.2139/ssrn.7180188",
+        "pdf": null,
+        "source": "SSRN Electronic Journal",
+        "version": "acceptedVersion"
+      }
+    ]
+  },
+  {
+    "id": "W7211866481",
+    "title": "The Heterogeneous Impact of Data Transfer Restrictions on Data Centre Geography",
+    "year": 2026,
+    "doi": "https://doi.org/10.2139/ssrn.7429402",
+    "authors": [
+      "otto kässi",
+      "Vili Lehdonvirta"
+    ],
+    "abstract": "",
+    "locations": [
+      {
+        "landing": "https://doi.org/10.2139/ssrn.7429402",
+        "pdf": "https://doi.org/10.2139/ssrn.7429402",
+        "source": "SSRN Electronic Journal",
+        "version": "acceptedVersion"
+      }
+    ]
+  }
+]

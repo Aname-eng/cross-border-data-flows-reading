@@ -1,6 +1,6 @@
 # Production, Trade, and Cross-Border Data Flows｜读书会协作仓库
 
-本仓库整理 Chang、Cong、Wang、Zhang 的 NBER Working Paper 31416，包含逐步中文解析、完整读书会汇报、企业有限最优复核、三个现实扩展和一个可分支阅读的静态网站。
+本仓库整理 Chang、Cong、Wang、Zhang 的 NBER Working Paper 31416，包含逐步中文解析、完整读书会汇报、可审计的前序—后续文献谱系、企业有限最优复核、三个现实扩展和一个可分支阅读的静态网站。
 
 ## 直接使用
 
@@ -15,8 +15,9 @@
 - **逐步解析 PDF：**[`deliverables/逐步解析.pdf`](deliverables/逐步解析.pdf)
 - **原公式课件：**[`deliverables/公式讲解.pdf`](deliverables/公式讲解.pdf)
 - **解析 Markdown：**[`content/论文解析.md`](content/论文解析.md)
+- **文献谱系：**[`content/文献脉络与扩展文献.md`](content/文献脉络与扩展文献.md)，逐篇区分前置机制、CCWZ 的改进、后续直接扩展、经验检验和背景引用。
 
-互动网页先按“研究问题 → 发现 → 贡献 → 质疑 → 政策”线性展开，到扩展部分可以选择：
+互动网页先按“研究问题 → 发现 → 文献谱系 → 有限最优复核 → 政策”线性展开，到扩展部分可以选择：
 
 - 路线 A：安全、许可与固定合规成本；
 - 路线 B：数据质量、收益饱和与算力互补；
@@ -38,12 +39,15 @@
 
 完整推导见 [`content/有限最优复核与修复.md`](content/有限最优复核与修复.md)，可运行检查见 [`scripts/check_finite_optimum.py`](scripts/check_finite_optimum.py)。
 
+文献复核表明，CCWZ 的可辩护增量不是首次研究非竞争性、隐私、数据中介或数据积累，而是把**原始数据—目的地专用工作数据—企业数据存量—商品贸易—跨境政策**接进同一个两国一般均衡。后续文献主要推进到跨国政策协调、多国增长、企业创新和数据中心选址；目前未找到直接修复其线性无上限采购问题的论文。
+
 ## 目录
 
 ```text
 content/
   论文解析.md                 既有逐步解析，内容保持不改
   完整汇报.md                 动机、结果、政策、贡献与质疑
+  文献脉络与扩展文献.md       前置文献、CCWZ增量与后续研究分类
   有限最优复核与修复.md       独立复核和三种闭合方式
   扩展现实基础.md             三条路线的制度与研究依据
   routes/                     A、B、C 的完整逐步模型
@@ -59,6 +63,8 @@ research/
   review-plan.md              文献检索合同
   source-ledger.csv           来源台账
   claim-evidence-matrix.csv   论断—证据表
+  citation-lineage.csv        逐篇文献关系与核验边界
+  openalex-citing-works.json  OpenAlex 引用候选快照
   finite-optimum-check.json   模型检查输出
 scripts/
   build_site.py               从 Markdown 重建网页
@@ -97,6 +103,7 @@ git checkout -b <你的分支名>
 - 主模型和数值结论：NBER Working Paper 31416，2025 年 3 月修订版，<https://doi.org/10.3386/w31416>。
 - 用户提供材料：作者 2026 年 AFA 报告，用于演讲主线。
 - 文献与制度来源：见 [`research/source-ledger.csv`](research/source-ledger.csv)。
+- 前置和后续论文的关系分类：见 [`research/citation-lineage.csv`](research/citation-lineage.csv)。
 - 每项重要论断的支持与边界：见 [`research/claim-evidence-matrix.csv`](research/claim-evidence-matrix.csv)。
 
 本仓库没有收录 NBER 论文 PDF。请从 NBER 或 DOI 页面获取原文。论文目前按 NBER 工作论文引用；仓库不会把工作论文写成已发表期刊论文。
