@@ -31,6 +31,8 @@ require(sum(bool(slide.select_one("aside.notes")) for slide in slides) == 35, "e
 require(sum(bool(slide.select_one(".slide-source")) for slide in slides[1:]) == 34, "every non-title slide needs a visible source line")
 require(len(soup.select("section.appendix")) == 10, "expected ten appendix side rooms")
 require("<pre><code>&lt;" not in html, "raw presentation HTML was rendered as a code block")
+require("<b>20</b><span>聚焦全文</span>" in html, "corpus slide must show 20 focused full-text readings")
+require("<span>待读</span>" not in html, "corpus slide still shows an unread queue")
 
 stage = soup.select_one("#model-stage")
 require(stage is not None, "missing staged model slide")

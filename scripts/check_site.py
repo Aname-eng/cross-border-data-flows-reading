@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import csv
 import json
+import re
 import shutil
 import subprocess
 from pathlib import Path
@@ -91,6 +92,9 @@ checks["single_page_has_auditable_literature_lineage"] = all(
         "Lee（2025）",
         "没有引用 CCWZ",
         "38 国、44 行业",
+        "35,575 款应用",
+        "655,200 个观测",
+        "2,628 个双边年度观测",
     ]
 )
 checks["single_page_has_full_text_relationship_matrix"] = all(
@@ -142,6 +146,7 @@ checks["evidence_downloads_exist"] = all(
         "citation-lineage.csv",
         "deep-reading-matrix.csv",
         "paper-corpus-manifest.csv",
+        "background-reading-notes.md",
         "google-scholar-citing-works.json",
         "finite-optimum-check.json",
         "CCWZ-explorable-deck.pdf",
@@ -159,7 +164,7 @@ with (ROOT / "research" / "paper-corpus-manifest.csv").open(encoding="utf-8-sig"
     corpus_rows = list(csv.DictReader(handle))
 checks["expanded_literature_ledgers_are_complete"] = (
     len(source_rows) >= 62
-    and len(claim_rows) >= 46
+    and len(claim_rows) >= 51
     and len(lineage_rows) >= 51
     and len(deep_reading_rows) == 18
 )
@@ -173,13 +178,42 @@ checks["ledger_ids_are_unique"] = all(
         [row["corpus_id"] for row in corpus_rows],
     ]
 )
+known_source_ids = {row["source_id"] for row in source_rows}
+referenced_source_ids = {
+    match
+    for row in [*claim_rows, *lineage_rows, *deep_reading_rows]
+    for match in re.findall(
+        r"\bS\d+(?:v\d+)?\b",
+        ";".join(
+            str(value)
+            for key, value in row.items()
+            if key in {"source_ids", "source_id"}
+        ),
+    )
+}
+checks["evidence_tables_only_reference_known_sources"] = (
+    referenced_source_ids <= known_source_ids
+)
 checks["paper_corpus_has_25_pdfs_and_1012_pages"] = (
     len(corpus_rows) == 25 and sum(int(row["pages"]) for row in corpus_rows) == 1012
 )
-checks["paper_corpus_preserves_manual_reading_status"] = (
-    sum(row["reading_status"] == "queued" for row in corpus_rows) == 5
+checks["paper_corpus_has_no_unread_queue"] = (
+    sum(row["reading_status"] == "queued" for row in corpus_rows) == 0
+    and all(row["evidence_boundary"].strip() for row in corpus_rows)
     and any(row["reading_status"] == "full-model-audit" for row in corpus_rows)
     and any(row["reading_status"] == "superseded" for row in corpus_rows)
+)
+background_source_ids = {"S39", "S45", "S57", "S59", "S60"}
+checks["five_background_papers_are_full_text_checked"] = {
+    row["source_id"]
+    for row in source_rows
+    if row["evidence_state"] == "focused-full-text-read"
+} >= background_source_ids
+checks["sun_trefler_record_has_correct_author_and_sample"] = any(
+    row["source_id"] == "S45"
+    and row["authors"].startswith("Ruiqi Sun;")
+    and "35575款应用" in row["use"]
+    for row in source_rows
 )
 checks["wang_2025_is_full_text_and_direct_citation"] = any(
     row["source_id"] == "S56"

@@ -19,6 +19,7 @@
 - **解析 Markdown：**[`content/论文解析.md`](content/论文解析.md)
 - **文献谱系：**[`content/文献脉络与扩展文献.md`](content/文献脉络与扩展文献.md)，逐篇区分前置机制、CCWZ 的改进、后续直接扩展、经验检验和背景引用。
 - **全文深读关系矩阵：**[`content/深读关系矩阵.md`](content/深读关系矩阵.md) 与 [`research/deep-reading-matrix.csv`](research/deep-reading-matrix.csv)，把前置机制、CCWZ 增量、后续继承或偏离、页码证据和报告边界放在同一记录中。
+- **背景全文复核：**[`research/background-reading-notes.md`](research/background-reading-notes.md)，记录 OECD（2019）、周念利等（2022）、刘斌与甄洋（2022）、Sun–Trefler（2023 工作论文版）和代丽华等（2024）的样本、定量结果与识别边界。
 - **修复与扩展总览：**[`content/修复与扩展总览.md`](content/修复与扩展总览.md)，用同一套尾部公式连接三种数学闭合、三条经济路线、制度背景、文献依据和重算顺序；网站另提供可调 $\theta=\alpha\xi(e-1)$ 检查器。
 
 互动网页按“研究问题 → 发现 → 文献谱系 → 错误与修复 → 完整复核 → 三条扩展 → 原始解析”线性展开，到扩展部分可以选择：
@@ -43,7 +44,7 @@
 
 完整推导见 [`content/有限最优复核与修复.md`](content/有限最优复核与修复.md)。[`scripts/check_finite_optimum.py`](scripts/check_finite_optimum.py) 用 SymPy 验证一般利润指数并作数值尾部检查；[`verification/lean/CCWZFiniteOptimum/Basic.lean`](verification/lean/CCWZFiniteOptimum/Basic.lean) 形式化证明两个基准多项式尾部无上界。Lean 只验证抽象命题，经济合同与价格口径仍由原文审计和人工推导确定。
 
-文献复核表明，CCWZ 的可辩护增量不是首次研究非竞争性、隐私、数据中介或数据积累，而是把**原始数据—目的地专用工作数据—企业数据存量—商品贸易—跨境政策**接进同一个两国一般均衡。当前语料清单登记 25 份 PDF、1,012 页，并用阅读状态区分模型审计、全文通读、聚焦全文、节读、待读和被替代版本。Google Scholar 的 20 条引用结果已全部分类；Lee（2025）经参考文献复核不属于 CCWZ 引用者，王永进等（2025）则由《金融研究》官方全文确认直接引用 CCWZ，但采用 Caliendo–Parro 量化贸易骨架。Dubus、Kässi–Lehdonvirta、Ito–Tomiura、Demirer 等论文的模型条件、识别设计和数量级均已回到全文核验。目前仍未找到直接修复 CCWZ 线性无上限采购问题并重算福利的论文。
+文献复核表明，CCWZ 的可辩护增量不是首次研究非竞争性、隐私、数据中介或数据积累，而是把**原始数据—目的地专用工作数据—企业数据存量—商品贸易—跨境政策**接进同一个两国一般均衡。当前语料清单登记 25 份 PDF、1,012 页，并用阅读状态区分模型审计、全文通读、聚焦全文、节读、版本比较和被替代版本。原有 5 份待读背景论文已全部完成聚焦全文复核，清单中不再有 `queued` 项。Google Scholar 的 20 条引用结果已全部分类；Lee（2025）经参考文献复核不属于 CCWZ 引用者，王永进等（2025）则由《金融研究》官方全文确认直接引用 CCWZ，但采用 Caliendo–Parro 量化贸易骨架。Dubus、Kässi–Lehdonvirta、Ito–Tomiura、Demirer 等论文的模型条件、识别设计和数量级均已回到全文核验。目前仍未找到直接修复 CCWZ 线性无上限采购问题并重算福利的论文。
 
 ## 目录
 
@@ -79,6 +80,7 @@ research/
   citation-lineage.csv        逐篇文献关系与核验边界
   deep-reading-matrix.csv     前置—CCWZ—后续的18项全文关系矩阵
   paper-corpus-manifest.csv   25份PDF、1012页及人工阅读状态
+  background-reading-notes.md 5份背景论文的结果与识别边界
   deep-reading-brief.md       全文深读问题、证据协议与完成标准
   openalex-citing-works.json  OpenAlex 8 条引用候选快照
   google-scholar-citing-works.json  Google Scholar 20 条引用结果快照
@@ -88,6 +90,8 @@ scripts/
   check_finite_optimum.py     符号和数值尾部检查
   extract_paper_corpus.py     更新本地PDF清单且保留人工阅读状态
   check_site.py               网页与交付物验收
+  verify_workspace.py         一条命令运行确定性验收链
+.github/workflows/verify.yml  PR与分支推送的远端验收
 verification/lean/
   CCWZFiniteOptimum/Basic.lean  基准尾部无上界形式化证明
 archive/
@@ -97,18 +101,23 @@ archive/
 
 ## 重新构建
 
-环境要求：Python 3.11+、Pandoc；重建演示另需 Quarto 1.11+。本仓库的 Python 依赖写在 `requirements.txt`。
+环境要求：Python 3.11+、Node.js 18+、Pandoc 3.10.2；完整 Lean 验证另需 `lake`，重建演示另需 Quarto 1.11+。本仓库的 Python 依赖写在 `requirements.txt`。
 
 ```bash
 pip install -r requirements.txt
-python scripts/check_finite_optimum.py
-cd verification/lean && lake build && cd ../..
-python build/build_lineage.py
+python scripts/verify_workspace.py
+# 加上 Lean 形式化验证：
+python scripts/verify_workspace.py --with-lean
+```
+
+这条入口依次运行有限最优推导、文献谱系校验、网站重建、演示与网站验收、Python/JavaScript 语法和 Git 空白检查。GitHub Actions 会在 PR、`main` 与 `literature-lineage` 分支推送时运行同一验收链，并在独立任务中编译 Lean；工作流只验证，不发布 GitHub Pages。
+
+若需要重建演示本身，再运行：
+
+```bash
 python presentation/scripts/build_deck.py
 # 打开 docs/slides/?print-pdf，将35页打印为 deliverables/CCWZ-explorable-deck.pdf
 python presentation/scripts/check_deck.py
-python scripts/build_site.py
-python scripts/check_site.py
 ```
 
 `build_site.py` 从 `content/` 生成 `docs/index.html` 和打印用的 `docs/逐步解析.html`，并把演示 PDF 复制到网站下载区。网站使用 CDN 版 MathJax；断网时正文仍可阅读，联网后公式自动排版。`presentation/scripts/build_deck.py` 先在 `presentation/_render/` 完成 Quarto 构建，再原子式更新 `docs/slides/`，避免陈旧哈希资源残留；它优先使用系统 Quarto，也支持被忽略的 Windows 本地工具链 `tools/quarto/Quarto/bin/quarto.exe`。若要重建逐步解析 PDF，另需 XeLaTeX，再运行 `python scripts/build_pdf.py`。

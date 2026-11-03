@@ -101,6 +101,7 @@ for source, name in [
     (ROOT / "research" / "citation-lineage.csv", "citation-lineage.csv"),
     (ROOT / "research" / "deep-reading-matrix.csv", "deep-reading-matrix.csv"),
     (ROOT / "research" / "paper-corpus-manifest.csv", "paper-corpus-manifest.csv"),
+    (ROOT / "research" / "background-reading-notes.md", "background-reading-notes.md"),
     (ROOT / "research" / "google-scholar-citing-works.json", "google-scholar-citing-works.json"),
     (ROOT / "research" / "finite-optimum-check.json", "finite-optimum-check.json"),
     (ROOT / "deliverables" / "CCWZ-explorable-deck.pdf", "CCWZ-explorable-deck.pdf"),

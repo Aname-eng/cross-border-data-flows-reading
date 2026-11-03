@@ -91,6 +91,16 @@ bounded_max = maximize(bounded_fn, 160)
 convex_max = maximize(convex_fn, 160)
 capacity_max = maximize(base_fn, cap)
 
+
+def report_pair(pair: tuple[float, float]) -> dict[str, float]:
+    """Keep numerical evidence stable across SciPy/platform implementations."""
+    x, value = pair
+    return {
+        "argmax": round(x, 6),
+        "value": float(f"{value:.10g}"),
+    }
+
+
 # Plot in a range where all three repairs can be compared.  The y axis is
 # clipped so the baseline's explosive tail does not erase the repaired curves.
 font_path = Path("C:/Windows/Fonts/msyh.ttc")
@@ -132,18 +142,17 @@ results = {
     "symbolic_profit_phi_elasticity": str(phi_power),
     "unbounded_thresholds": {"closed": closed_exponent > 1, "open": open_exponent > 1},
     "baseline_bounded_search": [
-        {"upper": u, "argmax": x, "value": value}
-        for u, (x, value) in zip((5, 10, 20, 40, 80, 160), base_search)
+        {"upper": u, **report_pair(pair)}
+        for u, pair in zip((5, 10, 20, 40, 80, 160), base_search)
     ],
     "repairs": {
-        "bounded_service": {"argmax": bounded_max[0], "value": bounded_max[1]},
+        "bounded_service": report_pair(bounded_max),
         "convex_installation": {
             "cost_exponent": 1 + nu,
             "required_to_exceed": closed_exponent,
-            "argmax": convex_max[0],
-            "value": convex_max[1],
+            **report_pair(convex_max),
         },
-        "license_capacity": {"cap": cap, "argmax": capacity_max[0], "value": capacity_max[1]},
+        "license_capacity": {"cap": cap, **report_pair(capacity_max)},
     },
     "checks": {
         "symbolic_power_is_a_times_e_minus_1": True,
