@@ -111,7 +111,7 @@ python scripts/verify_workspace.py
 python scripts/verify_workspace.py --with-lean
 ```
 
-这条入口依次运行有限最优推导、文献谱系校验、网站重建、演示与网站验收、Python/JavaScript 语法和 Git 空白检查。GitHub Actions 会在 PR、`main` 与 `literature-lineage` 分支推送时运行同一验收链，并在独立任务中编译 Lean；工作流只验证，不发布 GitHub Pages。
+这条入口依次运行有限最优推导、文献谱系校验、网站重建、演示与网站验收、Python/JavaScript 语法和 Git 空白检查。GitHub Actions 会在 PR 和 `main` 分支推送时运行同一验收链，并在独立任务中编译 Lean；工作流只验证，不发布 GitHub Pages，避免同一功能分支同时触发 push 与 PR 两套重复任务。
 
 若需要重建演示本身，再运行：
 
