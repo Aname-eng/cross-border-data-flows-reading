@@ -98,6 +98,7 @@ if font_path.exists():
     font_manager.fontManager.addfont(font_path)
     plt.rcParams["font.family"] = font_manager.FontProperties(fname=font_path).get_name()
     plt.rcParams["axes.unicode_minus"] = False
+plt.rcParams["svg.hashsalt"] = "ccwz-finite-optimum-repairs"
 
 fig, ax = plt.subplots(figsize=(9.2, 5.4))
 ax.plot(L, baseline, color="#c84d3a", lw=2.3, label="原式：线性数据价格")
@@ -115,7 +116,7 @@ ax.legend(frameon=False, ncols=2, fontsize=9)
 ax.grid(alpha=0.18)
 fig.tight_layout()
 svg_path = ASSET_DIR / "finite-optimum-repairs.svg"
-fig.savefig(svg_path, format="svg")
+fig.savefig(svg_path, format="svg", metadata={"Date": None})
 plt.close(fig)
 svg_path.write_text(
     "\n".join(line.rstrip() for line in svg_path.read_text(encoding="utf-8").splitlines()) + "\n",

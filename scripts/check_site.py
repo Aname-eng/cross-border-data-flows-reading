@@ -35,9 +35,49 @@ checks["markdown_has_no_control_characters"] = all(
 
 index = (DOCS / "index.html").read_text(encoding="utf-8")
 soup = BeautifulSoup(index, "html.parser")
-checks["single_page_has_five_content_sections"] = all(
+checks["single_page_has_seven_content_sections"] = all(
     soup.select_one(selector) is not None
-    for selector in ["#report", "#literature", "#finite-optimum", "#routes", "#full-analysis"]
+    for selector in [
+        "#report",
+        "#literature",
+        "#repair-map",
+        "#finite-optimum",
+        "#routes",
+        "#full-analysis",
+        "#evidence",
+    ]
+)
+checks["single_page_integrates_error_repairs_and_extensions"] = all(
+    text in soup.select_one("#repair-map").get_text()
+    for text in [
+        "先闭合企业问题，再选择经济机制",
+        "有界有效数据服务",
+        "有限许可或共同数据包",
+        "企业吸收成本",
+        "安全许可与合同设计",
+        "信息质量、收益饱和与算力互补",
+        "训练、研发与利用能力积累",
+        "修复后必须重新计算哪些结果",
+    ]
+)
+checks["single_page_has_interactive_theta_diagnostic"] = (
+    soup.select_one("[data-theta-explorer]") is not None
+    and len(soup.select("[data-theta-preset]")) == 3
+    and len(soup.select("[data-theta-input]")) == 3
+    and soup.select_one("[data-theta-result]") is not None
+)
+checks["repair_map_has_background_and_literature_boundaries"] = all(
+    text in soup.select_one("#repair-map").get_text()
+    for text in [
+        "促进和规范数据跨境流动规定",
+        "Data Security Program",
+        "Jones–Tonetti",
+        "Farboodi–Veldkamp",
+        "Dubus",
+        "Demirer",
+        "Lee（2025）",
+        "观察性估计已经识别",
+    ]
 )
 checks["single_page_has_auditable_literature_lineage"] = all(
     text in soup.select_one("#literature").get_text()
@@ -80,9 +120,14 @@ checks["single_page_has_no_template_markers"] = not any(
         "{{REPORT}}",
         "{{LITERATURE_LINEAGE}}",
         "{{DEEP_READING}}",
+        "{{REPAIR_MAP}}",
         "{{FINITE_OPTIMUM}}",
+        "{{EXTENSION_OVERVIEW}}",
         "{{FULL_ANALYSIS}}",
         "{{ROUTE_A}}",
+        "{{ROUTE_B}}",
+        "{{ROUTE_C}}",
+        "{{SOURCE_TABLE}}",
     ]
 )
 checks["single_page_has_no_control_characters"] = all(

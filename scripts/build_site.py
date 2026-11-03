@@ -58,6 +58,7 @@ fragments = {
     "{{REPORT}}": md_to_html(CONTENT / "完整汇报.md", "report"),
     "{{LITERATURE_LINEAGE}}": md_to_html(CONTENT / "文献脉络与扩展文献.md", "literature"),
     "{{DEEP_READING}}": md_to_html(CONTENT / "深读关系矩阵.md", "deep-reading"),
+    "{{REPAIR_MAP}}": md_to_html(CONTENT / "修复与扩展总览.md", "repair-map"),
     "{{FINITE_OPTIMUM}}": md_to_html(CONTENT / "有限最优复核与修复.md", "finite"),
     "{{EXTENSION_OVERVIEW}}": md_to_html(CONTENT / "扩展现实基础.md", "extensions"),
     "{{ROUTE_A}}": md_to_html(CONTENT / "routes" / "路线A-安全许可与合规.md", "route-a"),
@@ -76,8 +77,14 @@ leftovers = [
         "{{REPORT}}",
         "{{LITERATURE_LINEAGE}}",
         "{{DEEP_READING}}",
+        "{{REPAIR_MAP}}",
         "{{FINITE_OPTIMUM}}",
+        "{{EXTENSION_OVERVIEW}}",
+        "{{ROUTE_A}}",
+        "{{ROUTE_B}}",
+        "{{ROUTE_C}}",
         "{{FULL_ANALYSIS}}",
+        "{{SOURCE_TABLE}}",
     )
     if part in page
 ]
