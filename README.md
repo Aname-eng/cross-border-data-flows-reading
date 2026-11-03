@@ -39,7 +39,7 @@
 
 完整推导见 [`content/有限最优复核与修复.md`](content/有限最优复核与修复.md)，可运行检查见 [`scripts/check_finite_optimum.py`](scripts/check_finite_optimum.py)。
 
-文献复核表明，CCWZ 的可辩护增量不是首次研究非竞争性、隐私、数据中介或数据积累，而是把**原始数据—目的地专用工作数据—企业数据存量—商品贸易—跨境政策**接进同一个两国一般均衡。后续文献主要推进到跨国政策协调、多国增长、企业创新和数据中心选址；目前未找到直接修复其线性无上限采购问题的论文。
+文献复核表明，CCWZ 的可辩护增量不是首次研究非竞争性、隐私、数据中介或数据积累，而是把**原始数据—目的地专用工作数据—企业数据存量—商品贸易—跨境政策**接进同一个两国一般均衡。扩大检索后，Google Scholar 的 20 条引用结果已全部分类，并补入引用图遗漏的政策协调、多国多行业量化、企业生产率和知识扩散研究。目前仍未找到直接修复其线性无上限采购问题的论文。
 
 ## 目录
 
@@ -64,7 +64,8 @@ research/
   source-ledger.csv           来源台账
   claim-evidence-matrix.csv   论断—证据表
   citation-lineage.csv        逐篇文献关系与核验边界
-  openalex-citing-works.json  OpenAlex 引用候选快照
+  openalex-citing-works.json  OpenAlex 8 条引用候选快照
+  google-scholar-citing-works.json  Google Scholar 20 条引用结果快照
   finite-optimum-check.json   模型检查输出
 scripts/
   build_site.py               从 Markdown 重建网页

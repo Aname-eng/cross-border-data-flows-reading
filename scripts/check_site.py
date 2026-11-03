@@ -1,6 +1,7 @@
 """Acceptance checks for the static site and generated deliverables."""
 from __future__ import annotations
 
+import csv
 import json
 import shutil
 import subprocess
@@ -40,7 +41,14 @@ checks["single_page_has_five_content_sections"] = all(
 )
 checks["single_page_has_auditable_literature_lineage"] = all(
     text in soup.select_one("#literature").get_text()
-    for text in ["Jones–Tonetti", "王永进", "Lee（2025）", "OpenAlex", "引用不等于扩展"]
+    for text in [
+        "Jones–Tonetti",
+        "Trade in Data",
+        "Ito–Tomiura",
+        "20 条引用",
+        "OpenAlex",
+        "引用不等于扩展",
+    ]
 )
 checks["single_page_has_three_route_panels"] = len(soup.select("[data-route-panel]")) == 3
 checks["single_page_has_route_controls"] = len(soup.select("[data-route-choice]")) == 4
@@ -55,8 +63,26 @@ checks["single_page_has_no_control_characters"] = all(
 checks["finite_optimum_figure_exists"] = (DOCS / "assets" / "finite-optimum-repairs.svg").exists()
 checks["evidence_downloads_exist"] = all(
     (DOCS / "assets" / name).exists()
-    for name in ["source-ledger.csv", "claim-evidence-matrix.csv", "citation-lineage.csv", "finite-optimum-check.json"]
+    for name in [
+        "source-ledger.csv",
+        "claim-evidence-matrix.csv",
+        "citation-lineage.csv",
+        "google-scholar-citing-works.json",
+        "finite-optimum-check.json",
+    ]
 )
+with (ROOT / "research" / "source-ledger.csv").open(encoding="utf-8-sig", newline="") as handle:
+    source_rows = list(csv.DictReader(handle))
+with (ROOT / "research" / "claim-evidence-matrix.csv").open(encoding="utf-8-sig", newline="") as handle:
+    claim_rows = list(csv.DictReader(handle))
+with (ROOT / "research" / "citation-lineage.csv").open(encoding="utf-8-sig", newline="") as handle:
+    lineage_rows = list(csv.DictReader(handle))
+checks["expanded_literature_ledgers_are_complete"] = (
+    len(source_rows) >= 62 and len(claim_rows) >= 39 and len(lineage_rows) >= 51
+)
+checks["google_scholar_snapshot_has_20_results"] = len(
+    json.loads((ROOT / "research" / "google-scholar-citing-works.json").read_text(encoding="utf-8"))["results"]
+) == 20
 
 model_results = json.loads((ROOT / "research" / "finite-optimum-check.json").read_text(encoding="utf-8"))
 checks["all_model_checks_pass"] = all(model_results["checks"].values())

@@ -77,6 +77,7 @@ for source, name in [
     (ROOT / "research" / "source-ledger.csv", "source-ledger.csv"),
     (ROOT / "research" / "claim-evidence-matrix.csv", "claim-evidence-matrix.csv"),
     (ROOT / "research" / "citation-lineage.csv", "citation-lineage.csv"),
+    (ROOT / "research" / "google-scholar-citing-works.json", "google-scholar-citing-works.json"),
     (ROOT / "research" / "finite-optimum-check.json", "finite-optimum-check.json"),
     (ROOT / "deliverables" / "公式讲解.pdf", "公式讲解.pdf"),
 ]:
