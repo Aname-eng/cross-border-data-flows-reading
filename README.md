@@ -86,6 +86,7 @@ research/
   google-scholar-citing-works.json  Google Scholar 20 条引用结果快照
   finite-optimum-check.json   模型检查输出
 scripts/
+  build_lineage.py            校验并发布规范文献谱系
   build_site.py               从 Markdown 重建网页
   check_finite_optimum.py     符号和数值尾部检查
   extract_paper_corpus.py     更新本地PDF清单且保留人工阅读状态

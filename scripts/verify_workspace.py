@@ -31,7 +31,7 @@ def main() -> None:
 
     python = sys.executable
     run("finite-optimum derivation", [python, "scripts/check_finite_optimum.py"])
-    run("literature-lineage validation", [python, "build/build_lineage.py"])
+    run("literature-lineage validation", [python, "scripts/build_lineage.py"])
     run("single-page site rebuild", [python, "scripts/build_site.py"])
     run("deck acceptance", [python, "presentation/scripts/check_deck.py"])
     run("site and evidence acceptance", [python, "scripts/check_site.py"])
