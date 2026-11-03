@@ -48,14 +48,42 @@ checks["single_page_has_auditable_literature_lineage"] = all(
         "20 条引用",
         "OpenAlex",
         "引用不等于扩展",
+        "Lee（2025）",
+        "没有引用 CCWZ",
+        "38 国、44 行业",
     ]
+)
+checks["single_page_has_full_text_relationship_matrix"] = all(
+    text in soup.select_one("#deep-reading").parent.get_text()
+    for text in [
+        "前置机制、CCWZ 增量与后续偏离",
+        "数据与算力的替代弹性约为 0.33–0.44",
+        "下游经济体开业数相对处理前均值提高 49%",
+        "有限最优修复",
+    ]
+)
+checks["single_page_explains_lean_boundary"] = all(
+    text in soup.select_one("#finite-optimum").get_text()
+    for text in ["Lean 4.34.1", "open_profit_unbounded", "它没有形式化 CCWZ"]
 )
 checks["single_page_has_three_route_panels"] = len(soup.select("[data-route-panel]")) == 3
 checks["single_page_has_route_controls"] = len(soup.select("[data-route-choice]")) == 4
+checks["single_page_links_to_explorable_deck"] = (
+    len(soup.select('a[href="slides/"]')) >= 1
+    and (DOCS / "slides" / "index.html").exists()
+    and (DOCS / "assets" / "CCWZ-explorable-deck.pdf").exists()
+)
 checks["single_page_embeds_full_analysis"] = "原式—解析—课件覆盖表" in soup.get_text()
 checks["single_page_has_no_template_markers"] = not any(
     marker in index
-    for marker in ["{{REPORT}}", "{{LITERATURE_LINEAGE}}", "{{FINITE_OPTIMUM}}", "{{FULL_ANALYSIS}}", "{{ROUTE_A}}"]
+    for marker in [
+        "{{REPORT}}",
+        "{{LITERATURE_LINEAGE}}",
+        "{{DEEP_READING}}",
+        "{{FINITE_OPTIMUM}}",
+        "{{FULL_ANALYSIS}}",
+        "{{ROUTE_A}}",
+    ]
 )
 checks["single_page_has_no_control_characters"] = all(
     ord(char) >= 32 or char in "\n\r\t" for char in index
@@ -67,8 +95,11 @@ checks["evidence_downloads_exist"] = all(
         "source-ledger.csv",
         "claim-evidence-matrix.csv",
         "citation-lineage.csv",
+        "deep-reading-matrix.csv",
+        "paper-corpus-manifest.csv",
         "google-scholar-citing-works.json",
         "finite-optimum-check.json",
+        "CCWZ-explorable-deck.pdf",
     ]
 )
 with (ROOT / "research" / "source-ledger.csv").open(encoding="utf-8-sig", newline="") as handle:
@@ -77,8 +108,44 @@ with (ROOT / "research" / "claim-evidence-matrix.csv").open(encoding="utf-8-sig"
     claim_rows = list(csv.DictReader(handle))
 with (ROOT / "research" / "citation-lineage.csv").open(encoding="utf-8-sig", newline="") as handle:
     lineage_rows = list(csv.DictReader(handle))
+with (ROOT / "research" / "deep-reading-matrix.csv").open(encoding="utf-8-sig", newline="") as handle:
+    deep_reading_rows = list(csv.DictReader(handle))
+with (ROOT / "research" / "paper-corpus-manifest.csv").open(encoding="utf-8-sig", newline="") as handle:
+    corpus_rows = list(csv.DictReader(handle))
 checks["expanded_literature_ledgers_are_complete"] = (
-    len(source_rows) >= 62 and len(claim_rows) >= 39 and len(lineage_rows) >= 51
+    len(source_rows) >= 62
+    and len(claim_rows) >= 46
+    and len(lineage_rows) >= 51
+    and len(deep_reading_rows) == 18
+)
+checks["ledger_ids_are_unique"] = all(
+    len(values) == len(set(values))
+    for values in [
+        [row["source_id"] for row in source_rows],
+        [row["claim_id"] for row in claim_rows],
+        [row["lineage_id"] for row in lineage_rows],
+        [row["matrix_id"] for row in deep_reading_rows],
+        [row["corpus_id"] for row in corpus_rows],
+    ]
+)
+checks["paper_corpus_has_25_pdfs_and_1012_pages"] = (
+    len(corpus_rows) == 25 and sum(int(row["pages"]) for row in corpus_rows) == 1012
+)
+checks["paper_corpus_preserves_manual_reading_status"] = (
+    sum(row["reading_status"] == "queued" for row in corpus_rows) == 5
+    and any(row["reading_status"] == "full-model-audit" for row in corpus_rows)
+    and any(row["reading_status"] == "superseded" for row in corpus_rows)
+)
+checks["wang_2025_is_full_text_and_direct_citation"] = any(
+    row["source_id"] == "S56"
+    and row["evidence_state"] == "full-text-read"
+    and "直接引用CCWZ" in row["use"]
+    for row in source_rows
+)
+checks["lee_relationship_is_corrected"] = any(
+    row["lineage_id"] == "N02"
+    and row["relationship_to_ccwz"] == "does not cite CCWZ in checked full paper"
+    for row in lineage_rows
 )
 checks["google_scholar_snapshot_has_20_results"] = len(
     json.loads((ROOT / "research" / "google-scholar-citing-works.json").read_text(encoding="utf-8"))["results"]

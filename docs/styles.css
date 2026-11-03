@@ -185,6 +185,24 @@ main { overflow: clip; }
 .prose th, .prose td, .table-shell th, .table-shell td { padding: .75rem .65rem; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
 .prose th, .table-shell th { color: var(--navy); font-size: .78rem; letter-spacing: .03em; background: var(--soft-teal); }
 .prose .table-wrapper { overflow-x: auto; }
+.chapter-divider {
+  display: grid;
+  grid-template-columns: minmax(8rem, .3fr) 1fr;
+  align-items: baseline;
+  gap: 2rem;
+  max-width: var(--measure);
+  margin: 7rem auto 3rem;
+  padding: 1.2rem 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+.chapter-divider span { color: var(--rust); font-family: ui-monospace, monospace; font-size: .78rem; letter-spacing: .08em; }
+.chapter-divider strong { color: var(--navy); font-family: "Noto Serif SC", serif; font-size: 1.35rem; }
+.deep-reading-prose { max-width: var(--measure); }
+.deep-reading-prose > h1:first-child { max-width: var(--reading); margin: 0 0 2rem; }
+.deep-reading-prose > p, .deep-reading-prose > h2, .deep-reading-prose > h3, .deep-reading-prose > h4,
+.deep-reading-prose > ul, .deep-reading-prose > ol, .deep-reading-prose > blockquote, .deep-reading-prose > .math { max-width: var(--reading); margin-left: auto; margin-right: auto; }
+.deep-reading-prose table { min-width: 68rem; }
 
 .chapter-diagnostic { background: #172d32 !important; color: #edf4f1; }
 .chapter-diagnostic .chapter-heading, .chapter-diagnostic .prose h2 { border-color: #4b6266; }
@@ -245,6 +263,7 @@ footer p:last-child { font-size: .85rem; }
   .orientation a:nth-child(3) { border-left: 0; border-top: 1px solid var(--line); }
   .orientation a:nth-child(4) { border-top: 1px solid var(--line); }
   .chapter-heading { grid-template-columns: 1fr; row-gap: 1.5rem; }
+  .chapter-divider { grid-template-columns: 1fr; gap: .4rem; }
   .diagnostic-strip { grid-template-columns: 1fr; }
   .diagnostic-strip div + div { border-left: 0; border-top: 1px solid #4b6266; }
   .route-article::before { display: none; }

@@ -1,0 +1,49 @@
+project:
+  type: default
+  output-dir: _render
+  render:
+    - index.qmd
+
+resources:
+  - assets/bounded-service.svg
+  - assets/table2-intervals.svg
+  - assets/theta-regimes.svg
+  - assets/source/ccwz-calibration-table.png
+  - stage.js
+
+format:
+  revealjs:
+    theme:
+      - default
+      - theme.scss
+    title-slide: false
+    width: 1280
+    height: 720
+    margin: 0.025
+    center: false
+    controls: true
+    controls-layout: edges
+    controls-back-arrows: faded
+    progress: true
+    slide-number: c/t
+    navigation-mode: linear
+    transition: fade
+    background-transition: fade
+    hash: true
+    hash-one-based-index: false
+    history: true
+    touch: true
+    keyboard: true
+    overview: true
+    help: true
+    menu: false
+    preview-links: auto
+    scrollable: false
+    auto-stretch: true
+    pdf-separate-fragments: false
+    html-math-method: mathjax
+    include-after-body: includes/after-body.html
+    output-file: index.html
+
+execute:
+  enabled: false

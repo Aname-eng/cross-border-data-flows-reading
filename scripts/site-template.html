@@ -24,6 +24,7 @@
       <a href="#literature">文献脉络</a>
       <a href="#finite-optimum">有限最优</a>
       <a href="#routes">扩展路线</a>
+      <a href="slides/">学术演示</a>
       <a href="#full-analysis">逐步解析</a>
     </nav>
     <button class="quiet-button" type="button" data-action="print">打印 / 导出</button>
@@ -36,7 +37,8 @@
         <h1 id="hero-title">一篇论文，<br><em>四种读法</em></h1>
         <p class="lede">先理解跨境数据如何改变生产与贸易，再看 CCWZ 从哪些文献出发、后续研究如何推进，最后选择公式复核或现实扩展。全部内容都在这一页；路线选择只改变阅读顺序，不删减材料。</p>
         <div class="hero-actions">
-          <a class="primary-button" href="#report">从完整汇报开始</a>
+          <a class="primary-button" href="slides/">打开 35 页 explorable 演示</a>
+          <a class="secondary-button" href="#report">从完整汇报开始</a>
           <a class="secondary-button" href="assets/逐步解析.pdf">下载逐步解析 PDF</a>
         </div>
       </div>
@@ -47,6 +49,7 @@
           <div><dt>原解析</dt><dd>{{ANALYSIS_LINES}} 行，保持不改</dd></div>
           <div><dt>独立检查</dt><dd>封闭指数 20/3；开放指数 4/3</dd></div>
           <div><dt>推荐修复</dt><dd>有界有效数据服务</dd></div>
+          <div><dt>全文语料</dt><dd>25 份 PDF · 1,012 页</dd></div>
           <div><dt>阅读方式</dt><dd>线性通读或三条分支</dd></div>
         </dl>
       </aside>
@@ -75,6 +78,11 @@
         <p>逐篇说明核心参考文献提供了什么、CCWZ 新增了什么，再核对后续论文究竟延伸模型、提供经验检验，还是只作背景引用。</p>
       </header>
       <article class="prose literature-prose">{{LITERATURE_LINEAGE}}</article>
+      <div id="deep-reading" class="chapter-divider" aria-label="全文深读关系矩阵">
+        <span>全文证据</span>
+        <strong>把前置机制、CCWZ 增量与后续偏离放在同一张图上</strong>
+      </div>
+      <article class="prose deep-reading-prose">{{DEEP_READING}}</article>
     </section>
 
     <section id="finite-optimum" class="chapter chapter-diagnostic">
@@ -144,8 +152,11 @@
         <a href="assets/source-ledger.csv">来源台账 CSV</a>
         <a href="assets/claim-evidence-matrix.csv">论断—证据表 CSV</a>
         <a href="assets/citation-lineage.csv">文献谱系 CSV</a>
+        <a href="assets/deep-reading-matrix.csv">全文关系矩阵 CSV</a>
+        <a href="assets/paper-corpus-manifest.csv">25 份 PDF 阅读状态</a>
         <a href="assets/google-scholar-citing-works.json">Scholar 20 条引用快照</a>
         <a href="assets/finite-optimum-check.json">有限最优检查 JSON</a>
+        <a href="assets/CCWZ-explorable-deck.pdf">35 页汇报 PDF</a>
         <a href="assets/公式讲解.pdf">原公式课件 PDF</a>
       </div>
       <div class="table-shell">{{SOURCE_TABLE}}</div>
