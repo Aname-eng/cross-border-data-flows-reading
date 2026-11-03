@@ -2,5 +2,11 @@
 __pycache__/
 *.pyc
 .DS_Store
+.firecrawl/
 build/
 tmp/
+tools/quarto/
+presentation/_render/
+presentation/index_files/
+presentation/assets/source/ccwz-p*.png
+verification/lean/.lake/

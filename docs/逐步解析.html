@@ -43,7 +43,7 @@ body { background: white; }
 <h2 id="analysis-模型中有三种数据不能混作一个变量">1. 模型中有三种“数据”，不能混作一个变量</h2>
 <h3 id="analysis-主体符号与量纲">1.1 主体、符号与量纲</h3>
 <p>时间离散且无限，国家为本国 H 和外国 F，品种为 <span class="math inline">\(i\in[0,1]\)</span>。原文的星号表示“在外国使用”，下标 H/F 表示“在何处生成”。例如，<span class="math inline">\(\varphi_{H,t}^{*}\)</span> 是本国生成、外国使用的工作数据，不是外国生成的数据。[S2，§2]</p>
-<table>
+<div class="table-wrapper"><table>
 <colgroup>
 <col style="width: 33%" />
 <col style="width: 33%" />
@@ -143,7 +143,7 @@ body { background: white; }
 <td>三者不同</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p>企业利润沿用原文的 <span class="math inline">\(F_t\)</span>，不要与 F 国下标混淆。为缩短公式，定义</p>
 <p><span class="math display">\[
 \kappa\equiv\Pi(1+b\mathbb I),\qquad
@@ -753,7 +753,7 @@ N^{*}=n^{*}+l_F^{*}+l_F,
 <p>原文的 <span class="math inline">\(T=Y_H+Y_H^{*}\)</span> 与进口价格乘数，不能在没有说明时同时解释为“<span class="math inline">\(Y_H^{*}\)</span> 是外国实收量”且“本国按 <span class="math inline">\(\tau Y_H^{*}\)</span> 消耗资源”。本解析按原文给定系统解读图表；第 12 节的新模型则把安全与合规支出明确列为真实资源使用。</p>
 <p>这也是政策结论的适用范围：作者图 5 的“最低商品壁垒最优”是其价格楔子和福利闭合下的数值结果，并非已经证明适用于有税收返还、市场势力和报复策略的一般最优关税定理。</p>
 <h3 id="analysis-五类经济的切换表">6.4 五类经济的切换表</h3>
-<table>
+<div class="table-wrapper"><table>
 <thead>
 <tr>
 <th>情形</th>
@@ -800,7 +800,7 @@ N^{*}=n^{*}+l_F^{*}+l_F,
 <td><span class="math inline">\(\mathbb I_H=1\)</span></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p>单向情形还要相应设置外国的指示量与加工劳动，不能只把某一个贸易数量强制归零、其余方程全部照旧。</p>
 <hr />
 <h2 id="analysis-从方程求稳态候选解再检查有限最优">7. 从方程求稳态候选解，再检查有限最优</h2>
@@ -922,7 +922,7 @@ P_D=\frac{\gamma q\varphi}{D}.
 <h3 id="analysis-边界与一个可复算的稳态候选解">7.5 边界与一个可复算的稳态候选解</h3>
 <p><span class="math inline">\(\xi=0\)</span> 时，数据不影响生产；应直接删去数据部门，以 <span class="math inline">\(l=D=\varphi=0\)</span> 求普通封闭生产模型，不能将 <span class="math inline">\(\nu_l=0\)</span> 代入含 <span class="math inline">\(\ln\nu_l\)</span> 的计算式。<span class="math inline">\(\delta_\Phi=0\)</span> 且 <span class="math inline">\(\varphi&gt;0\)</span> 时，<span class="math inline">\(\Phi_{t+1}=\Phi_t+\varphi\)</span> 不可能保持有限水平稳态；<span class="math inline">\(\delta_\Phi=1\)</span> 时，存量完全折旧，但当期采购仍在下期生效。</p>
 <p>教学例子采用原文表 1 的 <span class="math inline">\(\beta=.99,\sigma=2,\eta=1.3,\Omega=1.315,\alpha=1/3,\rho=21,\delta_K=\delta_\Phi=.025,\gamma=.5,B=1\)</span>，再明确选定 <span class="math inline">\(A=\xi=\Pi=\pi=1\)</span>、<span class="math inline">\(\mathbb I=0\)</span>。得到：</p>
-<table>
+<div class="table-wrapper"><table>
 <thead>
 <tr>
 <th>变量</th>
@@ -963,7 +963,7 @@ P_D=\frac{\gamma q\varphi}{D}.
 <td style="text-align: right;">6.086730</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p>数据商零利润、家庭预算、生产、资本需求、劳动需求、供数条件和数据 Euler 的残差均由 <a href="验证/check_math.py"><code>验证/check_math.py</code></a> 检查；完整精度见 <a href="验证/检查结果.json"><code>检查结果.json</code></a>。这些数值是稳态方程的候选解，作者的开放经济图形另按原文报告。</p>
 <h3 id="analysis-正的一阶条件解还需要有限最优的检验">7.6 正的一阶条件解，还需要有限最优的检验</h3>
 <p>若按附录的字面单企业优化理解：企业面对给定的工作数据单价，可以单方面增加自己的采购，且没有额外采购上限或安装成本，则可以检验其问题是否有有限解。先在封闭经济把工资、租金、数据价格与总需求固定为候选稳态的正值，令 <span class="math inline">\(Y&gt;0\)</span>，并记 <span class="math inline">\(a=\alpha\xi\)</span>、<span class="math inline">\(b_\rho=(\rho-1)/\rho\)</span>、<span class="math inline">\(c_0=(r/\alpha)^\alpha[w/(1-\alpha)]^{1-\alpha}/A&gt;0\)</span>。企业逆需求为 <span class="math inline">\(p=(Y/y)^{1/\rho}\)</span>，当前最优经营利润问题是</p>
@@ -1183,7 +1183,7 @@ E_t\hat{\mathcal R}_{\Phi,t+1}
 <p>这种继承是模块性的。CCWZ 没有在基准中加入黏性价格、货币政策规则和名义汇率制度，不能称为“把数据放进完整的 Galí–Monacelli 小型开放新凯恩斯模型”。它是两国、实质变量为主、带数据加工与数据积累的动态一般均衡模型。</p>
 <p>同样，数据商与隐私文献提供了经济动机，并不表示 CCWZ 解了 Ichihashi 的消费者战略披露或 Acemoglu 等人的相关隐私外部性模型。原文使用 <span class="math inline">\(\Pi(1+b\mathbb I)\pi D^2\)</span> 这个简约形式承接这些问题，没有显式刻画“我出售的数据泄露你的信息”的外部性。[S2，pp.4—7]</p>
 <h3 id="analysis-与读书会中几类论文的区别">10.7 与读书会中几类论文的区别</h3>
-<table>
+<div class="table-wrapper"><table>
 <colgroup>
 <col style="width: 33%" />
 <col style="width: 33%" />
@@ -1233,7 +1233,7 @@ E_t\hat{\mathcal R}_{\Phi,t+1}
 <td>CCWZ 的单位测度对称企业不刻画平台倾斜、赢者通吃或用户迁移</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p>前三类贸易论文及 Prüfer–Schottmüller 的定位依据本地论文开篇与模型介绍，资料位置列于 S14。这个比较不意味着它们都是 CCWZ 直接改写的祖先模型。</p>
 <hr />
 <h2 id="analysis-为什么这项研究值得读优秀在哪里">11. 为什么这项研究值得读，优秀在哪里</h2>
@@ -1578,7 +1578,7 @@ q_t=E_t\Bigg[M_{t,t+1}\Bigg(&amp;\alpha\xi MC_{t+1}\frac{T_{t+1}}{\Phi_{t+1}}\\
 <p>扩展后的企业在获得外国工作数据后，既可能立即降低经营成本，也可能增加训练/研发投入，随后提高本国能力。因此，数据开放与组织培训、算法适配之间应出现互补；同样的进口数据量在初始研发效率不同的国家可能产生不同的生产率路径。</p>
 <p>要区分一次性生产率效应和能力积累，应分别观察数据采购、训练/研发支出、任务适配能力及后续产出，而非将所有数字投资合成单一指标。</p>
 <h3 id="analysis-三项扩展如何选择">12.4 三项扩展如何选择</h3>
-<table>
+<div class="table-wrapper"><table>
 <colgroup>
 <col style="width: 25%" />
 <col style="width: 25%" />
@@ -1613,7 +1613,7 @@ q_t=E_t\Bigg[M_{t,t+1}\Bigg(&amp;\alpha\xi MC_{t+1}\frac{T_{t+1}}{\Phi_{t+1}}\\
 <td>数据开放何时伴随本国吸收能力形成</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p>B 的有界生产率可直接修复第 7.6 节识别出的有限最优问题。基准确定后，三个扩展最好逐一加入、分别比较同一基准；一开始把所有新机制合并，会使数据价格、隐私、安全、算力与学习的作用难以识别。若做第一篇后续论文，A 与现有制度最直接对应，也最容易提出区分固定成本和单位成本的可检验预测。</p>
 <hr />
 <h2 id="analysis-数学检验证据与演讲使用">13. 数学检验、证据与演讲使用</h2>
@@ -1632,7 +1632,7 @@ q_t=E_t\Bigg[M_{t,t+1}\Bigg(&amp;\alpha\xi MC_{t+1}\frac{T_{t+1}}{\Phi_{t+1}}\\
 <p>完整推导留在本 Markdown；课件把相邻代数步骤拆开，主讲消费供数、CES、企业数据投资、数据商和稳态，较长的稳态解及公式条件放在附录。其结构参考了同学课件中“先设定、再逐式推导、最后解释均衡含义”的做法。</p>
 <hr />
 <h2 id="analysis-原式解析课件覆盖表">14. 原式—解析—课件覆盖表</h2>
-<table>
+<div class="table-wrapper"><table>
 <thead>
 <tr>
 <th>原文/报告对象</th>
@@ -1732,7 +1732,7 @@ q_t=E_t\Bigg[M_{t,t+1}\Bigg(&amp;\alpha\xi MC_{t+1}\frac{T_{t+1}}{\Phi_{t+1}}\\
 <td>数据状态线性化；图形符号以原文为准</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr />
 <h2 id="analysis-参考资料与可核对来源">参考资料与可核对来源</h2>
 <p>以下 S 编号同时用于正文和 <a href="research/来源台账.csv"><code>research/来源台账.csv</code></a>。页码未注明“PDF”时均指论文印刷页码；全文的 Appendix A 对应 PDF 第 39—42 页。</p>

@@ -3,9 +3,9 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Chang、Cong、Wang、Zhang《Production, Trade, and Cross-Border Data Flows》逐步解析、完整汇报、有限最优复核与三条扩展路线。">
-  <title>跨境数据流：论文解析与可选研究路线</title>
-  <link rel="stylesheet" href="styles.css">
+  <meta name="description" content="Chang、Cong、Wang、Zhang《Production, Trade, and Cross-Border Data Flows》的逐步解析、文献谱系、有限最优诊断、三种数学修复及三条可检验扩展路线。">
+  <title>跨境数据流：论文解析、模型修复与研究扩展</title>
+  <link rel="stylesheet" href="styles.css?v=20261103-repair-map">
   <script>
     window.MathJax = {
       tex: {inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']]},
@@ -13,7 +13,7 @@
     };
   </script>
   <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-  <script defer src="app.js"></script>
+  <script defer src="app.js?v=20261103-repair-map"></script>
 </head>
 <body>
   <div class="reading-progress" aria-hidden="true"><span></span></div>
@@ -21,8 +21,10 @@
     <a class="brand" href="#top" aria-label="返回页面顶部">CCWZ / 数据与贸易</a>
     <nav aria-label="主要导航">
       <a href="#report">完整汇报</a>
-      <a href="#finite-optimum">有限最优</a>
-      <a href="#routes">扩展路线</a>
+      <a href="#literature">文献脉络</a>
+      <a href="#repair-map">诊断与修复</a>
+      <a href="#routes">三条扩展</a>
+      <a href="slides/">学术演示</a>
       <a href="#full-analysis">逐步解析</a>
     </nav>
     <button class="quiet-button" type="button" data-action="print">打印 / 导出</button>
@@ -32,10 +34,12 @@
     <section class="hero" aria-labelledby="hero-title">
       <div class="hero-copy">
         <p class="eyebrow">云鹰读书会 · 交互研究档案</p>
-        <h1 id="hero-title">一篇论文，<br><em>四种读法</em></h1>
-        <p class="lede">先理解跨境数据如何改变生产与贸易，再决定深入公式、有限最优修复，或三条现实扩展。全部内容都在这一页；路线选择只改变阅读顺序，不删减材料。</p>
+        <h1 id="hero-title">先读懂论文，<br><em>再把模型修好</em></h1>
+        <p class="lede">这一页从 CCWZ 的问题、机制和定量结果出发，接着核对文献谱系，再完整展示企业有限最优缺口、三种数学修复和三条经济扩展。公式、制度背景、证据边界与完整推导都保留在同一份 HTML 中。</p>
         <div class="hero-actions">
-          <a class="primary-button" href="#report">从完整汇报开始</a>
+          <a class="primary-button" href="slides/">打开 35 页 explorable 演示</a>
+          <a class="secondary-button" href="#report">从完整汇报开始</a>
+          <a class="secondary-button" href="#repair-map">看错误与三种修复</a>
           <a class="secondary-button" href="assets/逐步解析.pdf">下载逐步解析 PDF</a>
         </div>
       </div>
@@ -45,17 +49,18 @@
         <dl>
           <div><dt>原解析</dt><dd>{{ANALYSIS_LINES}} 行，保持不改</dd></div>
           <div><dt>独立检查</dt><dd>封闭指数 20/3；开放指数 4/3</dd></div>
-          <div><dt>推荐修复</dt><dd>有界有效数据服务</dd></div>
-          <div><dt>阅读方式</dt><dd>线性通读或三条分支</dd></div>
+          <div><dt>数学闭合</dt><dd>有界服务 / 许可上限 / 凸成本</dd></div>
+          <div><dt>经济扩展</dt><dd>合同 / 信息生产 / 能力形成</dd></div>
+          <div><dt>全文语料</dt><dd>25 份 PDF · 1,012 页</dd></div>
         </dl>
       </aside>
     </section>
 
     <section class="orientation" aria-label="四种阅读入口">
-      <a href="#report"><span>01</span><strong>汇报</strong><small>问什么、发现什么、贡献与政策</small></a>
-      <a href="#finite-optimum"><span>02</span><strong>复核</strong><small>授权、测度、价格与修复</small></a>
-      <a href="#routes"><span>03</span><strong>分支</strong><small>安全 / 算力 / 能力积累</small></a>
-      <a href="#full-analysis"><span>04</span><strong>推导</strong><small>原始 2051 行逐步解析</small></a>
+      <a href="#report"><span>01</span><strong>汇报与谱系</strong><small>问题、发现、前序改进与后续推进</small></a>
+      <a href="#repair-map"><span>02</span><strong>错误与修复</strong><small>尾部指数、三种闭合和工具边界</small></a>
+      <a href="#routes"><span>03</span><strong>三条扩展</strong><small>安全合同 / 信息算力 / 能力形成</small></a>
+      <a href="#full-analysis"><span>04</span><strong>全部推导</strong><small>原始 2051 行逐步解析</small></a>
     </section>
 
     <section id="report" class="chapter chapter-report">
@@ -67,11 +72,76 @@
       <article class="prose report-prose">{{REPORT}}</article>
     </section>
 
+    <section id="literature" class="chapter chapter-literature">
+      <header class="chapter-heading">
+        <p class="chapter-number">02 / 文献脉络</p>
+        <h2>先分清继承、改进、引用与扩展</h2>
+        <p>逐篇说明核心参考文献提供了什么、CCWZ 新增了什么，再核对后续论文究竟延伸模型、提供经验检验，还是只作背景引用。</p>
+      </header>
+      <article class="prose literature-prose">{{LITERATURE_LINEAGE}}</article>
+      <div id="deep-reading" class="chapter-divider" aria-label="全文深读关系矩阵">
+        <span>全文证据</span>
+        <strong>把前置机制、CCWZ 增量与后续偏离放在同一张图上</strong>
+      </div>
+      <article class="prose deep-reading-prose">{{DEEP_READING}}</article>
+    </section>
+
+    <section id="repair-map" class="chapter chapter-repair-map">
+      <header class="chapter-heading">
+        <p class="chapter-number">03 / 错误、修复与扩展地图</p>
+        <h2>先判断最大值是否存在，再讨论政策</h2>
+        <p>互动检查器展示尾部指数如何改变企业问题；下方总览把三种数学闭合、三条经济路线、制度背景和最近文献接到同一条推理链上。</p>
+      </header>
+
+      <div class="logic-chain" aria-label="有限最优诊断的四步逻辑">
+        <article><small>01 / 选择集</small><strong>连续、非负、无上限</strong><span>附录按单位价格让企业选择工作数据</span></article>
+        <article><small>02 / 收益尾部</small><strong>利润按 L<sup>θ</sup> 增长</strong><span>θ = αξ(e−1)，基准均大于 1</span></article>
+        <article><small>03 / 一阶条件</small><strong>正根是局部最小值</strong><span>θ&gt;1 时二阶导数为正</span></article>
+        <article><small>04 / 闭合</small><strong>技术、合同或成本</strong><span>三种修复改变不同经济对象</span></article>
+      </div>
+
+      <div class="theta-lab" data-theta-explorer>
+        <div class="theta-lab-copy">
+          <p class="panel-label">互动尾部检查</p>
+          <h3>用同一个指数检查任意参数组</h3>
+          <p>给定线性数据价格和无上限选择集，企业一次性偏离的尾部为：</p>
+          <div class="theta-equation" aria-label="利润尾部公式">V(L) ≥ −qL + βCL<sup>θ</sup><br><span>θ = αξ(e − 1)</span></div>
+          <p class="theta-note">封闭经济令 <em>e = ρ</em>；开放经济令 <em>e = m</em>。检查器只判断这条尾部偏离，不替代完整动态存在性证明。</p>
+        </div>
+        <div class="theta-controls">
+          <div class="theta-presets" aria-label="参数预设">
+            <button type="button" class="active" data-theta-preset="closed">封闭基准 · 20/3</button>
+            <button type="button" data-theta-preset="open">开放基准 · 4/3</button>
+            <button type="button" data-theta-preset="boundary">边界示例 · 1</button>
+          </div>
+          <label>资本份额 α
+            <input type="range" min="0.05" max="0.80" step="any" value="0.3333333333333333" data-theta-input="alpha">
+            <output data-theta-output="alpha">0.333</output>
+          </label>
+          <label>数据利用弹性 ξ
+            <input type="range" min="0.05" max="2.00" step="0.01" value="1" data-theta-input="xi">
+            <output data-theta-output="xi">1.00</output>
+          </label>
+          <label>需求弹性 e
+            <input type="range" min="1.01" max="30" step="0.01" value="21" data-theta-input="elasticity">
+            <output data-theta-output="elasticity">21.00</output>
+          </label>
+          <div class="theta-result" data-theta-result data-regime="superlinear" aria-live="polite">
+            <small>当前 θ</small>
+            <strong data-theta-value>6.667</strong>
+            <span data-theta-verdict>目标无上界；有限正驻点是局部最小值。</span>
+          </div>
+        </div>
+      </div>
+
+      <article class="prose repair-map-prose">{{REPAIR_MAP}}</article>
+    </section>
+
     <section id="finite-optimum" class="chapter chapter-diagnostic">
       <header class="chapter-heading">
-        <p class="chapter-number">02 / 独立复核</p>
-        <h2>问题成立，但结论必须带上合同条件</h2>
-        <p>这里重新从原文附录出发，分别检查企业选择集、单位测度、非竞争性和数据价格口径，再给出三种闭合方式。</p>
+        <p class="chapter-number">04 / 独立复核全文</p>
+        <h2>从原文选择集推到三种闭合方式</h2>
+        <p>这里逐步检查企业选择集、单位测度、非竞争性、价格口径和开放经济，并交代 Python、SymPy、数值图与 Lean 各自验证到哪里。</p>
       </header>
       <div class="diagnostic-strip" role="list" aria-label="有限最优检查结果">
         <div role="listitem"><small>封闭经济</small><strong>αξ(ρ−1)=20/3</strong><span>超线性</span></div>
@@ -83,7 +153,7 @@
 
     <section id="routes" class="chapter chapter-routes">
       <header class="chapter-heading">
-        <p class="chapter-number">03 / 扩展路线</p>
+        <p class="chapter-number">05 / 扩展路线</p>
         <h2>走哪条路，由研究问题决定</h2>
         <p>默认显示全部路线，适合线性通读。也可以只保留一条路线，页面会记住选择并生成可分享的 URL。</p>
       </header>
@@ -114,7 +184,7 @@
 
     <section id="full-analysis" class="chapter chapter-analysis">
       <header class="chapter-heading">
-        <p class="chapter-number">04 / 全部推导</p>
+        <p class="chapter-number">06 / 全部推导</p>
         <h2>原始解析完整保留，不跳步</h2>
         <p>下面嵌入既有解析全文。它与来源文件保持一致；本项目只改变排版，不改公式、结论和章节结构。</p>
       </header>
@@ -126,14 +196,20 @@
 
     <section id="evidence" class="chapter chapter-evidence">
       <header class="chapter-heading">
-        <p class="chapter-number">05 / 证据台账</p>
+        <p class="chapter-number">07 / 证据台账</p>
         <h2>每项判断都能回到来源</h2>
         <p>台账区分作者报告、独立推导、综合解释和新增模型。完整 CSV 随仓库保存。</p>
       </header>
       <div class="evidence-actions">
         <a href="assets/source-ledger.csv">来源台账 CSV</a>
         <a href="assets/claim-evidence-matrix.csv">论断—证据表 CSV</a>
+        <a href="assets/citation-lineage.csv">文献谱系 CSV</a>
+        <a href="assets/deep-reading-matrix.csv">全文关系矩阵 CSV</a>
+        <a href="assets/paper-corpus-manifest.csv">25 份 PDF 阅读状态</a>
+        <a href="assets/background-reading-notes.md">五份背景全文复核</a>
+        <a href="assets/google-scholar-citing-works.json">Scholar 20 条引用快照</a>
         <a href="assets/finite-optimum-check.json">有限最优检查 JSON</a>
+        <a href="assets/CCWZ-explorable-deck.pdf">35 页汇报 PDF</a>
         <a href="assets/公式讲解.pdf">原公式课件 PDF</a>
       </div>
       <div class="table-shell">{{SOURCE_TABLE}}</div>

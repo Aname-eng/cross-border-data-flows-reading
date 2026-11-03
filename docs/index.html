@@ -3,9 +3,9 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Chang、Cong、Wang、Zhang《Production, Trade, and Cross-Border Data Flows》逐步解析、完整汇报、有限最优复核与三条扩展路线。">
-  <title>跨境数据流：论文解析与可选研究路线</title>
-  <link rel="stylesheet" href="styles.css">
+  <meta name="description" content="Chang、Cong、Wang、Zhang《Production, Trade, and Cross-Border Data Flows》的逐步解析、文献谱系、有限最优诊断、三种数学修复及三条可检验扩展路线。">
+  <title>跨境数据流：论文解析、模型修复与研究扩展</title>
+  <link rel="stylesheet" href="styles.css?v=20261103-repair-map">
   <script>
     window.MathJax = {
       tex: {inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']]},
@@ -13,7 +13,7 @@
     };
   </script>
   <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-  <script defer src="app.js"></script>
+  <script defer src="app.js?v=20261103-repair-map"></script>
 </head>
 <body>
   <div class="reading-progress" aria-hidden="true"><span></span></div>
@@ -21,8 +21,10 @@
     <a class="brand" href="#top" aria-label="返回页面顶部">CCWZ / 数据与贸易</a>
     <nav aria-label="主要导航">
       <a href="#report">完整汇报</a>
-      <a href="#finite-optimum">有限最优</a>
-      <a href="#routes">扩展路线</a>
+      <a href="#literature">文献脉络</a>
+      <a href="#repair-map">诊断与修复</a>
+      <a href="#routes">三条扩展</a>
+      <a href="slides/">学术演示</a>
       <a href="#full-analysis">逐步解析</a>
     </nav>
     <button class="quiet-button" type="button" data-action="print">打印 / 导出</button>
@@ -32,10 +34,12 @@
     <section class="hero" aria-labelledby="hero-title">
       <div class="hero-copy">
         <p class="eyebrow">云鹰读书会 · 交互研究档案</p>
-        <h1 id="hero-title">一篇论文，<br><em>四种读法</em></h1>
-        <p class="lede">先理解跨境数据如何改变生产与贸易，再决定深入公式、有限最优修复，或三条现实扩展。全部内容都在这一页；路线选择只改变阅读顺序，不删减材料。</p>
+        <h1 id="hero-title">先读懂论文，<br><em>再把模型修好</em></h1>
+        <p class="lede">这一页从 CCWZ 的问题、机制和定量结果出发，接着核对文献谱系，再完整展示企业有限最优缺口、三种数学修复和三条经济扩展。公式、制度背景、证据边界与完整推导都保留在同一份 HTML 中。</p>
         <div class="hero-actions">
-          <a class="primary-button" href="#report">从完整汇报开始</a>
+          <a class="primary-button" href="slides/">打开 35 页 explorable 演示</a>
+          <a class="secondary-button" href="#report">从完整汇报开始</a>
+          <a class="secondary-button" href="#repair-map">看错误与三种修复</a>
           <a class="secondary-button" href="assets/逐步解析.pdf">下载逐步解析 PDF</a>
         </div>
       </div>
@@ -45,17 +49,18 @@
         <dl>
           <div><dt>原解析</dt><dd>2051 行，保持不改</dd></div>
           <div><dt>独立检查</dt><dd>封闭指数 20/3；开放指数 4/3</dd></div>
-          <div><dt>推荐修复</dt><dd>有界有效数据服务</dd></div>
-          <div><dt>阅读方式</dt><dd>线性通读或三条分支</dd></div>
+          <div><dt>数学闭合</dt><dd>有界服务 / 许可上限 / 凸成本</dd></div>
+          <div><dt>经济扩展</dt><dd>合同 / 信息生产 / 能力形成</dd></div>
+          <div><dt>全文语料</dt><dd>25 份 PDF · 1,012 页</dd></div>
         </dl>
       </aside>
     </section>
 
     <section class="orientation" aria-label="四种阅读入口">
-      <a href="#report"><span>01</span><strong>汇报</strong><small>问什么、发现什么、贡献与政策</small></a>
-      <a href="#finite-optimum"><span>02</span><strong>复核</strong><small>授权、测度、价格与修复</small></a>
-      <a href="#routes"><span>03</span><strong>分支</strong><small>安全 / 算力 / 能力积累</small></a>
-      <a href="#full-analysis"><span>04</span><strong>推导</strong><small>原始 2051 行逐步解析</small></a>
+      <a href="#report"><span>01</span><strong>汇报与谱系</strong><small>问题、发现、前序改进与后续推进</small></a>
+      <a href="#repair-map"><span>02</span><strong>错误与修复</strong><small>尾部指数、三种闭合和工具边界</small></a>
+      <a href="#routes"><span>03</span><strong>三条扩展</strong><small>安全合同 / 信息算力 / 能力形成</small></a>
+      <a href="#full-analysis"><span>04</span><strong>全部推导</strong><small>原始 2051 行逐步解析</small></a>
     </section>
 
     <section id="report" class="chapter chapter-report">
@@ -137,17 +142,21 @@ Y_{i,t}=A_t(\Phi_{i,t}^{\xi}k_{i,t})^\alpha n_{i,t}^{1-\alpha}.
 <h3 id="report-数据开放会改变冲击传播">4.5 数据开放会改变冲击传播</h3>
 <p>生产率正冲击后，开放经济可以从外国调入工作数据，因而本国工作数据和存量上升；封闭或仅商品贸易模型中，新数据采购可能下降。若受冲击国家的数据利用能力明显较低，这种反转可能消失。</p>
 <p>隐私成本冲击首先影响本国原始数据供给和由其生成的数据流；进口数据成本冲击首先影响外国来源数据需求。两类冲击都可能减少跨境使用，但来源和国际传导方向不同，政策含义也不同。</p>
-<h2 id="report-这篇论文贡献了什么">5. 这篇论文贡献了什么</h2>
+<h2 id="report-这篇论文相对既有文献贡献了什么">5. 这篇论文相对既有文献贡献了什么</h2>
+<p>贡献必须有比较对象。Jones–Tonetti（2020）已经建立数据非竞争性、产权和隐私框架；Ichihashi 与 Acemoglu 等已经研究数据中介、价格歧视和泄露外部性；Cong 等已经让数据进入研发和内生增长；Farboodi–Veldkamp 已把数据写成可储存、交易和折旧的信息资产。CCWZ 的推进不是重新发明这些机制，而是把它们接到两国生产、商品贸易和跨境数据政策上。逐篇比较及后续文献分类见《文献脉络：CCWZ 从哪里来，后来往哪里走》。</p>
 <h3 id="report-把数据链条拆成四个地点">5.1 把数据链条拆成四个地点</h3>
 <p>论文把原始数据提供地、工作数据加工地、企业使用地和最终商品消费地分开。福利分配因此不再等同于生产地的产出变化。</p>
 <h3 id="report-用加工劳动给非竞争性加上真实成本">5.2 用加工劳动给非竞争性加上真实成本</h3>
 <p>数据可以复用，但清洗和任务适配劳动不能复用。这比把数据写成免费公共品更接近可操作的产业链。</p>
-<h3 id="report-把工作数据流变成可折旧状态">5.3 把工作数据流变成可折旧状态</h3>
-<p>这一处理允许讨论当期采购、历史积累和冲击持续时间，而不是只做静态的“有数据/无数据”比较。</p>
+<h3 id="report-在开放经济中积累目的地专用工作数据">5.3 在开放经济中积累目的地专用工作数据</h3>
+<p>Farboodi–Veldkamp 的 2021 工作论文已经把数据作为可储存、交易和折旧的状态变量，因此“首次建模数据积累”不能作为无条件的新颖性主张。CCWZ 更准确的推进是按来源和使用国积累工作数据，由此讨论跨境替代、历史存量和冲击持续时间。</p>
 <h3 id="report-把开放写成双方参与约束">5.4 把开放写成双方参与约束</h3>
 <p>作者关心每个国家是否分别从开放中获益，而不只计算世界总福利。这使“数据鸿沟”成为协议能否被双方接受的问题。</p>
-<h3 id="report-给后续研究留下可识别的接口">5.5 给后续研究留下可识别的接口</h3>
-<p>数据授权、质量、算力、安全投入和吸收能力都可以接入现有状态方程。模型是一个可扩展骨架，而不是已经完成现实政策量化的终点。</p>
+<h3 id="report-后续研究分成量化贸易产业组织增长和经验测量">5.5 后续研究分成量化贸易、产业组织、增长和经验测量</h3>
+<p>王永进、王文斌、谢芳（2025）直接引用 CCWZ，但用 38 国 44 行业的 Caliendo–Parro 框架替换了企业动态数据存量。行业销售形成外部数据规模，跨境壁垒削弱这一规模效应，产业补贴和数据政策反制成为新的政策工具。在其投入产出代理的行业数据弹性下，GDPR 使中国福利下降 0.01%、欧盟平均下降 0.37%、全球平均下降 0.17%；中国实施最优产业扶持后，本国福利提高 0.07%。这些是模型反事实，不是 GDPR 的因果估计。</p>
+<p>Dubus et al.（2026）把政府政策写成连续开放度，并增加网络效应、企业进入和品种调整。其协调结论具有明确条件：CES 下外国开放对本国福利的导数为零，非合作开放已经有效；只有替代弹性随品种变化且进入成本足够高时，单边开放才会过多。Lee（2025）让国内和进口数据进入研发和内生增长，但全文没有引用 CCWZ，其 Chang et al.（2024）指 Chang–Wu–Zhang 的人力资本论文，因而应列为相邻模型而非直接后续。王永进、谢芳、王文斌（2024）的单边/区域开放与协调结论目前只有官方摘要证据，未作方程或数值归因。</p>
+<p>经验研究测量的是不同边际。Liu et al.（2024）的国家/地区—行业—年份固定效应系数为 <span class="math inline">\(-0.0385\)</span>；Ito–Tomiura（2025）的选择修正 DID 得到劳动生产率约 4–5%、TFP 约 5–6% 的 ATT；Kässi–Lehdonvirta（2026）发现 GDPR 级规则后，下游经济体和高 GDP 经济体的数据中心开业数分别相对处理前均值提高 49% 和 32%，同时其模型允许总算力下降而境内投资上升；Demirer et al. 的 2026 年 10 月修订版估计存储下降约 25%、处理下降约 15%，并在另一套生产函数识别中得到 0.33–0.44 的数据—算力替代弹性。它们约束了扩展模型的数量级，却不直接验证 CCWZ 的参数或有限最优。</p>
+<p>现有文献仍未把有界信息服务、显式许可容量或足够凸安装成本嵌回 CCWZ 的一般均衡并重算福利区间。逐篇证据、页码、引用关系和报告边界见《从数据非竞争到跨境政策：CCWZ 的前置机制、模型增量与后续分叉》及 <code>research/deep-reading-matrix.csv</code>。</p>
 <h2 id="report-哪些地方值得质疑">6. 哪些地方值得质疑</h2>
 <h3 id="report-企业数据选择需要有限最优条件">6.1 企业数据选择需要有限最优条件</h3>
 <p>原文附录让中间品企业在给定每单位工作数据价格下连续选择 <span class="math inline">\(\varphi_t\)</span>，并在利润中扣除 <span class="math inline">\(P_{\varphi,t}\varphi_t\)</span>。在封闭经济中，企业重新优化商品产量后的经营利润随数据存量按</p>
@@ -187,15 +196,627 @@ Y_{i,t}=A_t(\Phi_{i,t}^{\xi}k_{i,t})^\alpha n_{i,t}^{1-\alpha}.
 </ul>
 <p>互动网页同时保留线性通读和三条分支，最终演讲可以在网页中选择路径，而不必先删除未选内容。</p>
 <h2 id="report-证据边界">9. 证据边界</h2>
-<p>论文的模型、图表和数值结论以 NBER 2025 年修订版为准；AFA 2026 报告用于演讲结构。本文没有独立复现作者开放经济脉冲响应或福利图，也没有把后续制度事实当作原模型参数估计。有限最优检查是对原文附录所写选择集和价格式的独立推导；三种修复和三条扩展是本项目提出的研究方案。</p>
+<p>论文的模型、图表和数值结论以 NBER 2025 年 3 月修订版为准；2023 初版用于版本比较，2026 AFA 报告只用于演讲结构。作者的开放经济脉冲响应和福利图没有在本项目中独立复现，后续制度事实也没有被当作原模型参数估计。</p>
+<p>本地语料清单登记 25 份 PDF、1,012 页。<code>full-model-audit</code>、<code>full-text-read</code> 和 <code>focused-full-text-read</code> 分别表示模型审计、全文通读和聚焦全文阅读；另保留 <code>section-read</code>、<code>version-compared</code> 或 <code>superseded</code> 状态。原有 5 份 <code>queued</code> 背景论文已完成聚焦全文复核，当前清单没有待读项；但文本提取和聚焦阅读仍不等于逐页重做每个附录。王永进等（2025）以《金融研究》19 页官方 PDF 为准；王永进等（2024）仍停留在官方摘要级证据。</p>
+<p>有限最优检查是对原文附录所写选择集和价格式的独立推导。SymPy 验证一般利润指数，数值搜索展示尾部，Lean 只证明两个基准多项式尾部无上界；合同集合、企业测度和价格口径仍由经济推导确定。三种修复和三条扩展是本项目提出的研究方案。</p>
+</article>
+    </section>
+
+    <section id="literature" class="chapter chapter-literature">
+      <header class="chapter-heading">
+        <p class="chapter-number">02 / 文献脉络</p>
+        <h2>先分清继承、改进、引用与扩展</h2>
+        <p>逐篇说明核心参考文献提供了什么、CCWZ 新增了什么，再核对后续论文究竟延伸模型、提供经验检验，还是只作背景引用。</p>
+      </header>
+      <article class="prose literature-prose"><h1 id="literature-文献脉络ccwz-从哪里来后来往哪里走">文献脉络：CCWZ 从哪里来，后来往哪里走</h1>
+<blockquote>
+<p>检索截止：2026 年 11 月 3 日。这里把“引用 CCWZ”“与 CCWZ 研究同一问题”和“直接扩展 CCWZ 模型”分开。引用候选来自 Google Scholar、OpenAlex、OpenCitations 和 RePEc；模型关系则依据论文正文、摘要和可取得的作者、期刊或机构页面判断。Google Scholar 的 20 条引用结果已逐项保存在 <code>research/google-scholar-citing-works.json</code>。18 项全文关系与页码证据另见 <code>research/deep-reading-matrix.csv</code> 和《从数据非竞争到跨境政策：CCWZ 的前置机制、模型增量与后续分叉》。</p>
+</blockquote>
+<h2 id="literature-先给结论">先给结论</h2>
+<p>CCWZ 的核心贡献不是第一次把数据写进生产函数，也不是第一次讨论隐私、数据中介或数据积累。它真正新增的是一组连接：<strong>把消费者产生的原始数据、数据商加工出的目的地专用工作数据、企业持有的数据存量、商品贸易和跨境数据政策放进同一个两国一般均衡模型。</strong> 这样，前序文献分别讨论的非竞争性、隐私、预测、创新和数据市场，第一次被用于回答“数据能否跨境复用、谁加工、谁生产、商品贸易是否还能成立”这一组国际问题。[S2, S4–S8, S19–S21]</p>
+<p>后续研究围绕四条路径展开。第一条把跨境数据放进多国增长和研发；第二条把单边开放、连续开放度、区域开放和跨国协调写成政策博弈；第三条用不同模型骨架构造多国多行业量化一般均衡；第四条用企业生产率、创新、知识扩散、价值链稳定和数据中心选址测量跨境限制的现实后果。多数论文只继承 CCWZ 的问题或某一渠道，而没有继承整套企业数据存量结构。<strong>真正逐式继承 CCWZ 企业采购问题并修复有限最优条件的论文，目前仍没有找到。</strong></p>
+<h2 id="literature-一前序文献分别提供了什么">一、前序文献分别提供了什么</h2>
+<h3 id="literature-jonestonetti2020非竞争性所有权与隐私">1. Jones–Tonetti（2020）：非竞争性、所有权与隐私</h3>
+<p>Jones 和 Tonetti 将数据定义为可被多家企业同时使用的非竞争性生产要素，比较企业所有、消费者所有和政府限制数据交易三种制度。论文的重点是所有权如何改变数据共享范围、产出和隐私，而不是国际贸易。[S4]</p>
+<p>CCWZ 继承了三点：消费产生数据、消费者承担隐私损失、同一份数据可以被多个生产者使用。它新增的是<strong>跨国使用的方向性</strong>：一国原始数据可由数据商分别加工成供本国和外国企业使用的工作数据，因此“非竞争”不再等于“没有加工成本”。这一步允许模型同时记录数据来源地、加工地和使用地。</p>
+<p>CCWZ 没有取代 Jones–Tonetti 的所有权分析。它把数据产权和市场势力大幅简化，因此不能回答企业囤积数据、消费者所有权或排他授权何者更有效。</p>
+<h3 id="literature-ichihashi20202021与-acemoglu-等2022数据中介价格歧视与外部性">2. Ichihashi（2020、2021）与 Acemoglu 等（2022）：数据中介、价格歧视与外部性</h3>
+<p>Ichihashi（2020）研究消费者向卖方披露信息后，推荐改善与个性化定价之间的冲突；Ichihashi（2021）进一步研究一名消费者的数据如何泄露他人信息。Acemoglu 等（2022）说明这种数据外部性可能压低数据价格并导致过度共享。[S19–S21]</p>
+<p>CCWZ 从这组文献取得数据中介和隐私补偿的微观动机，却把策略性定价、相关信息外部性和平台竞争压缩成家庭的隐私损失与数据价格。它的推进不在中介理论本身，而在于<strong>把中介嵌入开放宏观模型</strong>：数据商使用劳动，把同一原始数据转化为不同目的地的工作数据，并产生跨境支付和贸易成本。</p>
+<p>因此，CCWZ 对国际传导更强，对数据交易的微观基础更弱。若研究安全许可、相关隐私损害或平台市场势力，应回到这组文献，而不能直接把 CCWZ 的线性数据价格当作完整合同理论。</p>
+<h3 id="literature-congxiezhang2021数据进入研发与知识积累">3. Cong–Xie–Zhang（2021）：数据进入研发与知识积累</h3>
+<p>Cong、Xie 和 Zhang 构造内生增长模型：消费者产生并出售数据，企业用数据研发，知识积累推动长期增长；分散均衡存在研发劳动不足和数据过度使用。[S5]</p>
+<p>CCWZ 将研究对象从“数据如何创造知识和增长”改为“数据如何直接提高当期生产，并与商品贸易共同决定开放”。它新增两国、商品贸易、数据进口成本和数据利用能力差距，但没有内生研发和长期增长。两篇论文不是上下替代关系：前者解释增长率，CCWZ 解释生产分工、贸易可行区间和冲击传播。</p>
+<h3 id="literature-cong-等2022生产与创新之间的纵向非竞争性">4. Cong 等（2022）：生产与创新之间的纵向非竞争性</h3>
+<p>Cong、Wei、Xie 和 Zhang 允许同一数据同时进入生产部门和创新部门，称之为跨用途的纵向非竞争性；创新部门因知识可积累而在长期数据使用中占主导。[S6]</p>
+<p>CCWZ 处理的是另一种复用：<strong>跨企业、跨来源和跨国家的横向复用</strong>。它把本国与外国工作数据放进 CES 聚合器，使两国数据的替代弹性进入贸易和动态结果。代价是 CCWZ 只有生产用途，无法比较“将数据用于当期生产”与“将数据用于未来研发”的配置。这正是 Lee（2025）和 2026 年增长研究后来补上的方向。[S9, S26]</p>
+<h3 id="literature-farboodiveldkamp2021-工作论文当前稿-2024预测信息饱和与数据估值">5. Farboodi–Veldkamp（2021 工作论文；当前稿 2024）：预测、信息饱和与数据估值</h3>
+<p>Farboodi 和 Veldkamp 把交易产生的数据写成可储存、可交易、可折旧的信息资产。数据通过提高预测精度创造价值；预测误差存在下界，因此数据在长期具有自然的边际收益递减。论文还用模型估算数据易货导致的 GDP 漏计。[S7]</p>
+<p>CCWZ 借用“交易产生数据”和数据资产思路，但不建模预测精度。它把数据效率写成幂函数生产率，并把工作数据作为企业状态，因此更容易连接两国贸易和脉冲响应，却失去了信息饱和所提供的天然上界。</p>
+<p>这项比较也收窄了 CCWZ 的新颖性表述。CCWZ 说自己首次显式建模数据积累；若将范围理解为全部数据经济学，这一说法过强，因为 Farboodi–Veldkamp 的 2021 工作论文已经把数据作为储存、交易和折旧的状态变量。更稳妥的贡献是：<strong>CCWZ 首次在跨境生产与贸易框架中积累目的地专用工作数据，并研究其折旧如何改变开放经济的过渡动态。</strong></p>
+<h3 id="literature-xiezhang2024-预印本消费者数据之外还有生产者数据和自然数据">6. Xie–Zhang（2024 预印本）：消费者数据之外还有生产者数据和自然数据</h3>
+<p>Xie 和 Zhang 指出，CCWZ 与多篇数据经济模型都只从消费者活动生成原始数据；他们加入生产过程产生的企业数据和自然数据，并比较不同数据类型对长期增长的影响。[S22]</p>
+<p>这不是 CCWZ 的前置基础，而是同时期数据增长文献对其数据来源假设的扩展。它说明 CCWZ 的“原始数据”并不覆盖机器日志、供应链运行记录、卫星和环境观测。CCWZ 的优势仍是跨境流动和贸易，Xie–Zhang 的优势则是数据来源与增长机制更完整。</p>
+<h3 id="literature-开放宏观与贸易文献提供骨架不提供数据机制">7. 开放宏观与贸易文献：提供骨架，不提供数据机制</h3>
+<p>Dixit–Stiglitz 的品种聚合、Galí–Monacelli 的开放经济结构、Caldara 等的贸易政策冲击及相关国际宏观研究，为 CCWZ 提供 CES 需求、价格指数、贸易成本和动态冲击的标准骨架。[S2, S13]</p>
+<p>CCWZ 的推进是把数据状态和数据政策接到这套骨架上，使商品政策与数据政策共同决定贸易是否成立。不过，它沿用代表性家庭、同质企业和聚合贸易成本，因此没有吸收异质企业进入、全球价值链网络和多边一般均衡的丰富边际。</p>
+<h2 id="literature-二ccwz-相对前序文献的四项可辩护改进">二、CCWZ 相对前序文献的四项可辩护改进</h2>
+<h3 id="literature-改进一把数据来源与数据用途之间增加了加工层">改进一：把“数据来源”与“数据用途”之间增加了加工层</h3>
+<p>以往模型常把消费者数据直接交给生产者或研发者。CCWZ 增加数据商及加工劳动，区分原始数据与工作数据。同一份原始数据可以非竞争地生成面向不同国家的工作数据，但每个目的地仍需要清洗和加工。这是模型能够同时容纳非竞争性和跨境成本的关键。</p>
+<h3 id="literature-改进二把国内数据经济改成两国生产与贸易问题">改进二：把国内数据经济改成两国生产与贸易问题</h3>
+<p>CCWZ 不只问开放数据是否提高产出，还问商品贸易在什么条件下可行、数据利用能力差距如何改变相对价格，以及单向或双向数据开放怎样移动参与约束。由此产生“数据流可以恢复原本冻结的商品贸易”和“数据落后国可能提供更多原始数据、数据先进国生产更多工作数据”的新结论。</p>
+<h3 id="literature-改进三把目的地专用工作数据积累成状态变量">改进三：把目的地专用工作数据积累成状态变量</h3>
+<p>工作数据不是当期流量即用即弃，而是按来源和目的地分别积累并折旧。这使模型能够比较封闭经济和开放经济中生产率、隐私及进口成本冲击后的数据使用路径。该改进相对 Farboodi–Veldkamp 的区别在于国际目的地和贸易传导，而不是第一次引入数据存量。</p>
+<h3 id="literature-改进四把数据政策与商品政策放进同一政策组合">改进四：把数据政策与商品政策放进同一政策组合</h3>
+<p>CCWZ 比较商品开放、单向数据开放和完全开放，说明一项政策的福利取决于另一项政策以及两国数据能力差距。此前的数据所有权和隐私文献通常没有商品贸易，此前的开放宏观文献又没有数据生产要素。CCWZ 的价值在于连接二者。</p>
+<h2 id="literature-三这些不能写成-ccwz-的改进">三、这些不能写成 CCWZ 的“改进”</h2>
+<ol type="1">
+<li><strong>数据交易的微观基础没有更强。</strong> 线性单位价格、竞争性数据商和聚合隐私损失比 Ichihashi、Acemoglu 等的合同与外部性分析更简化。</li>
+<li><strong>数据回报没有自然饱和。</strong> Farboodi–Veldkamp 用预测误差下界形成收益上限；CCWZ 的幂函数在无采购上限的字面解释下反而出现有限最优问题。</li>
+<li><strong>没有内生增长。</strong> Cong 等研究知识和创新，CCWZ 研究直接生产和过渡动态。将稳态产出提高写成长期增长率提高是不对的。</li>
+<li><strong>没有因果识别。</strong> CCWZ 的数值结果是校准后的机制展示，不是跨境政策的经验处理效应。</li>
+<li><strong>没有企业异质性或多国网络。</strong> 代表性企业无法刻画合规固定成本如何筛选小企业，也无法回答数据中心、平台和供应链在多国之间重新选址。</li>
+</ol>
+<h2 id="literature-四后续文献不能只按谁引用了-ccwz来找">四、后续文献不能只按“谁引用了 CCWZ”来找</h2>
+<p>截至检索日，Google Scholar 的 “Cited by” 页面显示 20 条结果，OpenAlex 记录 8 条，OpenCitations 和 RePEc 各列 2 条。[S17, S23, S33, S34] Google Scholar 的 20 条中还包含一篇学位论文与其工作论文版本、一条只有题名的中文记录，以及若干只在背景处引用 CCWZ 的低相关研究，因此不能把“20”解释成 20 篇独立模型扩展。</p>
+<p>更关键的是，<strong>引用不等于扩展</strong>。引用图会收入林产品预测、加密货币和海底光缆等只在背景处提到 CCWZ 的研究，却漏掉最接近 CCWZ 的中文政策模型、日本企业生产率研究和部分新近论文。所以下面按模型关系分类，而不按引用次数排序。</p>
+<h2 id="literature-五最接近-ccwz-的后续推进">五、最接近 CCWZ 的后续推进</h2>
+<h3 id="literature-王永进谢芳王文斌2024官方摘要指向开放与协调问题">1. 王永进、谢芳、王文斌（2024）：官方摘要指向开放与协调问题</h3>
+<p>《跨境数据流动政策的福利效应：制约因素与跨国协调》的官方摘要把研究对象概括为单边开放、区域开放、规模报酬、非成员福利和政策互补。题目、作者、刊期与页码已由《经济研究》引文和南开大学公告交叉确认。[S24]</p>
+<p>全文尚未取得，因此这里不判断它是否引用或逐式继承 CCWZ，也不把摘要中的条件结论展开成方程或数值。它应列为候选相关后续，而不是已经核实的直接扩展。</p>
+<h3 id="literature-lee2025相邻的多国研发与内生增长模型">2. Lee（2025）：相邻的多国研发与内生增长模型</h3>
+<p>《Trade and Growth with Digital Data》构造多国贸易—增长模型：国内与外国数据形成存量，数据进入研发，知识和商品同时跨国联系，隐私成本进入福利。[S9] 它把跨境数据从当期生产移到创新，因此可以补足 CCWZ 没有内生增长的机制。</p>
+<p>全文和参考文献复核后，Lee 不能列为 CCWZ 的引用者。正文的 “Chang et al. (2024)” 对应 Chang、Wu、Zhang 的 <em>Endogenous Growth and Human Capital Accumulation in a Data Economy</em>，不是 Chang、Cong、Wang、Zhang 的 CCWZ。两篇论文主题相邻，但没有可核验的直接谱系关系。</p>
+<h3 id="literature-王立勇常清黄京磊张龙天2026从两国生产推进到多国增长和跨国证据">3. 王立勇、常清、黄京磊、张龙天（2026）：从两国生产推进到多国增长和跨国证据</h3>
+<p>王立勇、常清、黄京磊和张龙天的《数据跨境流动与经济增长：理论框架与经验证据》发表于《经济研究》2026 年第 2 期（pp.119—141），与 CCWZ 有三名共同作者，是目前最接近的作者团队后续研究。校方官方介绍显示，论文建立多国一般均衡模型，引入数据的“双重非竞争性”，并使用 119 个国家和地区 2010—2022 年面板数据。作者报告数据进口和出口均促进增长，要素收入份额构成一条机制，效果在技术领先国家更强，贸易成本削弱增长效应。[S26] 本项目尚未取得期刊全文，因而不把这些摘要级结果进一步解释为对 CCWZ 方程的直接继承，也不报告未经核验的回归系数。</p>
+<p>它相对 CCWZ 的推进有三层：两国变多国，生产与贸易水平效应变为增长机制，纯理论校准增加跨国经验检验。由于期刊全文目前未公开取得，这里不判断“双重非竞争性”是否沿用 CCWZ 的具体 CES 和数据商合同，也不把摘要中的相关性或回归结果写成已验证的结构参数。</p>
+<h3 id="literature-dong-等2026把宏观机制带到企业创新策略">4. Dong 等（2026）：把宏观机制带到企业创新策略</h3>
+<p>《Cross-Border Data Flows and Corporate Innovation Strategies: Evidence from China》使用中国上市公司与 TAPED 政策数据库构造企业跨境数据流暴露度。其摘要报告，跨境数据流促进实质性创新，对策略性创新没有显著影响；知识多样性、全球认知范围和信息不对称是机制，信息基础设施、数据密集度、国际化程度和吸收能力形成异质性。[S31]</p>
+<p>它直接对应 CCWZ 没有经验识别和企业异质性的缺口，但不是原模型的结构估计。全文受 SSRN 访问限制，现阶段只能依据主来源摘要报告。</p>
+<h3 id="literature-kässilehdonvirta2026把监管楔子拆成总算力与设施区位">5. Kässi–Lehdonvirta（2026）：把监管楔子拆成总算力与设施区位</h3>
+<p>《The Heterogeneous Impact of Data Transfer Restrictions on Data Centre Geography》研究 158 个国家首次采用 GDPR 级传输规则前后的数据中心开业。全文以 Sun–Abraham 事件研究为主，并用 ETWFE–Poisson、Callaway–Sant’Anna、winsorization 和加密货币数据中心安慰剂检查结果。下游经济体和高 GDP 经济体的开业数分别比处理前均值高 49% 和 32%；无监管反事实下，下游经济体累计站点数约低 17%。总体平均效应较弱且不精确。[S32]</p>
+<p>论文明确引用 CCWZ，并把既有“监管降低数据和算力使用”的楔子渠道扩展到区位选择。其合规配额模型允许更严规则减少全球总算力，却提高境内数据中心投资。因而“境内设施增加”不能被解释为总计算投入或福利上升。</p>
+<h2 id="literature-六引用了-ccwz但不能称为直接扩展的文献">六、引用了 CCWZ，但不能称为直接扩展的文献</h2>
+<h3 id="literature-liu-等2024国内价值链稳定">Liu 等（2024）：国内价值链稳定</h3>
+<p>这篇 PLOS ONE 论文用国家/地区—行业—年份固定效应研究跨境数据限制、创新与国内价值链稳定，基准 RCDF 系数为 <span class="math inline">\(-0.0385\)</span>，并把创新作为机制变量。在正文中，CCWZ 只是支持“限制会削弱上下游协作和中间品供应”的一项参考文献；论文没有继承 CCWZ 方程或估计其参数。固定效应结果属于观察性关联，不是随机政策效应。[S16]</p>
+<h3 id="literature-changwuzhang2024数据与人力资本">Chang–Wu–Zhang（2024）：数据与人力资本</h3>
+<p>论文让消费活动产生的数据进入人力资本积累，从而提高增长。它与 CCWZ 共享作者和数据积累主题，但研究对象是教育、人力资本和增长，不是商品贸易或跨境政策。[S18]</p>
+<h3 id="literature-xiezhang2024生产者数据和自然数据">Xie–Zhang（2024）：生产者数据和自然数据</h3>
+<p>论文明确把 CCWZ 列为只从消费者活动生成数据的模型之一，随后加入生产者数据和自然数据。它扩展的是数据类型，不是 CCWZ 的跨境结构。[S22]</p>
+<h3 id="literature-wangwang2025数字时代贸易理论综述">Wang–Wang（2025）：数字时代贸易理论综述</h3>
+<p>《Trade Theories in the Digital Age》讨论数字技术如何改变生产要素、产品属性、市场结构和贸易理论。它把 CCWZ 当作数字数据进入贸易理论的案例，本身不是 CCWZ 模型的后续版本。[S29]</p>
+<h3 id="literature-changcongfangzhang2025数据经济与生育">Chang–Cong–Fang–Zhang（2025）：数据经济与生育</h3>
+<p>《Data Economy to the Rescue of Our Empty Planet?》让人口产生的非竞争性数据提高人力资本和家庭生产率，并研究数据—生育—人口的反馈。OpenCitations 确认它引用 CCWZ，且有三名共同作者，但它将模型用于人口问题，没有延伸跨境贸易政策。[S28]</p>
+<h3 id="literature-mawang2026ai数据控制与企业融资">Ma–Wang（2026）：AI、数据控制与企业融资</h3>
+<p>《Who Controls the Data, Who Controls the Money?》在 DSGE 中加入数据密集型与非数据密集型企业、AI 技术积累和金融加速器。它扩展的是数据资产与融资渠道，而非跨境流动。[S30]</p>
+<h3 id="literature-wangchangzhanghuang2026文献综述与治理框架">Wang–Chang–Zhang–Huang（2026）：文献综述与治理框架</h3>
+<p>《数据跨境流动的经济效应和治理》由三名 CCWZ 作者参与，系统整理测度、企业经营、贸易、创新增长、约束风险和治理。它是作者团队对研究版图的再组织，不是新模型。[S27]</p>
+<h2 id="literature-七修正后的研究地图">七、修正后的研究地图</h2>
+<p>把前序和后续放在一起，CCWZ 位于四条文献线的交点：</p>
+<ol type="1">
+<li><strong>非竞争性与产权：</strong> Jones–Tonetti → CCWZ 的跨国复用；</li>
+<li><strong>隐私与中介：</strong> Ichihashi、Acemoglu 等 → CCWZ 的加工和跨境支付；</li>
+<li><strong>数据动态：</strong> Farboodi–Veldkamp、Cong 等 → CCWZ 的目的地专用存量；</li>
+<li><strong>开放经济：</strong> 国际贸易和开放宏观骨架 → CCWZ 的商品—数据联合开放。</li>
+</ol>
+<p>后续文献则从这个交点向外展开：政策协调、内生增长、企业创新、设施选址和治理测度。现有研究仍留下三个明确缺口：</p>
+<ul>
+<li>没有论文把有限授权合同或采购上限嵌回 CCWZ 一般均衡并重新计算福利；</li>
+<li>多数增长论文仍用数据数量或可达性，尚未把信息质量饱和与跨境算力同时建模；</li>
+<li>企业层实证尚未把合规许可、安全投入和数据流量放进同一可识别框架。</li>
+</ul>
+<p>因此，本项目的三条扩展路线应从上述缺口出发，而不是把所有“引用 CCWZ”的论文都称为它的后续模型。</p>
+<h2 id="literature-八扩大检索后背景文献至少还包括四组">八、扩大检索后，背景文献至少还包括四组</h2>
+<h3 id="literature-跨境规则如何变成可观测的贸易摩擦">1. 跨境规则如何变成可观测的贸易摩擦</h3>
+<p>Casalini 和 López González（2019）把跨境传输制度分成无专门规制、自由流动但出口方事后负责、以充分性或合同等保障为条件、逐案授权四类，并把本地存储安排放在从无要求到存储、处理和流动限制的连续谱上。[S39] 这是一项政策分类，不是限制效应估计。Spiezia 和 Tscheke（2020）随后用 1995—2012 年双边贸易和引力模型研究国际数据协议，说明协议既可能通过信任、互操作和法律确定性促进贸易，也可能带来合规成本。[S38]</p>
+<p>Ferracane 和 van der Marel 的研究线进一步区分个人数据治理模式及其对数字服务贸易的影响；Ferracane、Ugarte 和 Rogaler（2026）则用 Digital Trade Integration 数据库描绘全球数字贸易政策。[S43, S44, S49] 这组文献解决的是 CCWZ 没有测量的对象：现实中的“数据进口成本”究竟由本地存储、跨境传输许可、平台责任、数据保护还是其他数字贸易规则组成。</p>
+<p>Ma、Shen 和 Fang（2024）使用 TAPED 协议条款研究货物与服务贸易，表明自由数据流条款与两类贸易都有关，但渠道和行业条件不同。[S40] 因此，经验研究通常测到的是协议或制度暴露，而不是 CCWZ 模型中的真实数据流量。两者应通过测量方程连接，不能直接把规则指数代入工作数据存量。</p>
+<h3 id="literature-隐私规则会同时改变数据投入企业组织和市场进入">2. 隐私规则会同时改变数据投入、企业组织和市场进入</h3>
+<p>Acquisti、Taylor 和 Wagman（2016）综述隐私披露、保护和消费者选择的经济学；Bergemann、Bonatti 和 Gan（2022）说明社会数据的相关性会形成外部性并改变中介收购成本。[S54, S55] 这两篇文献提示，CCWZ 的隐私损失不只是家庭偏好参数，也可能取决于其他人的数据和中介合同。</p>
+<p>GDPR 经验研究已经把影响拆到多个边际。Peukert 等（2022）跟踪 11 万多个网站及其第三方技术调用，发现监管影响会外溢到并非直接受约束的网站；Jia、Jin 和 Wagman（2021）研究科技创业投资。Demirer et al. 的 2026 年 10 月修订版使用全球云服务商数据：欧盟—美国 DID/事件研究得到存储约下降 25%、处理约下降 15%；另一套 shift-share IV 生产函数估计得到 0.33–0.44 的数据—算力替代弹性。模型把行为变化解释为隐含数据成本上升 21%，对应总生产成本增加 0.1–0.6%。[S46, S52, S53]</p>
+<p>这些结果不支持把监管只写成一个可变冰山成本。许可和审核会影响进入，云处理规则会改变可变投入，隐私保护还会改变消费者供数和企业采用技术的回报。Demirer 的 DID 和 IV 分别识别政策后的投入调整和生产函数参数，不能合并成一个政策系数；其全文也没有引用 CCWZ，应列为相邻经验基础。</p>
+<h3 id="literature-数据规则对贸易的证据已从总量推进到产品企业和知识流">3. 数据规则对贸易的证据已从总量推进到产品、企业和知识流</h3>
+<p>Gupta、Ghosh 和 Sridhar（2022）考察数据贸易限制与 IT 服务出口；Yan（2024）考察 GDPR 与 183 个国家对欧跨境电商。[S42, S50] Sun 和 Trefler 的本地 2023 年工作论文版则把 35,575 款应用与 63,679 件 AI 专利连接。基准 IV 报告，一四分位距的 AI 增加对应外国用户增加 2.67 个对数点；在作者对 25 个最大经济体高低限制的比较中，数据限制把 AI 的指数化用户乘数从 13.2 降至 7.5。[S45] 这项结果支持数据与算法互补，但结果变量是应用用户，因果解释依赖开发国 AI 供给、行业 AI 强度和 2008 年前专利状态构成的成本移位工具变量满足排除限制。</p>
+<p>中国文献也已形成多条经验线。周念利等（2022）在 31 个出口国的 2014—2018 年面板中，把数字服务出口分为广延和集约边际；完整固定效应规格的 DSTRI 型壁垒系数分别为 <span class="math inline">\(-0.3061\)</span> 和 <span class="math inline">\(-0.0835\)</span>。[S57] 刘斌、甄洋（2022）用 40 个经济体、56 个行业的 WIOD 研发行业投入流构造 655,200 个观测，完整基准的数字规则系数为 <span class="math inline">\(0.0191\)</span>，并报告入度中心度反应大于出度中心度。[S59] 代丽华等（2024）在 50 个经济体、2010—2021 年的 2,628 个双边年度观测中，报告 RTA 跨境数据规则总深度系数为 <span class="math inline">\(0.0547\)</span>，三类细分条款均为正。[S60] 朱康等（2024）研究制造业创新，周科选等（2026）进一步研究企业供应链风险。[S58, S61]</p>
+<p>这些全文结果把 CCWZ 的聚合结论拆成贸易进入、既有出口、研发投入网络、应用用户、创新和供应链等可观察结果，却没有观察 CCWZ 的完整链条“原始数据—加工劳动—工作数据存量—企业产量”。周念利等的短面板和滞后工具变量、刘斌与甄洋的研发投入代理、代丽华等缺少国家对固定效应且采用共同第三方缔约国工具变量，都要求保留识别边界。它们不能合并成一个“开放一定提高福利”的经验结论，也不能用于验证有限最优条件。</p>
+<h3 id="literature-经验文献开始直接检验-ccwz-最核心的生产机制">4. 经验文献开始直接检验 CCWZ 最核心的生产机制</h3>
+<p>最接近 CCWZ 生产机制的证据来自三类研究：Ito 和 Tomiura（2025）的日本企业生产率，Hu 等（2026）的跨境知识扩散，以及 Quan（2023）的数据价值和隐私偏好。它们分别对应“数据是否提高企业生产率”“外国信息是否形成知识投入”和“企业及消费者如何评价数据与隐私”。[S35, S37, S41]</p>
+<p>这三类结果比一般的数字贸易回归更能约束 CCWZ，但仍缺少同一数据集中对原始数据、加工劳动、工作数据存量和企业产出的联合观测。</p>
+<h2 id="literature-九新检索出的直接或接近后续研究">九、新检索出的直接或接近后续研究</h2>
+<h3 id="literature-quan2023从校准隐私参数推进到数据价值识别">1. Quan（2023）：从校准隐私参数推进到数据价值识别</h3>
+<p>《Tracing Out International Data Flow: The Value of Data and Privacy》利用 GDPR 前后企业供给和消费者需求反应，度量企业的数据价值和消费者隐私偏好。Google 索引的论文正文片段明确列出 CCWZ。[S35]</p>
+<p>它对 CCWZ 的主要增量是经验识别，而不是新贸易结构：原模型把隐私成本和数据生产率作为校准参数，Quan 尝试用监管冲击和市场反应识别这些力量。该文并未估计 CCWZ 的两国一般均衡，因此应称为直接经验后续，而非结构复现。</p>
+<h3 id="literature-dubusköthenbürgerparentiushchev2026协调结论取决于需求曲率">2. Dubus、Köthenbürger、Parenti、Ushchev（2026）：协调结论取决于需求曲率</h3>
+<p>《Trade in Data: Regulating Cross-Border Data Flows》明确比较并引用 CCWZ，把离散的允许/禁止出口改成政府选择连续开放度，并增加数据网络效应、企业进入和品种调整。[S36] 全文福利式（12）显示，在恒定替代弹性 CES 下，本国福利不含外国开放度，<span class="math inline">\(\partial U_i/\partial\delta_j=0\)</span>；网络收益、单品消费和品种损失相互抵消，非合作开放与全球最优一致。</p>
+<p>只有替代弹性随品种数变化且进入成本足够高时，外国开放减少品种、提高市场势力的损失才占优，单边开放会超过协调最优。Dubus 等因此是直接政策后续，但“需要协调”是需求系统和进入条件共同产生的结论，不能无条件推广。</p>
+<h3 id="literature-王永进王文斌谢芳2025直接引用-ccwz但采用-caliendoparro-骨架">3. 王永进、王文斌、谢芳（2025）：直接引用 CCWZ，但采用 Caliendo–Parro 骨架</h3>
+<p>《跨境数据流动壁垒对中国的影响及反制战略》的 19 页官方全文已取得。论文在参考文献 [10] 直接引用 CCWZ，并以 2017 年 OECD ICIO 数据构造 38 国、44 行业模型，其中 22 个行业可贸易。行业销售形成外部数据规模，跨境政策参数 <span class="math inline">\(\kappa_{in}\)</span> 决定出口产生的数据能否被使用；论文分别模拟 GDPR 式非歧视壁垒和美国针对中国的歧视壁垒，再比较产业补贴与数据政策反制。[S56]</p>
+<p>其贸易弹性为 5.03、行业需求弹性为 4、资本—劳动替代参数为 0.3；政策情景使用 <span class="math inline">\(\kappa_{EU,n}=0.7\)</span> 和 <span class="math inline">\(\kappa_{US,CN}=0\)</span>。在投入产出代理的行业数据规模弹性下，GDPR 使中国福利下降 0.01%、欧盟平均下降 0.37%、全球平均下降 0.17%；中国实施最优产业扶持后，本国福利提高 0.07%。统一设定 <span class="math inline">\(\psi=0.14\)</span> 的示意比较得到 6.28% 的最大福利增益。它是密切量化后续，但模型骨架来自 Caliendo–Parro（2015），没有 CCWZ 的原始—工作数据转换和企业动态存量；上述数字是校准反事实，不是因果估计。</p>
+<h3 id="literature-itotomiura2025企业进入跨境数据收集后的生产率具有时滞">4. Ito–Tomiura（2025）：企业进入跨境数据收集后的生产率具有时滞</h3>
+<p>RIETI 论文把 2019 和 2021 年日本制造业与服务业企业调查同 2019—2022 年生产率数据合并，识别 2021 年首次进入涉外数据收集的企业。研究并列报告回归调整、逆概率加权和双重稳健 AIPW DID。三种估计的总体 ATT 很接近：劳动生产率提高约 4–5%，TFP 提高约 5–6%；2021 年系数为正但不显著，2022 年 AIPW 系数分别为 0.061 和 0.076。[S37]</p>
+<p>这补充了 CCWZ 缺少的企业自选择和时滞。估计仍依赖条件平行趋势及对可观测特征的调整，论文也没有引用 CCWZ；它属于相邻经验旁证，不能直接标定 CCWZ 的数据弹性。</p>
+<h3 id="literature-huzhanwenyu2026跨境数据作为国际知识扩散渠道">5. Hu、Zhan、Wen、Yu（2026）：跨境数据作为国际知识扩散渠道</h3>
+<p>《Cross-Border Data Flow and Knowledge Diffusion: Evidence From China》把 GDPR 作为政策冲击，结合中国专利和 Google Patents 引文研究国际知识扩散。[S41] 它把 CCWZ 中抽象的外国工作数据换成可观察的跨国知识引用，适合检验路线 C 的“数据—研发—能力积累”机制。</p>
+<p>该文的结果变量是专利知识扩散，不是企业产量；因此它支持数据进入创新机制，却不能单独验证 CCWZ 的生产函数指数。</p>
+<h3 id="literature-maosunzeng2026市场扩大数据池和福利扭曲">6. Mao–Sun–Zeng（2026）：市场扩大、数据池和福利扭曲</h3>
+<p>《Data as a Production Factor with Market Expansion》构造消费者产生非竞争数据、企业从中介购买数据的一般均衡，研究市场扩大如何增加数据池、降低成本并改变福利扭曲，同时刻画社会最优和效率中性点。[S47]</p>
+<p>它引用 CCWZ，并直接推进“市场扩大为何因数据非竞争性产生额外收益”这一问题。不过它研究的市场扩大不等于跨境数据政策，也没有处理 CCWZ 的目的地专用数据存量。</p>
+<h3 id="literature-the-production-effects2023可能是作者团队经验线的早期版本">7. “The Production Effects…”（2023）可能是作者团队经验线的早期版本</h3>
+<p>Google Scholar 还列出常清、王立勇、张龙天的 SSRN 4544922《The Production Effects of Cross-Border Data Flows: Evidences from Cross-Country Panel Data》。目前只能取得题名、作者和摘要片段。[S62] 它与 2026 年《数据跨境流动与经济增长》高度接近，可能是同一经验项目的前期版本；在取得版本说明前，不能把两者算成两项独立贡献。</p>
+<h2 id="literature-十google-scholar-的-20-条引用逐项怎么分类">十、Google Scholar 的 20 条引用逐项怎么分类</h2>
+<p>Google Scholar 的结果比 OpenAlex 更完整，但只有五项直接推进跨境数据理论或识别：</p>
+<ol type="1">
+<li><strong>Quan（2023）</strong>：数据价值与隐私的直接经验后续；</li>
+<li><strong>Kässi–Lehdonvirta（2026）</strong>：数据中心选址的直接经验和位置模型；</li>
+<li><strong>Dubus 等（2026）</strong>：连续开放度、市场结构与国际协调的直接理论扩展；</li>
+<li><strong>Mao–Sun–Zeng（2026）</strong>：市场扩大与数据福利扭曲的一般均衡扩展；</li>
+<li><strong>Chang–Wang–Zhang（2023）</strong>：作者团队跨国生产效应经验稿，可能是后续正式论文的前身。</li>
+</ol>
+<p>另有七项是实质相关、但没有继承 CCWZ 跨境结构的研究：Chang–Wu–Zhang 的人力资本模型、Chu–Chen–Yang 的中国省级数据要素研究、Xie–Zhang 的多类数据增长模型、Chang–Cong–Fang–Zhang 的生育模型、Zhang 的隐私时间成本、Gao 等的 AI 主权研究，以及 Ma–Wang 的企业融资模型。[S18, S22, S28, S30, S34, S48]</p>
+<p>三项属于综述或政策测量：Wang–Wang（2025）的数字贸易理论综述、Ferracane 等（2026）的 DTI 数据库研究，以及 Quan 的博士论文版本。后者与其 2023 工作论文重复，不应重复计数。[S29, S34, S35, S49]</p>
+<p>剩余五项只提供旁支或低相关引用：Liu 等的国内价值链稳定、林产品贸易预测、加密货币博弈、海底光缆与双边贸易，以及只有题名记录的“数据要素乘数效应”。其中只有 Liu 等直接检验跨境限制的经济机制；其余不能称为 CCWZ 扩展。[S16, S34]</p>
+<p>OpenAlex 另发现 Dong 等（2026）的企业创新策略论文，而它没有出现在这次 Scholar 的 20 条页面中。[S17, S31] 这再次说明，引用数据库只能产生候选集，最终分类必须回到研究对象和模型增量。</p>
+<h2 id="literature-十一扩大文献后ccwz-的位置更清楚了">十一、扩大文献后，CCWZ 的位置更清楚了</h2>
+<p>背景文献已经充分说明三件事：数据具有非竞争性和隐私外部性；跨境规则会改变贸易、云投入、企业进入和创新；协议条款、隐私法规与实际数据传输不是同一个变量。CCWZ 的独特位置仍是把工作数据加工、动态存量、能力差距和商品贸易放在同一两国框架中。</p>
+<p>后续研究也已经越过“跨境数据是否重要”这个初级问题。当前前沿分别研究连续开放度和政策协调、多国多行业壁垒、企业进入跨境传输后的生产率、知识扩散、数据中心选址及增长。真正空缺的是把这些经验边际重新接回一个具有有限授权合同、收益饱和、异质企业和多国网络的动态一般均衡。</p>
+<p>扩大检索没有推翻本项目的三条扩展路线，反而让它们的任务更具体：路线 A 应接入固定合规成本与企业进入；路线 B 应连接云处理投入、信息饱和和数据中心选址；路线 C 应以专利引用、研发要素和企业吸收能力为可检验结果。有限最优修复仍是这三条路线共同需要先解决的理论闭合条件。</p>
+</article>
+      <div id="deep-reading" class="chapter-divider" aria-label="全文深读关系矩阵">
+        <span>全文证据</span>
+        <strong>把前置机制、CCWZ 增量与后续偏离放在同一张图上</strong>
+      </div>
+      <article class="prose deep-reading-prose"><h1 id="deep-reading-从数据非竞争到跨境政策ccwz-的前置机制模型增量与后续分叉">从数据非竞争到跨境政策：CCWZ 的前置机制、模型增量与后续分叉</h1>
+<h2 id="deep-reading-ccwz-的贡献在于连接五个环节而不是分别发明每个环节">1. CCWZ 的贡献在于连接五个环节，而不是分别发明每个环节</h2>
+<p>CCWZ 之前的文献已经解释了数据为何不同于普通投入。Jones–Tonetti（2020）强调横向非竞争性和所有权；Cong–Xie–Zhang（2021）及 Cong et al.（2022）把数据带入研发、知识积累和多重使用；Ichihashi（2020, 2021）、Acemoglu et al.（2022）与 Bergemann–Bonatti–Gan（2022）研究披露、相关信息外部性和数据中介；Farboodi–Veldkamp 则把数据写成会积累、折旧并提高预测精度的信息资产。</p>
+<p>CCWZ 的增量是把这些分散机制接成一条国际一般均衡链：消费者活动产生原始数据 <span class="math inline">\(D_i\)</span>，数据商把它加工为面向目的地的工作数据 <span class="math inline">\(\varphi_{ij}\)</span>，企业将工作数据积累为企业状态 <span class="math inline">\(\Phi_i\)</span>，数据状态提高生产率，商品和工作数据再跨境流动。政策由此既改变企业可取得的数据，也改变比较优势、商品贸易和两国福利。这个连接解释了论文为什么重要，也划定了它没有处理的对象：相关信息泄露、战略中介、创新、数据质量和算力互补都被压缩到较少的参数或直接省略。</p>
+<p>2024 年以后，文献没有沿着一条统一路线继续推进。Xie–Zhang 和 Lee 把问题转向数据类型与创新增长；Dubus et al. 转向网络效应、品种和政策协调；王永进、王文斌、谢芳转向多国多行业量化贸易与产业政策；Liu et al.、Ito–Tomiura、Kässi–Lehdonvirta 和 Demirer et al. 分别测量价值链、生产率、数据中心区位以及数据—算力投入。它们大多继承 CCWZ 的问题或某一渠道，却没有继承整套企业数据存量结构。</p>
+<h2 id="deep-reading-证据分级">2. 证据分级</h2>
+<p>本章使用三类证据：</p>
+<ul>
+<li><strong>A1：模型或识别设计全文复核。</strong> 已核对核心方程、结果表、识别设计和版本；可用于报告机制、条件和定量结果。</li>
+<li><strong>A2：聚焦全文阅读。</strong> 已核对导论、核心模型、主要命题或结果；可用于关系判断，但不等于逐页校勘整篇论文。</li>
+<li><strong>B：官方摘要或书目信息。</strong> 只用于确认题目、作者、研究对象和官方摘要中的结论，不作方程、引用关系或数值归因。</li>
+</ul>
+<p>完整的 18 项机器可读矩阵见 <code>research/deep-reading-matrix.csv</code>；25 份本地 PDF 的阅读状态、页数和证据边界见 <code>research/paper-corpus-manifest.csv</code>。本章所称“全文复核”均对应这两张表中的具体页码和边界。</p>
+<h2 id="deep-reading-前置文献提供了四类机制">3. 前置文献提供了四类机制</h2>
+<h3 id="deep-reading-非竞争性解释了复用收益却没有自动解决合同和价格">3.1 非竞争性解释了复用收益，却没有自动解决合同和价格</h3>
+<p>Jones–Tonetti（2020）把数据写成消费活动的副产品。数据进入生产后可以由多家企业同时使用，因而所有权决定数据能否被广泛复用。企业若拥有数据，不会内化向其他企业开放的社会收益；消费者拥有数据时，市场使用量可以增加，但消费者必须因隐私损失获得补偿。</p>
+<p>CCWZ 继承了消费者生成数据和非竞争复用，却增加了两个中间层：原始数据先按目的地加工为工作数据，工作数据再形成企业的数据状态。这个改动让数据能够与商品贸易共同决定比较优势。它也带来新的合同问题：非竞争性说明同一数据可以服务多个企业，却没有说明单家企业面对的数量集合、许可上限和价格表。CCWZ 附录把企业采购写成无上限连续数量并按单位付费，因此不能仅凭“所有企业使用相同数据”推出单企业采购上限。</p>
+<h3 id="deep-reading-隐私文献说明一笔自愿交易也可能漏掉第三方损失">3.2 隐私文献说明，一笔自愿交易也可能漏掉第三方损失</h3>
+<p>Ichihashi（2020）表明，披露可改善推荐，同时使卖方能够进行更精细的价格歧视。Ichihashi（2021）与 Acemoglu et al.（2022）进一步说明，一人的记录会帮助企业推断其他人的类型。交易价格若只补偿直接提供者，就没有覆盖相关信息泄露给第三方的损失。Bergemann–Bonatti–Gan（2022）则把这一问题放入数据中介：中介可以合并、匿名化并转售信号，但其合同仍受社会数据外部性和市场势力影响。</p>
+<p>CCWZ 用代表性消费者的隐私成本概括这些摩擦，并假定竞争性数据商把原始数据和劳动转化为工作数据。这个处理适合研究贸易制度，却无法回答“谁授权何种用途”“同一记录能否用于新的目的地或任务”以及“价格补偿了谁”。因此，安全许可扩展需要把数据类别、用途、接收方和期限写入授权集合，而不能只在总量方程上增加一个监管楔子。</p>
+<h3 id="deep-reading-增长文献把数据复用分成当期生产与未来创新">3.3 增长文献把数据复用分成当期生产与未来创新</h3>
+<p>Cong–Xie–Zhang（2021）让消费者数据和研发劳动共同创造新品种；历史数据通过知识积累影响未来创新。Cong et al.（2022）进一步允许同一数据同时服务现有企业的生产和新企业的创新。社会规划者对数据的边际价值因此包含生产收益和创新收益，私人价格可能同时漏掉两部分。</p>
+<p>CCWZ 选择了当期生产这一用途，并把数据积累放到企业状态中。这样可以清楚研究跨境政策和贸易，却没有内生新品种、研发劳动或能力形成。Lee（2025）和 Xie–Zhang（2024）重新打开增长端：前者让本国和进口数据进入研发，后者增加生产者数据和自然数据。两篇论文都不是 CCWZ 动态企业存量模型的直接结构扩展；Lee 的参考文献也没有引用 CCWZ，其“Chang et al.（2024）”指 Chang–Wu–Zhang 的人力资本论文。</p>
+<h3 id="deep-reading-信息精度提供了比幂函数更自然的远端边界">3.4 信息精度提供了比幂函数更自然的远端边界</h3>
+<p>Farboodi–Veldkamp 将数据理解为提高预测精度的可储存信息。数据越多，新增观测对后验精度的贡献越小；数据仍可积累和交易，但远端收益会递减。这种信息生产解释与 CCWZ 的局部生产率机制兼容，也为有限最优修复提供了经济基础。</p>
+<p>CCWZ 采用 <span class="math inline">\(\Phi^\xi\)</span> 的幂函数。企业先优化商品产量后，经营利润按 <span class="math inline">\(\Phi^{\alpha\xi(e-1)}\)</span> 增长。在原文的线性单位数据价格和无上限采购集合下，基准封闭经济指数为 <span class="math inline">\(20/3\)</span>，开放经济指数为 <span class="math inline">\(4/3\)</span>，均大于 1。Farboodi–Veldkamp 的预测精度机制说明，为何有效数据服务应在数据丰富时饱和，而不是无限维持同一幂弹性。</p>
+<h2 id="deep-reading-ccwz-把原始数据工作数据企业存量商品贸易政策放进同一模型">4. CCWZ 把“原始数据—工作数据—企业存量—商品贸易—政策”放进同一模型</h2>
+<p>CCWZ 的三个数据对象不能混为一谈：</p>
+<ol type="1">
+<li><span class="math inline">\(D_i\)</span> 是消费者活动产生的原始数据；</li>
+<li><span class="math inline">\(\varphi_{ij}\)</span> 是数据商利用原始数据和劳动生产的、面向目的地 <span class="math inline">\(j\)</span> 的工作数据；</li>
+<li><span class="math inline">\(\Phi_i\)</span> 是企业通过工作数据投资形成的生产性存量。</li>
+</ol>
+<p>这个区分使政策的作用链条可被追踪：限制来源或目的地会提高工作数据成本，企业的数据状态随之变化，边际成本和价格改变，商品贸易及福利再调整。作者 Table 2 的代表性切片显示，允许双向数据流后，两国都愿意开放的“本国数据重要性”区间由 <span class="math inline">\([0.75,1.22]\)</span> 扩大到 <span class="math inline">\([0.48,1.61]\)</span>。这是一项校准式机制结果，不是由现实政策冲击识别出的区间。</p>
+<p>同一结构也暴露了一个闭合缺口。附录让企业在给定正价格下连续选择工作数据，并支付 <span class="math inline">\(P_{\varphi,t}\varphi_{i,t}\)</span>，却没有写容量、固定许可或凸安装成本。在这一字面合同下，超线性经营收益压过线性成本，企业价值无有限最大值。这个判断针对合同集合、需求弹性和生产函数的组合，并不否定非竞争性本身。<code>content/有限最优复核与修复.md</code> 给出了人工推导、SymPy 检查、数值尾部检验和 Lean 形式化的边界。</p>
+<h2 id="deep-reading-后续研究沿四条路线分叉">5. 后续研究沿四条路线分叉</h2>
+<h3 id="deep-reading-数据类型和增长继承数据是状态偏离数据只服务生产">5.1 数据类型和增长：继承“数据是状态”，偏离“数据只服务生产”</h3>
+<p>Xie–Zhang（2024）明确把 CCWZ 列为消费者活动生成数据的模型，但其主要骨架来自 Cong–Xie–Zhang 的半内生增长框架。它增加生产过程生成的数据和不涉及个人隐私的自然数据，并研究三类数据的替代性如何改变长期增长和劳动配置。</p>
+<p>Lee（2025）让国内与进口数据进入研发和国家数据存量，考察商品贸易、数据贸易和创新增长的联动。它与 CCWZ 在主题上接近，却没有引用 CCWZ，也没有继承企业工作数据存量和两国政策制度。它应归为相邻独立模型，而不是 CCWZ 的直接后续。</p>
+<h3 id="deep-reading-产业组织与协调dubus-et-al.-的协调结论取决于需求系统">5.2 产业组织与协调：Dubus et al. 的协调结论取决于需求系统</h3>
+<p>Dubus et al.（2026）明确比较并引用 CCWZ，但换用了需求侧机制。数据开放增强跨国产品的网络效应、降低价格并提高单品消费，同时减少进入和品种数。政府选择开放度时，外部性来自本国开放对外国品种和替代弹性的影响。</p>
+<p>需求系统决定协调结论。在恒定替代弹性 CES 下，论文的福利式（12）不含外国开放度，因而</p>
+<p><span class="math display">\[
+\frac{\partial U_i}{\partial \delta_j}=0.
+\]</span></p>
+<p>网络收益、单品消费和品种减少恰好抵消，非合作开放同时实现全球最优。只有当替代弹性随品种数变化，且进入成本足够高时，开放减少品种并提高市场势力，单边开放才会过多，协调后的内点开放度低于纳什开放度。因此，“跨境数据需要协调”不能脱离需求曲率和进入条件单独报告。</p>
+<h3 id="deep-reading-多国量化与产业政策王永进等继承政策问题替换模型骨架">5.3 多国量化与产业政策：王永进等继承政策问题，替换模型骨架</h3>
+<p>王永进、王文斌、谢芳（2025）在参考文献 [10] 直接引用 CCWZ，并研究相同的跨境数据壁垒问题；其结构却建立在 Caliendo–Parro（2015）的 38 国、44 行业量化贸易模型上。行业总销售形成数据规模 <span class="math inline">\(D_n^j\)</span>，外部规模项 <span class="math inline">\((D_n^j)^{\psi_j}\)</span> 降低行业单位成本，跨境政策参数 <span class="math inline">\(\kappa_{in}\)</span> 决定出口所带来的数据能否被使用。模型没有企业数据存量、原始—工作数据转换或 CCWZ 的动态 Euler 方程。</p>
+<p>论文把贸易弹性设为 5.03、行业内需求弹性设为 4、资本—劳动替代参数设为 0.3；GDPR 情景采用 <span class="math inline">\(\kappa_{EU,n}=0.7\)</span>，美国针对中国的限制采用 <span class="math inline">\(\kappa_{US,CN}=0\)</span>。在由投入产出数据代理的行业 <span class="math inline">\(\psi_j\)</span> 下，GDPR 使中国福利下降 0.01%、欧盟平均下降 0.37%、全球平均下降 0.17%；中国实施最优产业扶持后，本国福利提高 0.07%。在统一设定 <span class="math inline">\(\psi=0.14\)</span> 的示意比较中，中国最优扶持带来的福利增益达到 6.28%，随后因财政负担而下降。</p>
+<p>这些数值是帽子代数下的模型反事实。<span class="math inline">\(\psi_j\)</span> 由“数据行业”投入系数代理，<span class="math inline">\(\kappa\)</span> 由政策情景校准，因而不能解释为 GDPR 的因果估计。该文是密切量化后续，却不是 CCWZ 动态结构的直接延长。</p>
+<h3 id="deep-reading-经验研究测量了不同边际不能合并成一个数据效应">5.4 经验研究测量了不同边际，不能合并成一个“数据效应”</h3>
+<p>Liu et al.（2024）使用国家/地区—行业—年份固定效应，报告跨境数据流动限制指标对国内价值链稳定性的基准系数 <span class="math inline">\(-0.0385\)</span>，并把创新作为机制变量。该设计是观察性面板关联，不是随机政策冲击，也不识别 CCWZ 的数据生产率弹性。</p>
+<p>Ito–Tomiura（2025）把日本企业 2019/2021 年调查与 2019–2022 年生产率连接起来，比较 2021 年开始涉外数据收集的企业与仅国内收集或不收集企业。RA、IPW 和 AIPW DID 给出的总体 ATT 接近：劳动生产率提高约 4–5%，TFP 提高约 5–6%；首年效应不显著，2022 年 AIPW 系数分别为 0.061 和 0.076。估计依赖条件平行趋势和对可观测选择的修正，不能直接验证 CCWZ 的 <span class="math inline">\(\xi\)</span>。</p>
+<p>Kässi–Lehdonvirta（2026）研究 158 国首次采用 GDPR 级跨境转移规则前后的数据中心开业。Sun–Abraham 事件研究显示，下游经济体开业数相对处理前均值提高 49%，高 GDP 经济体提高 32%；总体平均效应较弱且不精确。若把估计解释为因果，下游经济体的累计站点数在无监管反事实中约低 17%。其合规配额模型解释了看似矛盾的结果：监管可以减少全球总算力，同时把剩余投资迁回境内。</p>
+<p>Demirer et al. 的 2026 年 10 月修订版用云服务商数据回答两个不同问题。欧盟—美国 DID/事件研究显示，GDPR 后欧盟企业的存储下降约 25%、处理下降约 15%；另一套 shift-share IV 生产函数估计得到数据与算力的替代弹性约为 0.33–0.44。结合模型后，作者把企业行为解释为隐含数据成本提高约 21%，但总生产成本只提高 0.1–0.6%，因为数据在总成本中的份额较小。DID 数量和 IV 弹性来自不同识别任务，不能混成同一个政策系数。</p>
+<h2 id="deep-reading-三条扩展路线分别吸收不同证据">6. 三条扩展路线分别吸收不同证据</h2>
+<h3 id="deep-reading-路线-a安全许可把可流动改写为一组可执行合同">路线 A：安全许可把“可流动”改写为一组可执行合同</h3>
+<p>Ichihashi、Acemoglu et al. 和 Bergemann–Bonatti–Gan 表明，隐私损失取决于用途、推断对象和信息关联，而不只是字节总量。路线 A 因此应把许可证写成数据类别、用途、接收方、期限和安全条件的组合。企业选择的是许可集合或访问强度；数据商收入由许可费或受容量约束的单位价格构成。这样的可行集既解释现实中的分类监管，也能闭合 CCWZ 字面连续采购问题。</p>
+<h3 id="deep-reading-路线-b信息生产把有效数据写成质量-饱和-算力">路线 B：信息生产把有效数据写成“质量 × 饱和 × 算力”</h3>
+<p>Farboodi–Veldkamp 提供边际信息递减，Demirer et al. 提供数据—算力强互补，Ito–Tomiura 提供企业取得涉外数据后生产率改善具有时滞的证据。路线 B 可把 CCWZ 的 <span class="math inline">\(\Phi^\xi\)</span> 替换为有界有效数据服务 <span class="math inline">\(g(\Phi,Q,C)\)</span>，其中 <span class="math inline">\(Q\)</span> 表示质量和多样性，<span class="math inline">\(C\)</span> 表示算力。这个改动保留稳态附近的局部弹性，同时让远端收益饱和，并允许监管分别影响数据价格、质量和算力区位。</p>
+<h3 id="deep-reading-路线-c能力形成把一次性生产率收益转成长期创新">路线 C：能力形成把一次性生产率收益转成长期创新</h3>
+<p>Cong–Xie–Zhang、Cong et al.、Xie–Zhang 和 Lee 共同说明，数据可以同时服务当期生产、研发和组织学习。路线 C 应增加研发劳动、能力状态或新品种，使跨境数据对未来生产率的影响通过明确的积累方程发生。这样才能区分“进口更多数据提高今天的效率”和“长期接触外部数据改变企业能力”两种政策后果。</p>
+<h2 id="deep-reading-关系矩阵的结论">7. 关系矩阵的结论</h2>
+<div class="table-wrapper"><table>
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+</colgroup>
+<thead>
+<tr>
+<th>文献组</th>
+<th>前置机制或继承对象</th>
+<th>CCWZ 的增量或后续改动</th>
+<th>与 CCWZ 的关系</th>
+<th>主要边界</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Jones–Tonetti</td>
+<td>非竞争性、消费生成、所有权</td>
+<td>CCWZ 增加目的地加工、企业存量与贸易</td>
+<td>明确前置</td>
+<td>非竞争性不自动给出许可上限</td>
+</tr>
+<tr>
+<td>Ichihashi；Acemoglu et al.</td>
+<td>披露、相关推断、第三方外部性</td>
+<td>CCWZ 用代表性隐私成本概括</td>
+<td>微观前置/遗漏机制</td>
+<td>不能用总量隐私成本替代授权对象</td>
+</tr>
+<tr>
+<td>Bergemann–Bonatti–Gan</td>
+<td>战略中介、匿名化、信息转售</td>
+<td>CCWZ 使用竞争性数据商</td>
+<td>相邻前置</td>
+<td>中介合同没有进入 CCWZ</td>
+</tr>
+<tr>
+<td>Cong–Xie–Zhang；Cong et al.</td>
+<td>研发、知识积累、纵向复用</td>
+<td>CCWZ 转向生产和跨境贸易</td>
+<td>直接理论前置</td>
+<td>CCWZ 没有内生创新</td>
+</tr>
+<tr>
+<td>Farboodi–Veldkamp</td>
+<td>存储、折旧、预测精度和递减收益</td>
+<td>CCWZ 增加跨境加工和贸易</td>
+<td>动态状态前置</td>
+<td>远端饱和没有保留在幂函数中</td>
+</tr>
+<tr>
+<td>Xie–Zhang</td>
+<td>消费者数据增长模型</td>
+<td>增加生产者数据和自然数据</td>
+<td>引用型相邻扩展</td>
+<td>主要继承 Cong 的增长骨架</td>
+</tr>
+<tr>
+<td>Lee</td>
+<td>国家数据存量和研发</td>
+<td>增加多国数据贸易与增长</td>
+<td>相邻独立模型</td>
+<td>未引用 CCWZ；Chang 引文不是 CCWZ</td>
+</tr>
+<tr>
+<td>王永进等（2025）</td>
+<td>跨境壁垒和福利政策问题</td>
+<td>外部数据规模、44 行业、补贴与反制</td>
+<td>密切量化后续</td>
+<td>Caliendo–Parro 骨架；参数为代理/校准</td>
+</tr>
+<tr>
+<td>Dubus et al.</td>
+<td>政府选择开放度</td>
+<td>网络效应、品种与协调</td>
+<td>直接政策后续</td>
+<td>协调结论依赖非 CES 需求和进入成本</td>
+</tr>
+<tr>
+<td>Liu et al.</td>
+<td>限制与产业联系</td>
+<td>价值链稳定和创新面板</td>
+<td>引用型经验旁证</td>
+<td>固定效应相关，不是结构参数</td>
+</tr>
+<tr>
+<td>Ito–Tomiura</td>
+<td>企业涉外数据收集</td>
+<td>生产率 ATT</td>
+<td>相邻经验旁证</td>
+<td>选择修正 DID，不是随机实验</td>
+</tr>
+<tr>
+<td>Kässi–Lehdonvirta</td>
+<td>监管降低数据/算力收益</td>
+<td>新增算力区位与合规配额</td>
+<td>密切经验/模型扩展</td>
+<td>总算力和境内投资可反向变化</td>
+</tr>
+<tr>
+<td>Demirer et al.</td>
+<td>监管成本与企业数据投入</td>
+<td>数据—算力 CES 和成本测量</td>
+<td>相邻经验基础</td>
+<td>未引用 CCWZ；两套识别不可混写</td>
+</tr>
+<tr>
+<td>王永进等（2024）</td>
+<td>单边/区域开放与协调</td>
+<td>官方摘要报告条件性福利结论</td>
+<td>候选相关后续</td>
+<td>尚无全文，只保留摘要级判断</td>
+</tr>
+</tbody>
+</table></div>
+<p>这张矩阵给出一个明确判断：CCWZ 仍是把数据生产链和国际贸易链连接得最完整的模型之一；后续研究增加了重要的来源、需求、区位和经验边际，却尚未把有界信息服务、许可合同或足够凸安装成本嵌回 CCWZ 的一般均衡并重新计算其福利区间。截至 2026 年 11 月 3 日的有界检索中，没有发现完成这一闭合与重算的论文。</p>
+</article>
+    </section>
+
+    <section id="repair-map" class="chapter chapter-repair-map">
+      <header class="chapter-heading">
+        <p class="chapter-number">03 / 错误、修复与扩展地图</p>
+        <h2>先判断最大值是否存在，再讨论政策</h2>
+        <p>互动检查器展示尾部指数如何改变企业问题；下方总览把三种数学闭合、三条经济路线、制度背景和最近文献接到同一条推理链上。</p>
+      </header>
+
+      <div class="logic-chain" aria-label="有限最优诊断的四步逻辑">
+        <article><small>01 / 选择集</small><strong>连续、非负、无上限</strong><span>附录按单位价格让企业选择工作数据</span></article>
+        <article><small>02 / 收益尾部</small><strong>利润按 L<sup>θ</sup> 增长</strong><span>θ = αξ(e−1)，基准均大于 1</span></article>
+        <article><small>03 / 一阶条件</small><strong>正根是局部最小值</strong><span>θ&gt;1 时二阶导数为正</span></article>
+        <article><small>04 / 闭合</small><strong>技术、合同或成本</strong><span>三种修复改变不同经济对象</span></article>
+      </div>
+
+      <div class="theta-lab" data-theta-explorer>
+        <div class="theta-lab-copy">
+          <p class="panel-label">互动尾部检查</p>
+          <h3>用同一个指数检查任意参数组</h3>
+          <p>给定线性数据价格和无上限选择集，企业一次性偏离的尾部为：</p>
+          <div class="theta-equation" aria-label="利润尾部公式">V(L) ≥ −qL + βCL<sup>θ</sup><br><span>θ = αξ(e − 1)</span></div>
+          <p class="theta-note">封闭经济令 <em>e = ρ</em>；开放经济令 <em>e = m</em>。检查器只判断这条尾部偏离，不替代完整动态存在性证明。</p>
+        </div>
+        <div class="theta-controls">
+          <div class="theta-presets" aria-label="参数预设">
+            <button type="button" class="active" data-theta-preset="closed">封闭基准 · 20/3</button>
+            <button type="button" data-theta-preset="open">开放基准 · 4/3</button>
+            <button type="button" data-theta-preset="boundary">边界示例 · 1</button>
+          </div>
+          <label>资本份额 α
+            <input type="range" min="0.05" max="0.80" step="any" value="0.3333333333333333" data-theta-input="alpha">
+            <output data-theta-output="alpha">0.333</output>
+          </label>
+          <label>数据利用弹性 ξ
+            <input type="range" min="0.05" max="2.00" step="0.01" value="1" data-theta-input="xi">
+            <output data-theta-output="xi">1.00</output>
+          </label>
+          <label>需求弹性 e
+            <input type="range" min="1.01" max="30" step="0.01" value="21" data-theta-input="elasticity">
+            <output data-theta-output="elasticity">21.00</output>
+          </label>
+          <div class="theta-result" data-theta-result data-regime="superlinear" aria-live="polite">
+            <small>当前 θ</small>
+            <strong data-theta-value>6.667</strong>
+            <span data-theta-verdict>目标无上界；有限正驻点是局部最小值。</span>
+          </div>
+        </div>
+      </div>
+
+      <article class="prose repair-map-prose"><h1 id="repair-map-先闭合企业问题再选择经济机制">先闭合企业问题，再选择经济机制</h1>
+<p>这一页把独立复核、三种数学修复和三条经济扩展放在同一条因果链上。判断分两步：先问企业的数据选择是否存在有限最大值，再问跨境制度究竟改变许可、有效信息，还是长期利用能力。前一步决定模型是否成立，后一步决定模型能回答什么政策问题。</p>
+<h2 id="repair-map-一个尾部指数决定字面问题能否最大化">一个尾部指数决定字面问题能否最大化</h2>
+<p>固定单个企业偏离时的总需求、工资、资本租金和数据价格。企业先优化商品产量后，经营利润对数据状态 <span class="math inline">\(\Phi\)</span> 的增长阶数为</p>
+<p><span class="math display">\[
+\pi^{op}(\Phi)=C\Phi^\theta,
+\qquad
+\theta=\alpha\xi(e-1),
+\qquad C&gt;0.
+\]</span></p>
+<p>这里 <span class="math inline">\(\alpha\)</span> 是数据增强资本在生产中的份额，<span class="math inline">\(\xi\)</span> 是原模型的数据利用弹性，<span class="math inline">\(e\)</span> 表示相关商品需求弹性：封闭经济用 <span class="math inline">\(e=\rho\)</span>，开放经济用 <span class="math inline">\(e=m\)</span>。如果企业今天一次性购买 <span class="math inline">\(L\)</span> 单位工作数据，下一期经营利润给出下面的价值下界：</p>
+<p><span class="math display">\[
+V(L)\ge -qL+\beta C L^\theta,
+\qquad q&gt;0.
+\]</span></p>
+<p>因此，选择集和尾部曲率必须一起判断。</p>
+<div class="table-wrapper"><table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>指数区间</th>
+<th>尾部结果</th>
+<th>能否由这一步得到有限最优</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="math inline">\(\theta&gt;1\)</span></td>
+<td><span class="math inline">\(L^\theta\)</span> 压过线性成本，<span class="math inline">\(V(L)\to+\infty\)</span></td>
+<td>不能；目标无上界</td>
+</tr>
+<tr>
+<td><span class="math inline">\(\theta=1\)</span></td>
+<td>尾部斜率为 <span class="math inline">\(-q+\beta C\)</span></td>
+<td>取决于系数；等号时也不唯一</td>
+</tr>
+<tr>
+<td><span class="math inline">\(\theta&lt;1\)</span></td>
+<td>线性成本最终压过收益</td>
+<td>排除这条无界偏离，但完整动态问题仍需存在性条件</td>
+</tr>
+</tbody>
+</table></div>
+<p>CCWZ 的基准值给出</p>
+<p><span class="math display">\[
+\theta_{closed}=\frac13\times1\times(21-1)=\frac{20}{3},
+\]</span></p>
+<p><span class="math display">\[
+\theta_{open}=\frac13\times1\times(5-1)=\frac43.
+\]</span></p>
+<p>两者都大于 1。原附录同时让企业连续选择任意非负工作数据，并按单位支付线性价格，所以字面企业问题没有有限最大值。单位测度企业和数据非竞争性不会自动缩小单个企业的可行选择集。</p>
+<p>一阶条件也不能挽救这个问题。对归一化目标</p>
+<p><span class="math display">\[
+f(L)=-qL+\beta C L^\theta
+\]</span></p>
+<p>求导会得到一个正驻点，但当 <span class="math inline">\(\theta&gt;1\)</span> 时</p>
+<p><span class="math display">\[
+f&#39;&#39;(L)=\beta C\theta(\theta-1)L^{\theta-2}&gt;0.
+\]</span></p>
+<p>这个驻点是局部最小值。数值程序收敛到一阶条件根，只说明方程有根，不说明企业取得了最大值。</p>
+<h2 id="repair-map-三种修复改变的是三个不同对象">三种修复改变的是三个不同对象</h2>
+<h3 id="repair-map-修复-1有界有效数据服务推荐的新基准">修复 1：有界有效数据服务——推荐的新基准</h3>
+<p>将原来的幂函数数据乘数替换为在校准点附近保持局部弹性、在远端逐渐饱和的服务函数：</p>
+<p><span class="math display">\[
+g(\Phi)=\bar g\exp\left\{
+\frac\xi\kappa\left[1-
+\left(\frac\Phi{\bar\Phi}\right)^{-\kappa}\right]
+\right\},\qquad \kappa&gt;0.
+\]</span></p>
+<p>它满足</p>
+<p><span class="math display">\[
+g(\bar\Phi)=\bar g,
+\qquad
+\left.\frac{d\ln g}{d\ln\Phi}\right|_{\bar\Phi}=\xi,
+\qquad
+\lim_{\Phi\to\infty}g(\Phi)=\bar g e^{\xi/\kappa}&lt;\infty.
+\]</span></p>
+<p>这项修复改变生产技术：原稳态附近仍能匹配作者设定的数据弹性，但重复、噪声和任务不匹配使远端收益饱和。它与 Farboodi–Veldkamp 的预测精度边界及 Veldkamp–Chung 对数据功能的分类相容，但具体函数是本项目提出的闭合方式，不是这些文献直接估计的结构式。</p>
+<h3 id="repair-map-修复-2把数据写成有限许可或共同数据包">修复 2：把数据写成有限许可或共同数据包</h3>
+<p>若正文“所有企业购买相同数据”指一个有限数据包，企业的合同集合应写成</p>
+<p><span class="math display">\[
+0\le \varphi_{i,t}\le \bar\varphi_t.
+\]</span></p>
+<p>边界选择由 Kuhn–Tucker 条件决定：</p>
+<p><span class="math display">\[
+V^{marg}_{i,t}-P_{\varphi,t}-\mu_{i,t}=0,
+\qquad
+\mu_{i,t}(\bar\varphi_t-\varphi_{i,t})=0.
+\]</span></p>
+<p>这项修复改变合同，而不是生产技术。若每家企业只能购买完整访问权，更自然的价格是固定许可费或非线性菜单；数据商零利润条件也必须随之重写。</p>
+<h3 id="repair-map-修复-3加入足够凸的企业吸收成本">修复 3：加入足够凸的企业吸收成本</h3>
+<p>数据可复制，但接口、清洗、权限、算力和治理需要真实资源。令</p>
+<p><span class="math display">\[
+\Gamma(\varphi)=\frac{\kappa}{1+\nu}\varphi^{1+\nu},
+\qquad \kappa&gt;0.
+\]</span></p>
+<p>只要成本尾部阶数满足</p>
+<p><span class="math display">\[
+1+\nu&gt;\theta,
+\]</span></p>
+<p>凸成本最终压过经营收益。它改变企业侧吸收成本，适合做稳健性检查。封闭经济基准的 <span class="math inline">\(\theta=20/3\)</span> 要求很强的曲率，因此不宜把它当作唯一经济解释。</p>
+<p>三种修复不能混称为“加一个摩擦”：有界服务改技术，许可上限改可行合同，凸安装成本改资源约束。它们在稳态附近可能产生相似数量，却会给出不同的政策福利和价格条件。</p>
+<h2 id="repair-map-三条扩展各自回答一个可识别的问题">三条扩展各自回答一个可识别的问题</h2>
+<h3 id="repair-map-路线-a安全许可与合同设计">路线 A：安全许可与合同设计</h3>
+<p>现实规则按数据类别、敏感度、接收方、规模和用途设置豁免、标准合同、认证、安全评估或禁止事项。中国 2024 年《促进和规范数据跨境流动规定》、欧盟国际传输工具和美国 DOJ Data Security Program 都不是对所有字节征收同一个比例成本（S11、S12、S15）。</p>
+<p>路线 A 因而把政策拆成出口比例 <span class="math inline">\(x\)</span>、安全投入 <span class="math inline">\(e\)</span> 和固定合规成本 <span class="math inline">\(F\)</span>：</p>
+<p><span class="math display">\[
+G(D,x,e)=(v_H+v_Fx)D
+-kD^2(1+bx^2e^{-se})
+-\frac{h_e}{2}e^2-F\mathbf 1_{\{x&gt;0\}}.
+\]</span></p>
+<p>这条路线区分两个政策边际：降低 <span class="math inline">\(F\)</span> 主要决定企业是否开通跨境业务；降低单位摩擦或提高安全有效性主要改变已开通企业的使用量。Ichihashi、Acemoglu 等以及 Bergemann–Bonatti–Gan 提供了披露、相关数据外部性和中介定价的微观基础；它们限定了线性价格的适用范围，但没有直接给出 CCWZ 的跨国一般均衡。</p>
+<p><a href="?route=a#routes">进入路线 A 的完整推导</a></p>
+<h3 id="repair-map-路线-b信息质量收益饱和与算力互补">路线 B：信息质量、收益饱和与算力互补</h3>
+<p>物理流量不是有效信息。外国数据先按任务质量 <span class="math inline">\(\upsilon_F\)</span> 折算，再与本国数据聚合；数据状态与算力共同进入有界生产率：</p>
+<p><span class="math display">\[
+T=A K^\alpha n^{1-\alpha}
+\exp\left[
+\zeta\frac{\Phi}{k_0+\Phi}
+\frac{\mathcal M}{m_0+\mathcal M}
+\right].
+\]</span></p>
+<p>这个乘数小于 <span class="math inline">\(e^\zeta\)</span>，所以它直接闭合无限数据收益。其对数交叉导数为</p>
+<p><span class="math display">\[
+\frac{\partial^2\ln T}
+{\partial\Phi\,\partial\mathcal M}
+=\frac{\zeta k_0m_0}
+{(k_0+\Phi)^2(m_0+\mathcal M)^2}&gt;0,
+\]</span></p>
+<p>数据和算力因而具有对数互补性。Farboodi–Veldkamp 与 Veldkamp–Chung 支持信息收益有边界；Demirer 等关于 GDPR 后存储、处理投入和成本的研究约束数据—算力替代关系；Kässi–Lehdonvirta 则说明境内数据中心投资与总算力变化可以方向相反。这些观察性研究为机制提供量级和异质性证据，不能直接验证 CCWZ 的结构参数。</p>
+<p><a href="?route=b#routes">进入路线 B 的完整推导</a></p>
+<h3 id="repair-map-路线-c训练研发与利用能力积累">路线 C：训练、研发与利用能力积累</h3>
+<p>CCWZ 把国家利用能力 <span class="math inline">\(\xi\)</span> 设为外生参数。路线 C 另设有明确单位的能力存量 <span class="math inline">\(H_t\)</span>，让数据与研发投入共同形成下一期能力：</p>
+<p><span class="math display">\[
+H_{t+1}=(1-\delta_H)H_t
++\zeta_HR_t^a\Phi_t^{1-a},
+\qquad 0&lt;a&lt;1.
+\]</span></p>
+<p>这条路线区分当期生产率收益和滞后的能力形成。Cong–Xie–Zhang、Cong 等和 Chang–Wu–Zhang 分别研究数据、知识、研发和人力资本积累；Lee（2025）把国家数据可达性与全球知识放进多国增长框架，但该文没有引用 CCWZ，应列为相邻模型而不是直接扩展。</p>
+<p>能力状态不能承担所有未观测差异。经验研究至少要分别测量数据采购、训练或研发支出、人才与流程部署以及后续生产率，否则 <span class="math inline">\(H_t\)</span> 无法被证伪。该路线还必须与有界服务、授权上限或经过重新标定的曲率条件结合，避免数据和能力联合扩张再次产生无界收益。</p>
+<p><a href="?route=c#routes">进入路线 C 的完整推导</a></p>
+<h2 id="repair-map-文献怎样支持这套路线又支持到什么程度">文献怎样支持这套路线，又支持到什么程度</h2>
+<div class="table-wrapper"><table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr>
+<th>证据层次</th>
+<th>代表文献</th>
+<th>它解决的问题</th>
+<th>不能据此声称什么</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>数据产权与非竞争性</td>
+<td>Jones–Tonetti（2020）</td>
+<td>数据可重复使用及产权配置</td>
+<td>非竞争性自动产生企业采购上限</td>
+</tr>
+<tr>
+<td>隐私与数据外部性</td>
+<td>Ichihashi（2020、2021）；Acemoglu 等（2022）；Bergemann、Bonatti 与 Gan（2022）</td>
+<td>披露、相关信息、泄露外部性与中介</td>
+<td>已经求解 CCWZ 的跨国一般均衡</td>
+</tr>
+<tr>
+<td>信息生产与回报边界</td>
+<td>Farboodi–Veldkamp（本地 2024 版）；Veldkamp–Chung（2024）</td>
+<td>预测精度、折旧、任务与数据类型</td>
+<td>唯一确定本项目采用的饱和函数</td>
+</tr>
+<tr>
+<td>数据、研发与增长</td>
+<td>Cong–Xie–Zhang（2021）；Cong 等（2022）；Chang–Wu–Zhang（2024）；Lee（2025）</td>
+<td>数据怎样形成知识、人力资本或研发能力</td>
+<td>Lee（2025）是 CCWZ 的引用者或直接扩展</td>
+</tr>
+<tr>
+<td>跨境政策模型</td>
+<td>Dubus 等（2026）；王永进、王文斌、谢芳（2025）</td>
+<td>开放协调、数据壁垒与产业反制</td>
+<td>两者都继承了 CCWZ 的动态数据存量；王永进等采用的是 Caliendo–Parro 骨架</td>
+</tr>
+<tr>
+<td>经验量级</td>
+<td>Ito–Tomiura（2025）；Kässi–Lehdonvirta（2026）；Demirer 等（本地 2026 修订版）</td>
+<td>企业生产率、数据中心选址、隐私规则与生产投入</td>
+<td>观察性估计已经识别 CCWZ 的 <span class="math inline">\(\xi\)</span> 或证明有限最优存在</td>
+</tr>
+</tbody>
+</table></div>
+<p>关系判断以本站的全文语料和来源台账为准。“引用 CCWZ”只证明作者把它放进参考文献；只有论文明确继承核心状态、均衡对象或政策机制时，本站才标为直接扩展。</p>
+<h2 id="repair-map-修复后必须重新计算哪些结果">修复后必须重新计算哪些结果</h2>
+<p>闭合企业问题后，原论文的定性机制仍可作为待检验基准，但原数值不能自动继承。至少需要重新求解：</p>
+<ol type="1">
+<li>封闭经济的数据 Euler、稳态数据价格和使用量；</li>
+<li>开放经济的数据来源组合、商品贸易和两国价格；</li>
+<li>五种制度下的参与区间与 Table 2 类型比较；</li>
+<li>生产率、隐私和贸易成本冲击的转型路径；</li>
+<li>政策福利、协调条件及赢家和输家。</li>
+</ol>
+<p>最短的可靠路线是：先用有界 <span class="math inline">\(g(\Phi)\)</span> 重算封闭经济，再恢复商品贸易和跨境数据来源；随后只加入一条经济扩展。若研究现实规则，优先路线 A；若解释生产技术，选择路线 B；只有能观察研发和吸收能力时才进入路线 C。</p>
 </article>
     </section>
 
     <section id="finite-optimum" class="chapter chapter-diagnostic">
       <header class="chapter-heading">
-        <p class="chapter-number">02 / 独立复核</p>
-        <h2>问题成立，但结论必须带上合同条件</h2>
-        <p>这里重新从原文附录出发，分别检查企业选择集、单位测度、非竞争性和数据价格口径，再给出三种闭合方式。</p>
+        <p class="chapter-number">04 / 独立复核全文</p>
+        <h2>从原文选择集推到三种闭合方式</h2>
+        <p>这里逐步检查企业选择集、单位测度、非竞争性、价格口径和开放经济，并交代 Python、SymPy、数值图与 Lean 各自验证到哪里。</p>
       </header>
       <div class="diagnostic-strip" role="list" aria-label="有限最优检查结果">
         <div role="listitem"><small>封闭经济</small><strong>αξ(ρ−1)=20/3</strong><span>超线性</span></div>
@@ -315,7 +936,21 @@ y_i^*(\Phi_i)
 <p><span class="math display">\[
 \theta=\frac13(21-1)=\frac{20}{3}&gt;1.
 \]</span></p>
-<p><span class="math inline">\(\theta=1\)</span> 时需要比较线性收益与成本系数；<span class="math inline">\(\theta&lt;1\)</span> 排除这项尾部偏离，但完整动态问题仍需折现、状态边界和其他投入的可行性条件。</p>
+<p>三种指数情形应分开：</p>
+<ul>
+<li><span class="math inline">\(\theta&gt;1\)</span> 时，贴现收益在尾部压过线性成本，目标函数无上界。</li>
+<li><span class="math inline">\(\theta=1\)</span> 时，尾部是 <span class="math inline">\((-P_{\varphi,t}+\beta C_\rho)L\)</span>。若括号为正，问题仍无上界；若为负，线性成本控制尾部；若等于零，尾部变平，不能由这一项得到唯一有限解。</li>
+<li><span class="math inline">\(\theta&lt;1\)</span> 时，<span class="math inline">\(-P_{\varphi,t}L\)</span> 在尾部占优，因而排除这一无界偏离；完整动态问题仍需连续性、折现、状态边界和其他投入的可行性条件才能保证最大值存在。</li>
+</ul>
+<p>这也解释了为什么求出一阶条件的正根不够。当 <span class="math inline">\(\theta&gt;1\)</span> 时，归一化目标</p>
+<p><span class="math display">\[
+f(L)=-qL+\beta C L^\theta
+\]</span></p>
+<p>的正驻点满足 <span class="math inline">\(q=\beta C\theta L^{\theta-1}\)</span>，但</p>
+<p><span class="math display">\[
+f&#39;&#39;(L)=\beta C\theta(\theta-1)L^{\theta-2}&gt;0.
+\]</span></p>
+<p>该驻点是局部最小值，不是有限最优。稳态数值算法收敛到一个一阶条件根，也不能推翻尾部偏离。</p>
 <h2 id="finite-开放经济检查并不会自动通过">5. 开放经济检查并不会自动通过</h2>
 <p>开放经济中，中间品企业向本国和外国两个批发商销售。原文 Appendix A.2 的定价加成由商品来源替代弹性 <span class="math inline">\(m\)</span> 决定。固定两个市场的正需求规模，企业总收入可以写成若干正系数乘 <span class="math inline">\(p^{1-m}\)</span>，最优价格仍是 <span class="math inline">\(m/(m-1)\)</span> 倍边际成本。</p>
 <p>边际成本继续满足 <span class="math inline">\(MC(\Phi)\propto\Phi^{-\alpha\xi}\)</span>，所以优化后的经营利润至少按</p>
@@ -435,13 +1070,34 @@ P_{\varphi,t}+\Gamma&#39;(\varphi_t)
 <li>最优数据政策。</li>
 </ol>
 <p>修复消除了企业问题的尾部矛盾，却不保证作者原来的定量区间完全不变。最稳妥的研究顺序是：先用有界 <span class="math inline">\(g(\Phi)\)</span> 重新标定封闭经济，再逐步恢复商品贸易、单向数据流和双向开放。</p>
-<h2 id="finite-可运行证据">9. 可运行证据</h2>
-<p><code>scripts/check_finite_optimum.py</code> 从 CES 逆需求和成本函数独立推导利润指数，检查封闭与开放校准，并用归一化例子比较三种修复。输出为：</p>
+<h2 id="finite-人工推导sympy数值检查和-lean-各自验证什么">9. 人工推导、SymPy、数值检查和 Lean 各自验证什么</h2>
+<p>人工推导负责经济映射：固定单企业偏离时的价格和总需求，从原需求与生产函数导出优化后的利润指数，再识别原文合同是否允许 <span class="math inline">\(L\to\infty\)</span>。这是判断命题是否适用于 CCWZ 的关键环节。</p>
+<p><code>scripts/check_finite_optimum.py</code> 用 SymPy 对一般 CES 问题</p>
+<p><span class="math display">\[
+\max_y\;Y^{1/e}y^{(e-1)/e}-c\Phi^{-a}y
+\]</span></p>
+<p>求解，并验证最优经营利润对 <span class="math inline">\(\Phi\)</span> 的弹性为 <span class="math inline">\(a(e-1)\)</span>。脚本随后代入基准参数，得到封闭经济 <span class="math inline">\(20/3\)</span> 和开放经济 <span class="math inline">\(4/3\)</span>，并在逐步扩大的有界区间上比较原式和三种修复。输出为：</p>
 <ul>
 <li><code>research/finite-optimum-check.json</code>；</li>
 <li><code>docs/assets/finite-optimum-repairs.svg</code>。</li>
 </ul>
-<p>图中的金额和采购量经过归一化，只展示尾部阶数，不是作者的现实量化结果。</p>
+<p>数值搜索只是可视化证据：原式的“最优点”随着搜索上界外移，修复后的目标在给定归一化参数下取得有限解。它不替代一般尾部证明，也不把图中的归一化金额解释为作者的量化结果。</p>
+<p>Lean 4.34.1 + mathlib 4.34.1 项目位于 <code>verification/lean/</code>。<code>CCWZFiniteOptimum/Basic.lean</code> 先令 <span class="math inline">\(\Phi=x^3\)</span>，把两个基准有理幂化为整数幂：</p>
+<p><span class="math display">\[
+\Phi^{4/3}=x^4,
+\qquad
+\Phi^{20/3}=x^{20}.
+\]</span></p>
+<p>其定理 <code>open_profit_unbounded</code> 和 <code>closed_profit_unbounded</code> 分别证明，对任意实数目标 <span class="math inline">\(M\)</span>，只要收益系数 <span class="math inline">\(A&gt;0\)</span>，都存在 <span class="math inline">\(x\ge0\)</span> 使</p>
+<p><span class="math display">\[
+A x^4-qx^3&gt;M
+\quad\text{或}\quad
+A x^{20}-qx^3&gt;M.
+\]</span></p>
+<p>运行方式是：</p>
+<div class="sourceCode" id="finite-cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="finite-cb1-1"><a href="#finite-cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> scripts/check_finite_optimum.py</span>
+<span id="finite-cb1-2"><a href="#finite-cb1-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> verification/lean <span class="kw">&amp;&amp;</span> <span class="ex">lake</span> build</span></code></pre></div>
+<p>Lean 证明排除了手工多项式尾部论证中的代数跳步，但它只验证抽象命题。它没有形式化 CCWZ 的需求系统、授权集合、企业测度、合同解释或价格接受条件；这些经济对象与多项式之间的映射仍由前文的原文审计和人工推导承担。</p>
 <figure>
 <img src="assets/finite-optimum-repairs.svg" alt="有限最优诊断与三种修复" />
 <figcaption aria-hidden="true">有限最优诊断与三种修复</figcaption>
@@ -457,7 +1113,7 @@ P_{\varphi,t}+\Gamma&#39;(\varphi_t)
 
     <section id="routes" class="chapter chapter-routes">
       <header class="chapter-heading">
-        <p class="chapter-number">03 / 扩展路线</p>
+        <p class="chapter-number">05 / 扩展路线</p>
         <h2>走哪条路，由研究问题决定</h2>
         <p>默认显示全部路线，适合线性通读。也可以只保留一条路线，页面会记住选择并生成可分享的 URL。</p>
       </header>
@@ -475,7 +1131,8 @@ P_{\varphi,t}+\Gamma&#39;(\varphi_t)
 <h3 id="extensions-现实对应">现实对应</h3>
 <p>中国 2024 年《促进和规范数据跨境流动规定》不是对所有出境数据统一加价，而是按重要数据、敏感个人信息、非敏感个人信息、处理者身份和年度人数设置不同程序。部分情形豁免，部分需要标准合同或认证，达到更高门槛则需安全评估。</p>
 <p>美国 DOJ Data Security Program 也按数据类别、规模、接收方和交易类型区分禁止、限制与豁免。受限制的供应商、雇佣和投资协议可以在满足安全要求后进行；这与“一律禁止”不同。</p>
-<p>欧盟国际传输制度中的充分性决定、标准合同条款、约束性公司规则和认证等工具同样表明，制度会同时产生信任与资源成本。OECD/WTO 2025 年报告把开放和信任放在同一反事实框架中，也提醒我们不能把所有保护规则只写成贸易摩擦。</p>
+<p>欧盟国际传输制度中的充分性决定、标准合同条款、约束性公司规则和认证等工具同样表明，制度会同时产生信任与资源成本。OECD（2019）进一步把制度分成无专门规制、自由流动但事后负责、以充分性或合同等保障为条件、逐案授权四类，并把本地存储安排放在从无要求到存储、处理和流动限制的连续谱上。[S39] OECD/WTO 2025 年报告把开放和信任放在同一反事实框架中，也提醒我们不能把所有保护规则只写成贸易摩擦。</p>
+<p>两项全文经验研究把这套制度差异连接到不同贸易边际。周念利等（2022）在 31 个出口国的 2014—2018 年样本中报告，DSTRI 型壁垒与数字服务出口的广延和集约边际均负相关；代丽华等（2024）在 50 个经济体的 2010—2021 年样本中报告，RTA 数据条款深度与数字服务出口正相关，金融服务反应最大。[S57, S60] 两篇都是规则或壁垒指数的观察性研究，不能把系数直接解释为实际传输量或 CCWZ 的结构楔子。</p>
 <p>一篇直接引用 CCWZ 的 2024 年 PLOS ONE 跨国面板研究报告，跨境数据限制与国内价值链稳定之间的关系会通过创新渠道并随收入和技术水平而异。这项固定效应证据不能识别 CCWZ 的结构参数，也不能证明所有限制都降低福利；它支持的较窄判断是，政策影响具有显著异质性，统一成本乘数会遗漏创新渠道和国家条件。</p>
 <h3 id="extensions-为什么模型-a-合理">为什么模型 A 合理</h3>
 <p>模型 A 用三个对象拆开现实制度：</p>
@@ -497,6 +1154,7 @@ P_{\varphi,t}+\Gamma&#39;(\varphi_t)
 <h2 id="extensions-路线-b质量饱和与算力互补">路线 B：质量、饱和与算力互补</h2>
 <h3 id="extensions-现实对应-1">现实对应</h3>
 <p>Farboodi–Veldkamp 的数据经济模型把数据价值建在预测误差下降上：旧数据会因环境变化而贬值，预测精度也存在下界。Veldkamp–Chung（2024）把业务预测、研发知识和加工信息区分开。机器学习中的数据过滤与缩放研究进一步表明，高质量数据的价值依赖模型规模与算力，重复、噪声和任务不匹配会降低有效训练量。</p>
+<p>Sun 和 Trefler 的 2023 年工作论文把 35,575 款移动应用与 63,679 件 AI 专利匹配。其 IV 结果报告，一四分位距的 AI 增加对应外国用户增加 2.67 个对数点；在作者的高低限制比较中，数据限制把 AI 对外国用户的指数化乘数从 13.2 降到 7.5。[S45] 这项结果支持数据与算法互补，但因果解释依赖成本移位工具变量的排除限制，结果变量也是应用用户而非生产率或福利。</p>
 <p>这些事实支持两个判断：跨境字节数不是有效信息；数据和算力具有互补性。它们不唯一确定某个函数形式，但排除了“每增加相同比例数据都永久得到相同产出弹性”的简单外推。</p>
 <h3 id="extensions-为什么模型-b-合理">为什么模型 B 合理</h3>
 <p>路线 B 先把外国数据按质量 <span class="math inline">\(\upsilon_F\)</span> 换算为有效单位，再让数据存量与算力共同进入有上界的生产率函数。它同时解决三个问题：</p>
@@ -511,7 +1169,8 @@ P_{\varphi,t}+\Gamma&#39;(\varphi_t)
 <p>算力和数据同时由预期需求驱动，简单相关关系会高估互补性。质量指标也可能是事后由模型表现定义，造成机械相关。实证上需要事前质量指标或外生的数据/算力供给变化。</p>
 <h2 id="extensions-路线-c训练研发与利用能力积累">路线 C：训练、研发与利用能力积累</h2>
 <h3 id="extensions-现实对应-2">现实对应</h3>
-<p>Cong–Xie–Zhang（2021）和 Cong 等（2022）让数据通过研发与知识积累影响增长；Chang、Wu、Zhang（2024）进一步让经济活动产生的数据进入人力资本积累；Lee（2025）在多国框架中区分全球知识可得性和国家数据可达性。CCWZ 自己也指出，数据利用能力差距决定开放收益，但原模型把这种能力固定为 <span class="math inline">\(\xi\)</span>。</p>
+<p>Cong–Xie–Zhang（2021）和 Cong 等（2022）让数据通过研发与知识积累影响增长；Chang、Wu、Zhang（2024）进一步让经济活动产生的数据进入人力资本积累；Lee（2025）在多国框架中区分全球知识可得性和国家数据可达性。与 CCWZ 有三名共同作者的王立勇等（2026）进一步建立多国增长模型，并用 119 个国家和地区的 2010—2022 年面板报告数据进出口与增长的正相关及技术异质性；本项目尚未取得全文，不能据此核定方程继承或回归系数。[S26] CCWZ 自己也指出，数据利用能力差距决定开放收益，但原模型把这种能力固定为 <span class="math inline">\(\xi\)</span>。</p>
+<p>刘斌、甄洋（2022）用 40 个经济体、56 个行业的 WIOD 研发行业投入流构造研发要素代理，报告数字贸易规则与研发流入、流出及网络中心度正相关，且入度中心度系数更大。[S59] 该结果为“规则先改变研发投入网络，再形成能力”提供可测中间结果；但研发行业投入流不是实际数据、人员或专利流，不能直接识别长期能力状态。</p>
 <p>这些研究支持把“拥有数据”和“会使用数据”分开。人才、组织流程、模型训练、软件和研发支出可以形成能力状态；能力又决定下一批数据的边际价值。</p>
 <h3 id="extensions-为什么模型-c-合理">为什么模型 C 合理</h3>
 <p>路线 C 增加能力存量 <span class="math inline">\(H_t\)</span> 和训练/研发投入 <span class="math inline">\(R_t\)</span>。数据既进入当前生产，也与 <span class="math inline">\(R_t\)</span> 一起形成下一期能力。它可以回答：</p>
@@ -525,7 +1184,7 @@ P_{\varphi,t}+\Gamma&#39;(\varphi_t)
 <h3 id="extensions-主要风险-2">主要风险</h3>
 <p><span class="math inline">\(H_t\)</span> 容易成为吸收所有遗漏因素的潜变量。研究设计应预先指定可观察能力代理，并区分通用数字资本、行业知识和数据专用能力。若只用生产率残差倒推出 <span class="math inline">\(H_t\)</span>，模型很难被证伪。</p>
 <h2 id="extensions-三条路线怎样选择">三条路线怎样选择</h2>
-<table>
+<div class="table-wrapper"><table>
 <colgroup>
 <col style="width: 20%" />
 <col style="width: 20%" />
@@ -565,7 +1224,7 @@ P_{\varphi,t}+\Gamma&#39;(\varphi_t)
 <td>必须另加有界基准或严格参数条件</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h2 id="extensions-推荐的研究顺序">推荐的研究顺序</h2>
 <ol type="1">
 <li>用有界有效数据服务重新闭合原模型，并复算封闭经济和开放参与区间。</li>
@@ -598,7 +1257,9 @@ P_{\varphi,t}+\Gamma&#39;(\varphi_t)
 <h3 id="route-a-a.-安全保护可能促进流动连续出口许可与合规成本">12A. 安全保护可能促进流动：连续出口许可与合规成本</h3>
 <h4 id="route-a-a.1-为什么不再只用允许出口的指示变量">A.1 为什么不再只用“允许出口”的指示变量</h4>
 <p>中国《促进和规范数据跨境流动规定》第 3 条对不包含个人信息或重要数据的一些活动豁免相应程序，第 5、7、8 条又按处理者与信息数量等条件区别处理，第 10—11 条保留个人同意和安全义务。[S11]</p>
+<p>OECD（2019）把现实传输制度分成无专门规制、自由流动但出口方事后负责、以充分性或合同等保障为条件、逐案授权四类；本地存储还可分别叠加境内处理和流动限制。[S39，PDF pp.16—24] 这正对应不同的固定接入成本、许可范围和单位处理义务，而不是一个统一冰山成本。</p>
 <p>OECD/WTO（2025）的报告同时计算合规成本与信任收益。其“全面碎片化使全球 GDP 减少 4.5%”和“开放且有保障的制度使全球 GDP 增加约 1.77%”都是该报告特定反事实模拟，不能拿来标定 CCWZ 的 <span class="math inline">\(b\)</span> 或作为所有安全规则的因果效应。[S10，Executive Summary，pp.8—9]</p>
+<p>周念利等（2022）把数字服务出口拆成广延和集约边际，代丽华等（2024）则按 RTA 条款约束力度量规则深度；两篇全文都报告规则或壁垒与数字服务贸易显著相关。[S57, S60] 它们使用的是制度文本和 DSTRI 指数，并未观察实际传输量，因而适合约束开通与使用边际，不宜直接标定 <span class="math inline">\(x\)</span> 或 <span class="math inline">\(F\)</span>。</p>
 <p>对应的模型变化是：让政策既可能提高处理支出，也可能降低跨境隐私风险，而不是只增加 <span class="math inline">\(d_D\)</span>。</p>
 <h4 id="route-a-a.2-新增对象和技术">A.2 新增对象和技术</h4>
 <p>令 <span class="math inline">\(x\in[0,1]\)</span> 是允许出口处理的原始记录比例，<span class="math inline">\(e\ge0\)</span> 是安全保护投入强度。保留原始数据国内复用：</p>
@@ -718,6 +1379,7 @@ Y_t=C_t+I_t+\frac{h_e}2e_t^2+F\mathbf1_{\{x_t&gt;0\}}.
 <h3 id="route-b-b.-跨境字节数不等于有效信息数据质量饱和与算力互补">12B. 跨境字节数不等于有效信息：数据质量、饱和与算力互补</h3>
 <h4 id="route-b-b.1-后续文献改变了什么判断">B.1 后续文献改变了什么判断</h4>
 <p>Farboodi–Veldkamp 的 2024 版把信息价值建在预测误差下降上，旧数据因预测对象变化而贬值；Veldkamp–Chung（2024，§4.1）强调预测改进存在边界。它们支持将原文恒定弹性 <span class="math inline">\(\Phi^{\alpha\xi}\)</span> 改为有限的预测生产率收益，但没有要求采用下面某个特定函数。[S7–S8]</p>
+<p>Sun 和 Trefler 的 2023 年工作论文用 35,575 款应用和 63,679 件 AI 专利测量应用级 AI。其基准 IV 报告，一四分位距 AI 增加对应外国用户增加 2.67 个对数点；在 25 个最大经济体的高低数据限制比较中，作者计算的指数化乘数从 13.2 降至 7.5。[S45，Tables 1、5] 这支持数据可达性与算法互补，却不识别下面函数的饱和参数；成本移位工具变量的排除限制仍是因果解释的条件。</p>
 <p>本扩展给出一种可解析、可估计的替换：质量不同的数据先换成有效单位，数据与算力再共同决定有上界的生产率。</p>
 <h4 id="route-b-b.2-先将外国数据换成有效单位">B.2 先将外国数据换成有效单位</h4>
 <p>令 <span class="math inline">\(\upsilon_F&gt;0\)</span> 表示一单位外国工作数据对本国任务的有效质量，可包含语言适配、行业覆盖和记录准确度。设</p>
@@ -827,6 +1489,8 @@ MC_{t+1}T_{t+1}\zeta\frac{k_0}{(k_0+\Phi_{t+1})^2}
 <h4 id="route-c-c.1-后续文献提供的方向">C.1 后续文献提供的方向</h4>
 <p>原文结论提出让 <span class="math inline">\(\xi\)</span> 随使用反馈变化，但没有给出运动方程。直接写“多用数据使 <span class="math inline">\(\xi\)</span> 上升”还存在单位问题：<span class="math inline">\(\partial\ln T/\partial\xi=\alpha\ln\Phi\)</span> 会随数据单位改变。因此，更清楚的办法是另设有明确积累技术的能力存量 <span class="math inline">\(H\)</span>，并将数据量按固定基准归一化。</p>
 <p>Lee（2025）的 <em>Trade and Growth with Digital Data</em> 采用多国框架，数据由国内消费和外国可达数据形成存量，并进入研发生产函数。其 §2.3 在知识生产中区分全球知识可得性与国家数据可达性。这支持把数据进口与本国吸收能力、研发投入共同建模；该文是 KIEP Working Paper 25-02，不能写成已经发表的顶刊结果。[S9，§2.1—2.3]</p>
+<p>王立勇、常清、黄京磊和张龙天的《数据跨境流动与经济增长：理论框架与经验证据》发表于《经济研究》2026 年第 2 期（pp.119—141）。校方介绍称，该文建立多国一般均衡增长模型，并用 119 个国家和地区的 2010—2022 年面板报告数据进出口、技术差距和贸易成本的异质结果。[S26] 由于期刊全文尚未取得，这里只把它列作最近的作者团队后续，不据此反推具体状态方程或参数。</p>
+<p>刘斌、甄洋（2022）用 40 个经济体、56 个行业的 WIOD 研发行业投入流构造研发要素代理，报告数字规则对研发网络总中心度、出度和入度的系数均为正，入度系数更大。[S59，Tables 2、7] 这给出路线 C 可观察的中间边际，但研发行业投入流并非实际数据、研究人员或专利流，不能直接当作能力存量 <span class="math inline">\(H\)</span>。</p>
 <h4 id="route-c-c.2-新增能力状态与资源约束">C.2 新增能力状态与资源约束</h4>
 <p>令 <span class="math inline">\(H_t&gt;0\)</span> 为企业的组织、算法适配或技术能力，<span class="math inline">\(R_t\ge0\)</span> 为当期最终品计价的训练/研发投入：</p>
 <p><span class="math display">\[
@@ -928,7 +1592,7 @@ q_t=E_t\Bigg[M_{t,t+1}\Bigg(&amp;\alpha\xi MC_{t+1}\frac{T_{t+1}}{\Phi_{t+1}}\\
 
     <section id="full-analysis" class="chapter chapter-analysis">
       <header class="chapter-heading">
-        <p class="chapter-number">04 / 全部推导</p>
+        <p class="chapter-number">06 / 全部推导</p>
         <h2>原始解析完整保留，不跳步</h2>
         <p>下面嵌入既有解析全文。它与来源文件保持一致；本项目只改变排版，不改公式、结论和章节结构。</p>
       </header>
@@ -953,7 +1617,7 @@ q_t=E_t\Bigg[M_{t,t+1}\Bigg(&amp;\alpha\xi MC_{t+1}\frac{T_{t+1}}{\Phi_{t+1}}\\
 <h2 id="analysis-模型中有三种数据不能混作一个变量">1. 模型中有三种“数据”，不能混作一个变量</h2>
 <h3 id="analysis-主体符号与量纲">1.1 主体、符号与量纲</h3>
 <p>时间离散且无限，国家为本国 H 和外国 F，品种为 <span class="math inline">\(i\in[0,1]\)</span>。原文的星号表示“在外国使用”，下标 H/F 表示“在何处生成”。例如，<span class="math inline">\(\varphi_{H,t}^{*}\)</span> 是本国生成、外国使用的工作数据，不是外国生成的数据。[S2，§2]</p>
-<table>
+<div class="table-wrapper"><table>
 <colgroup>
 <col style="width: 33%" />
 <col style="width: 33%" />
@@ -1053,7 +1717,7 @@ q_t=E_t\Bigg[M_{t,t+1}\Bigg(&amp;\alpha\xi MC_{t+1}\frac{T_{t+1}}{\Phi_{t+1}}\\
 <td>三者不同</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p>企业利润沿用原文的 <span class="math inline">\(F_t\)</span>，不要与 F 国下标混淆。为缩短公式，定义</p>
 <p><span class="math display">\[
 \kappa\equiv\Pi(1+b\mathbb I),\qquad
@@ -1663,7 +2327,7 @@ N^{*}=n^{*}+l_F^{*}+l_F,
 <p>原文的 <span class="math inline">\(T=Y_H+Y_H^{*}\)</span> 与进口价格乘数，不能在没有说明时同时解释为“<span class="math inline">\(Y_H^{*}\)</span> 是外国实收量”且“本国按 <span class="math inline">\(\tau Y_H^{*}\)</span> 消耗资源”。本解析按原文给定系统解读图表；第 12 节的新模型则把安全与合规支出明确列为真实资源使用。</p>
 <p>这也是政策结论的适用范围：作者图 5 的“最低商品壁垒最优”是其价格楔子和福利闭合下的数值结果，并非已经证明适用于有税收返还、市场势力和报复策略的一般最优关税定理。</p>
 <h3 id="analysis-五类经济的切换表">6.4 五类经济的切换表</h3>
-<table>
+<div class="table-wrapper"><table>
 <thead>
 <tr>
 <th>情形</th>
@@ -1710,7 +2374,7 @@ N^{*}=n^{*}+l_F^{*}+l_F,
 <td><span class="math inline">\(\mathbb I_H=1\)</span></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p>单向情形还要相应设置外国的指示量与加工劳动，不能只把某一个贸易数量强制归零、其余方程全部照旧。</p>
 <hr />
 <h2 id="analysis-从方程求稳态候选解再检查有限最优">7. 从方程求稳态候选解，再检查有限最优</h2>
@@ -1832,7 +2496,7 @@ P_D=\frac{\gamma q\varphi}{D}.
 <h3 id="analysis-边界与一个可复算的稳态候选解">7.5 边界与一个可复算的稳态候选解</h3>
 <p><span class="math inline">\(\xi=0\)</span> 时，数据不影响生产；应直接删去数据部门，以 <span class="math inline">\(l=D=\varphi=0\)</span> 求普通封闭生产模型，不能将 <span class="math inline">\(\nu_l=0\)</span> 代入含 <span class="math inline">\(\ln\nu_l\)</span> 的计算式。<span class="math inline">\(\delta_\Phi=0\)</span> 且 <span class="math inline">\(\varphi&gt;0\)</span> 时，<span class="math inline">\(\Phi_{t+1}=\Phi_t+\varphi\)</span> 不可能保持有限水平稳态；<span class="math inline">\(\delta_\Phi=1\)</span> 时，存量完全折旧，但当期采购仍在下期生效。</p>
 <p>教学例子采用原文表 1 的 <span class="math inline">\(\beta=.99,\sigma=2,\eta=1.3,\Omega=1.315,\alpha=1/3,\rho=21,\delta_K=\delta_\Phi=.025,\gamma=.5,B=1\)</span>，再明确选定 <span class="math inline">\(A=\xi=\Pi=\pi=1\)</span>、<span class="math inline">\(\mathbb I=0\)</span>。得到：</p>
-<table>
+<div class="table-wrapper"><table>
 <thead>
 <tr>
 <th>变量</th>
@@ -1873,7 +2537,7 @@ P_D=\frac{\gamma q\varphi}{D}.
 <td style="text-align: right;">6.086730</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p>数据商零利润、家庭预算、生产、资本需求、劳动需求、供数条件和数据 Euler 的残差均由 <a href="验证/check_math.py"><code>验证/check_math.py</code></a> 检查；完整精度见 <a href="验证/检查结果.json"><code>检查结果.json</code></a>。这些数值是稳态方程的候选解，作者的开放经济图形另按原文报告。</p>
 <h3 id="analysis-正的一阶条件解还需要有限最优的检验">7.6 正的一阶条件解，还需要有限最优的检验</h3>
 <p>若按附录的字面单企业优化理解：企业面对给定的工作数据单价，可以单方面增加自己的采购，且没有额外采购上限或安装成本，则可以检验其问题是否有有限解。先在封闭经济把工资、租金、数据价格与总需求固定为候选稳态的正值，令 <span class="math inline">\(Y&gt;0\)</span>，并记 <span class="math inline">\(a=\alpha\xi\)</span>、<span class="math inline">\(b_\rho=(\rho-1)/\rho\)</span>、<span class="math inline">\(c_0=(r/\alpha)^\alpha[w/(1-\alpha)]^{1-\alpha}/A&gt;0\)</span>。企业逆需求为 <span class="math inline">\(p=(Y/y)^{1/\rho}\)</span>，当前最优经营利润问题是</p>
@@ -2093,7 +2757,7 @@ E_t\hat{\mathcal R}_{\Phi,t+1}
 <p>这种继承是模块性的。CCWZ 没有在基准中加入黏性价格、货币政策规则和名义汇率制度，不能称为“把数据放进完整的 Galí–Monacelli 小型开放新凯恩斯模型”。它是两国、实质变量为主、带数据加工与数据积累的动态一般均衡模型。</p>
 <p>同样，数据商与隐私文献提供了经济动机，并不表示 CCWZ 解了 Ichihashi 的消费者战略披露或 Acemoglu 等人的相关隐私外部性模型。原文使用 <span class="math inline">\(\Pi(1+b\mathbb I)\pi D^2\)</span> 这个简约形式承接这些问题，没有显式刻画“我出售的数据泄露你的信息”的外部性。[S2，pp.4—7]</p>
 <h3 id="analysis-与读书会中几类论文的区别">10.7 与读书会中几类论文的区别</h3>
-<table>
+<div class="table-wrapper"><table>
 <colgroup>
 <col style="width: 33%" />
 <col style="width: 33%" />
@@ -2143,7 +2807,7 @@ E_t\hat{\mathcal R}_{\Phi,t+1}
 <td>CCWZ 的单位测度对称企业不刻画平台倾斜、赢者通吃或用户迁移</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p>前三类贸易论文及 Prüfer–Schottmüller 的定位依据本地论文开篇与模型介绍，资料位置列于 S14。这个比较不意味着它们都是 CCWZ 直接改写的祖先模型。</p>
 <hr />
 <h2 id="analysis-为什么这项研究值得读优秀在哪里">11. 为什么这项研究值得读，优秀在哪里</h2>
@@ -2488,7 +3152,7 @@ q_t=E_t\Bigg[M_{t,t+1}\Bigg(&amp;\alpha\xi MC_{t+1}\frac{T_{t+1}}{\Phi_{t+1}}\\
 <p>扩展后的企业在获得外国工作数据后，既可能立即降低经营成本，也可能增加训练/研发投入，随后提高本国能力。因此，数据开放与组织培训、算法适配之间应出现互补；同样的进口数据量在初始研发效率不同的国家可能产生不同的生产率路径。</p>
 <p>要区分一次性生产率效应和能力积累，应分别观察数据采购、训练/研发支出、任务适配能力及后续产出，而非将所有数字投资合成单一指标。</p>
 <h3 id="analysis-三项扩展如何选择">12.4 三项扩展如何选择</h3>
-<table>
+<div class="table-wrapper"><table>
 <colgroup>
 <col style="width: 25%" />
 <col style="width: 25%" />
@@ -2523,7 +3187,7 @@ q_t=E_t\Bigg[M_{t,t+1}\Bigg(&amp;\alpha\xi MC_{t+1}\frac{T_{t+1}}{\Phi_{t+1}}\\
 <td>数据开放何时伴随本国吸收能力形成</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p>B 的有界生产率可直接修复第 7.6 节识别出的有限最优问题。基准确定后，三个扩展最好逐一加入、分别比较同一基准；一开始把所有新机制合并，会使数据价格、隐私、安全、算力与学习的作用难以识别。若做第一篇后续论文，A 与现有制度最直接对应，也最容易提出区分固定成本和单位成本的可检验预测。</p>
 <hr />
 <h2 id="analysis-数学检验证据与演讲使用">13. 数学检验、证据与演讲使用</h2>
@@ -2542,7 +3206,7 @@ q_t=E_t\Bigg[M_{t,t+1}\Bigg(&amp;\alpha\xi MC_{t+1}\frac{T_{t+1}}{\Phi_{t+1}}\\
 <p>完整推导留在本 Markdown；课件把相邻代数步骤拆开，主讲消费供数、CES、企业数据投资、数据商和稳态，较长的稳态解及公式条件放在附录。其结构参考了同学课件中“先设定、再逐式推导、最后解释均衡含义”的做法。</p>
 <hr />
 <h2 id="analysis-原式解析课件覆盖表">14. 原式—解析—课件覆盖表</h2>
-<table>
+<div class="table-wrapper"><table>
 <thead>
 <tr>
 <th>原文/报告对象</th>
@@ -2642,7 +3306,7 @@ q_t=E_t\Bigg[M_{t,t+1}\Bigg(&amp;\alpha\xi MC_{t+1}\frac{T_{t+1}}{\Phi_{t+1}}\\
 <td>数据状态线性化；图形符号以原文为准</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr />
 <h2 id="analysis-参考资料与可核对来源">参考资料与可核对来源</h2>
 <p>以下 S 编号同时用于正文和 <a href="research/来源台账.csv"><code>research/来源台账.csv</code></a>。页码未注明“PDF”时均指论文印刷页码；全文的 Appendix A 对应 PDF 第 39—42 页。</p>
@@ -2669,17 +3333,23 @@ q_t=E_t\Bigg[M_{t,t+1}\Bigg(&amp;\alpha\xi MC_{t+1}\frac{T_{t+1}}{\Phi_{t+1}}\\
 
     <section id="evidence" class="chapter chapter-evidence">
       <header class="chapter-heading">
-        <p class="chapter-number">05 / 证据台账</p>
+        <p class="chapter-number">07 / 证据台账</p>
         <h2>每项判断都能回到来源</h2>
         <p>台账区分作者报告、独立推导、综合解释和新增模型。完整 CSV 随仓库保存。</p>
       </header>
       <div class="evidence-actions">
         <a href="assets/source-ledger.csv">来源台账 CSV</a>
         <a href="assets/claim-evidence-matrix.csv">论断—证据表 CSV</a>
+        <a href="assets/citation-lineage.csv">文献谱系 CSV</a>
+        <a href="assets/deep-reading-matrix.csv">全文关系矩阵 CSV</a>
+        <a href="assets/paper-corpus-manifest.csv">25 份 PDF 阅读状态</a>
+        <a href="assets/background-reading-notes.md">五份背景全文复核</a>
+        <a href="assets/google-scholar-citing-works.json">Scholar 20 条引用快照</a>
         <a href="assets/finite-optimum-check.json">有限最优检查 JSON</a>
+        <a href="assets/CCWZ-explorable-deck.pdf">35 页汇报 PDF</a>
         <a href="assets/公式讲解.pdf">原公式课件 PDF</a>
       </div>
-      <div class="table-shell"><table><thead><tr><th>编号</th><th>来源</th><th>年份/版本</th><th>类型</th><th>用途</th></tr></thead><tbody><tr><td>S1</td><td>Production, Trade, and Cross-Border Data Flows: NBER record</td><td>2023 initial;2025-03 revision</td><td>official metadata</td><td>论文身份与版本</td></tr><tr><td>S2</td><td>Production, Trade, and Cross-Border Data Flows</td><td>2023;March 2025 revision</td><td>working paper</td><td>模型公式;数值结果归属;直接继承关系</td></tr><tr><td>S2v0</td><td>Production, Trade, and Cross-Border Data Flows</td><td>2023-06 initial</td><td>working paper</td><td>与2025修订版分开保存</td></tr><tr><td>S3</td><td>Production, Trade, and Cross-Border Data Flows: AFA slides</td><td>2026-01-04</td><td>conference slides</td><td>讲解主线;参数页图像;全文指向</td></tr><tr><td>S4</td><td>Nonrivalry and the Economics of Data</td><td>2020 AER110(9)2819-2858</td><td>journal article</td><td>非竞争性;消费生成;产权制度比较</td></tr><tr><td>S5</td><td>Knowledge Accumulation, Privacy, and Growth in a Data Economy</td><td>2021 Management Science67(10)6480-6492</td><td>journal article</td><td>隐私;数据约束;研发知识积累</td></tr><tr><td>S6</td><td>Endogenous Growth under Multiple Uses of Data</td><td>2022 JEDC141 104395</td><td>journal article</td><td>生产/创新多重使用;数据商</td></tr><tr><td>S7</td><td>A Model of the Data Economy</td><td>本地文件实际2024-07-09版本;系列始于2021</td><td>working paper</td><td>预测精度;折旧;数据回报边界;避免文件名与版本混淆</td></tr><tr><td>S8</td><td>Data and the Aggregate Economy</td><td>2024 JEL62(2)458-484</td><td>journal survey</td><td>模型分类;预测收益边界</td></tr><tr><td>S9</td><td>Trade and Growth with Digital Data</td><td>2025 KIEP Working Paper25-02</td><td>working paper</td><td>后续跨境数据增长模型;数据存量进入研发</td></tr><tr><td>S10</td><td>Economic Implications of Data Regulation: Balancing Openness and Trust</td><td>2025-02-10</td><td>official research report</td><td>信任与合规成本;情景模拟4.5%和1.77%</td></tr><tr><td>S11</td><td>促进和规范数据跨境流动规定</td><td>2024-03-22</td><td>official regulation</td><td>数据类别与门槛差异;安全义务</td></tr><tr><td>S12</td><td>Data Security Program</td><td>2025生效;检索于2026-10-28</td><td>official regulation explanation</td><td>特定数据及接收方限制;2025-04-08和2025-10-05生效日</td></tr><tr><td>S13</td><td>CCWZ直接引用的标准与隐私基础</td><td>1977;2005;2020;2022</td><td>attribution through focal paper</td><td>只说明原文引用角色;不冒充已读全部微观证明</td></tr><tr><td>S14</td><td>读书会同领域对照论文</td><td>2002;2003;2008;2012;2021</td><td>local primary papers</td><td>模型对象比较;不都视为CCWZ直接继承</td></tr><tr><td>S15</td><td>EU rules on international data transfers</td><td>2021-current</td><td>official guidance</td><td>扩展A的多工具制度动机</td></tr><tr><td>S16</td><td>Limiting heterogeneity in cross-border data flow: Impact on domestic value chains stability and the role of innovation</td><td>2024 PLOS ONE 19(8)</td><td>journal article</td><td>跨境数据限制与创新/价值链稳定的相邻实证证据;不直接标定模型</td></tr><tr><td>S17</td><td>OpenAlex citation record for CCWZ</td><td>retrieved 2026-11-03</td><td>bibliographic API</td><td>只用于发现后续文献;不作为经济结论证据</td></tr><tr><td>S18</td><td>Endogenous growth and human capital accumulation in a data economy</td><td>2024 Structural Change and Economic Dynamics69 298-312</td><td>journal article</td><td>扩展C的人力资本积累动机;不等同于CCWZ内生能力方程</td></tr></tbody></table></div>
+      <div class="table-shell"><table><thead><tr><th>编号</th><th>来源</th><th>年份/版本</th><th>类型</th><th>用途</th></tr></thead><tbody><tr><td>S1</td><td>Production, Trade, and Cross-Border Data Flows: NBER record</td><td>2023 initial;2025-03 revision</td><td>official metadata</td><td>论文身份与版本</td></tr><tr><td>S2</td><td>Production, Trade, and Cross-Border Data Flows</td><td>2023;March 2025 revision</td><td>working paper</td><td>模型公式;数值结果归属;直接继承关系</td></tr><tr><td>S2v0</td><td>Production, Trade, and Cross-Border Data Flows</td><td>2023-06 initial</td><td>working paper</td><td>与2025修订版分开保存</td></tr><tr><td>S3</td><td>Production, Trade, and Cross-Border Data Flows: AFA slides</td><td>2026-01-04</td><td>conference slides</td><td>讲解主线;参数页图像;全文指向</td></tr><tr><td>S4</td><td>Nonrivalry and the Economics of Data</td><td>2020 AER110(9)2819-2858</td><td>journal article</td><td>非竞争性;消费生成;产权制度比较</td></tr><tr><td>S5</td><td>Knowledge Accumulation, Privacy, and Growth in a Data Economy</td><td>2021 Management Science67(10)6480-6492</td><td>journal article</td><td>隐私;数据约束;研发知识积累</td></tr><tr><td>S6</td><td>Endogenous Growth under Multiple Uses of Data</td><td>2022 JEDC141 104395</td><td>journal article</td><td>生产/创新多重使用;数据商</td></tr><tr><td>S7</td><td>A Model of the Data Economy</td><td>本地文件实际2024-07-09版本;系列始于2021</td><td>working paper</td><td>预测精度;折旧;数据回报边界;避免文件名与版本混淆</td></tr><tr><td>S8</td><td>Data and the Aggregate Economy</td><td>2024 JEL62(2)458-484</td><td>journal survey</td><td>模型分类;预测收益边界</td></tr><tr><td>S9</td><td>Trade and Growth with Digital Data</td><td>2025 KIEP Working Paper25-02</td><td>working paper</td><td>相邻跨境数据增长模型；数据存量进入研发；未引用CCWZ</td></tr><tr><td>S10</td><td>Economic Implications of Data Regulation: Balancing Openness and Trust</td><td>2025-02-10</td><td>official research report</td><td>信任与合规成本;情景模拟4.5%和1.77%</td></tr><tr><td>S11</td><td>促进和规范数据跨境流动规定</td><td>2024-03-22</td><td>official regulation</td><td>数据类别与门槛差异;安全义务</td></tr><tr><td>S12</td><td>Data Security Program</td><td>2025生效;检索于2026-10-28</td><td>official regulation explanation</td><td>特定数据及接收方限制;2025-04-08和2025-10-05生效日</td></tr><tr><td>S13</td><td>CCWZ直接引用的标准与隐私基础</td><td>1977;2005;2020;2022</td><td>attribution through focal paper</td><td>只说明原文引用角色;不冒充已读全部微观证明</td></tr><tr><td>S14</td><td>读书会同领域对照论文</td><td>2002;2003;2008;2012;2021</td><td>local primary papers</td><td>模型对象比较;不都视为CCWZ直接继承</td></tr><tr><td>S15</td><td>EU rules on international data transfers</td><td>2021-current</td><td>official guidance</td><td>扩展A的多工具制度动机</td></tr><tr><td>S16</td><td>Limiting heterogeneity in cross-border data flow: Impact on domestic value chains stability and the role of innovation</td><td>2024 PLOS ONE 19(8)</td><td>journal article</td><td>跨境数据限制与创新/价值链稳定的相邻实证证据;不直接标定模型</td></tr><tr><td>S17</td><td>OpenAlex citation record for CCWZ</td><td>retrieved 2026-11-03</td><td>bibliographic API</td><td>只用于发现后续文献;不作为经济结论证据</td></tr><tr><td>S18</td><td>Endogenous growth and human capital accumulation in a data economy</td><td>2024 Structural Change and Economic Dynamics69 298-312</td><td>journal article</td><td>扩展C的人力资本积累动机;不等同于CCWZ内生能力方程</td></tr><tr><td>S19</td><td>Online Privacy and Information Disclosure by Consumers</td><td>2020 American Economic Review 110(2) 569-595</td><td>journal article</td><td>消费者披露、推荐、个性化定价与隐私；CCWZ数据中介的微观前置</td></tr><tr><td>S20</td><td>The Economics of Data Externalities</td><td>2021 Journal of Economic Theory 196 105316</td><td>journal article</td><td>相关数据外部性与企业信息收购；CCWZ未保留的微观机制</td></tr><tr><td>S21</td><td>Too Much Data: Prices and Inefficiencies in Data Markets</td><td>2022 AEJ Microeconomics 14(4) 218-256</td><td>journal article</td><td>数据泄露外部性、价格与过度共享；用于限定CCWZ线性价格设定</td></tr><tr><td>S22</td><td>A Generalized Model of Growth in the Data Economy</td><td>2024 Research Square v1;earlier working-paper circulation</td><td>preprint</td><td>新增生产者数据与自然数据；正文将CCWZ列为消费者活动生成数据的模型</td></tr><tr><td>S23</td><td>OpenCitations citation record for CCWZ</td><td>retrieved 2026-11-03</td><td>citation index</td><td>返回2条引用边；与OpenAlex和RePEc覆盖不同</td></tr><tr><td>S24</td><td>跨境数据流动政策的福利效应：制约因素与跨国协调</td><td>2024 经济研究59(9)99-117</td><td>journal article</td><td>一般均衡下单边/区域开放、规模报酬、非成员福利与政策互补；全文未取得，不作方程或数值归因</td></tr><tr><td>S26</td><td>数据跨境流动与经济增长：理论框架与经验证据</td><td>2026 经济研究61(2):119-141</td><td>journal article</td><td>同作者团队后续：多国一般均衡、双重非竞争性、119国/地区2010-2022面板；全文未公开取得</td></tr><tr><td>S27</td><td>数据跨境流动的经济效应和治理</td><td>2026 中央财经大学学报(7)5-19</td><td>journal review</td><td>作者团队综述：测度、企业、贸易、创新增长、约束风险与治理；非模型扩展</td></tr><tr><td>S28</td><td>Data Economy to the Rescue of Our Empty Planet?</td><td>2025 SSRN working paper 5062219</td><td>working paper</td><td>数据—人力资本—家庭生产率—生育反馈；引用CCWZ但非跨境模型延伸</td></tr><tr><td>S29</td><td>Trade Theories in the Digital Age</td><td>2025 China and World Economy33(2)</td><td>journal article</td><td>数字技术改变贸易理论的综述；引用CCWZ但非模型扩展</td></tr><tr><td>S30</td><td>Who Controls the Data, Who Controls the Money? Corporate Financing in the AI Era</td><td>2026 SSRN working paper 6448667</td><td>working paper</td><td>异质企业、AI积累、金融加速器和宏观审慎；非跨境模型扩展</td></tr><tr><td>S31</td><td>Cross-Border Data Flows and Corporate Innovation Strategies: Evidence from China</td><td>2026 SSRN working paper 7180188</td><td>working paper</td><td>中国上市公司与TAPED；实质/策略创新和知识机制；全文受限</td></tr><tr><td>S32</td><td>The Heterogeneous Impact of Data Transfer Restrictions on Data Centre Geography</td><td>2026-08-25 working paper; SSRN record 7429402</td><td>working paper</td><td>158国事件研究；数据中心选址与合规配额模型；总算力与境内投资分开报告</td></tr><tr><td>S33</td><td>RePEc citation list for NBER Working Paper 31416</td><td>retrieved 2026-11-03</td><td>citation index</td><td>返回2条引用；用于说明索引覆盖差异</td></tr><tr><td>S34</td><td>Google Scholar citing-works snapshot for CCWZ</td><td>retrieved 2026-11-03</td><td>citation index</td><td>完整候选引用集；逐项区分直接推进、相邻引用、重复版本与低相关引用</td></tr><tr><td>S35</td><td>Tracing Out International Data Flow: The Value of Data and Privacy</td><td>2023 SSRN 4185169; AFA 2024 program paper</td><td>working paper</td><td>以GDPR供需反应度量数据价值和隐私偏好；正文引用CCWZ</td></tr><tr><td>S36</td><td>Trade in Data: Regulating Cross-Border Data Flows</td><td>2026-01-14 working paper</td><td>working paper</td><td>明确引用CCWZ；需求侧网络效应、品种、政府开放度与有条件协调</td></tr><tr><td>S37</td><td>The Productivity Effects of Cross-border Data Flows: Evidence from Japanese firm-level data</td><td>2025-12 RIETI Discussion Paper 25-E-125</td><td>working paper</td><td>日本企业进入跨境数据收集与生产率ATT；观察性DID，不用于直接标定CCWZ</td></tr><tr><td>S38</td><td>International agreements on cross-border data flows and international trade: A statistical analysis</td><td>2020 OECD STI Working Paper</td><td>institutional working paper</td><td>1995-2012引力模型；国际数据协议、互操作、信任、合规成本与双边贸易</td></tr><tr><td>S39</td><td>Trade and Cross-Border Data Flows</td><td>2019 OECD Trade Policy Paper 220</td><td>institutional working paper</td><td>四类跨境传输制度与本地存储连续谱；互操作；政策综述而非因果估计</td></tr><tr><td>S40</td><td>Can data flow provisions facilitate trade in goods and services?—Analysis based on the TAPED database</td><td>2024 Journal of International Trade &amp; Economic Development</td><td>journal article</td><td>TAPED协议条款与货物、服务贸易；数字基础设施和行业异质性</td></tr><tr><td>S41</td><td>Cross-Border Data Flow and Knowledge Diffusion: Evidence From China</td><td>2026 Review of International Economics 34(5)1044-1072</td><td>journal article</td><td>以GDPR为冲击，连接中国专利和Google Patents引文，识别跨境数据与知识扩散</td></tr><tr><td>S42</td><td>Data privacy regulation and cross-border e-commerce</td><td>2024 Empirica 51(4)913-927</td><td>journal article</td><td>GDPR与183国对欧跨境电商；网站流量、数据收集、广告和共享渠道</td></tr><tr><td>S43</td><td>Regulating personal data: Data models and digital services trade</td><td>2021 working paper</td><td>working paper</td><td>个人数据治理模式与数字服务贸易</td></tr><tr><td>S44</td><td>Governing personal data and trade in digital services</td><td>2025 Review of International Economics</td><td>journal article</td><td>个人数据监管与数字服务贸易的后续经验研究</td></tr><tr><td>S45</td><td>The Impact of AI and Cross-Border Data Regulation on International Trade in Digital Services</td><td>2023-11 NBER WP 31925;2026 Journal of International Economics DOI 10.1016/j.jinteco.2026.104328</td><td>working paper and journal article</td><td>35575款应用2015–2020；AI部署、外国用户、数据限制与知识溢出；因果解释依赖成本移位工具变量的排除限制</td></tr><tr><td>S46</td><td>Data, Privacy Laws and Firm Production: Evidence from the GDPR</td><td>NBER WP 32146; local revision dated 2026-10</td><td>working paper</td><td>GDPR后的存储/处理投入、数据成本、生产成本及数据—算力互补；未核实为CCWZ引用者</td></tr><tr><td>S47</td><td>Data as a Production Factor with Market Expansion: Welfare and Distortions</td><td>2026 SSRN 5861683</td><td>working paper</td><td>非竞争数据、中介、隐私、市场扩张、社会最优与中性点；引用CCWZ</td></tr><tr><td>S48</td><td>Impact of data factor and data integration on economic development: Empirical insights from China</td><td>2025 Telecommunications Policy 49(8)103004</td><td>journal article</td><td>中国30省面板；数据要素、要素融合、TFP与非线性</td></tr><tr><td>S49</td><td>Global Trends in Digital Trade Policies and Practices: Evidence from the Digital Trade Integration Database</td><td>2026 World Trade Review 25(1)127-151</td><td>journal article</td><td>DTI数据库和全球数字贸易监管趋势；引用CCWZ但非模型扩展</td></tr><tr><td>S50</td><td>Impact of data trade restrictions on IT services export: A cross-country analysis</td><td>2022 Telecommunications Policy</td><td>journal article</td><td>数据贸易限制与IT服务出口的跨国经验</td></tr><tr><td>S51</td><td>Regulatory border effects in digital trade: Estimating the GDPR’s asymmetric impact on EU enterprises’ cross-border e-commerce through a triple difference-in-differences approach</td><td>2026 International Review of Economics &amp; Finance 110</td><td>journal article</td><td>GDPR、Schrems II和数据隐私框架阶段的跨境电商三重差分</td></tr><tr><td>S52</td><td>Regulatory Spillovers and Data Governance: Evidence from the GDPR</td><td>2022 Marketing Science</td><td>journal article</td><td>11万网站第三方技术调用；GDPR对受监管和未受监管网站的溢出</td></tr><tr><td>S53</td><td>The Short-Run Effects of the General Data Protection Regulation on Technology Venture Investment</td><td>2021 Marketing Science</td><td>journal article</td><td>GDPR实施后欧洲科技创业投资的短期变化</td></tr><tr><td>S54</td><td>The Economics of Privacy</td><td>2016 Journal of Economic Literature 54(2)442-492</td><td>journal review</td><td>隐私披露的理论与经验基础综述</td></tr><tr><td>S55</td><td>The Economics of Social Data</td><td>2022 RAND Journal of Economics</td><td>journal article</td><td>数据中介、社会数据外部性、隐私与信息转售</td></tr><tr><td>S56</td><td>跨境数据流动壁垒对中国的影响及反制战略</td><td>2025 金融研究(9)77-95</td><td>journal article</td><td>直接引用CCWZ；38国44行业量化贸易模型；外部数据规模、GDPR/美国限制、产业补贴与反制</td></tr><tr><td>S57</td><td>数据跨境流动壁垒对数字服务贸易二元边际影响的经验研究</td><td>2022 国际经贸探索</td><td>journal article</td><td>2014–2018年31出口国；DSTRI壁垒与数字服务出口广延/集约边际；观察性面板</td></tr><tr><td>S58</td><td>跨境数据流动对制造业创新能力的影响</td><td>2024 工业技术经济</td><td>journal article</td><td>制造业创新、生产要素流动和企业数字化环境</td></tr><tr><td>S59</td><td>数字贸易规则与研发要素跨境流动</td><td>2022 中国工业经济</td><td>journal article</td><td>40经济体2000–2014年WIOD研发行业投入流；数字规则、研发要素代理与网络中心度；观察性设计</td></tr><tr><td>S60</td><td>RTAs框架下跨境数据流动规则对数字服务贸易的影响研究</td><td>2024 国际贸易</td><td>journal article</td><td>50经济体2010–2021年TAPED条款深度与数字服务出口；双向固定效应和共同第三方缔约国IV</td></tr><tr><td>S61</td><td>数据跨境流动限制与企业供应链风险：效应与机理</td><td>2026 上海对外经贸大学学报</td><td>journal article</td><td>企业限制指数、供应链风险、资源配置效率与创新机制</td></tr><tr><td>S62</td><td>The Production Effects of Cross-Border Data Flows: Evidences from Cross-Country Panel Data</td><td>2023 SSRN 4544922</td><td>working paper</td><td>同作者团队早期跨国生产效应稿；可能与2026增长论文存在版本关系，正文未取得</td></tr></tbody></table></div>
     </section>
   </main>
 

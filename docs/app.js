@@ -47,6 +47,67 @@
     || 'all';
   selectRoute(initial, false);
 
+  const thetaExplorer = document.querySelector('[data-theta-explorer]');
+  if (thetaExplorer) {
+    const thetaInputs = Object.fromEntries(
+      [...thetaExplorer.querySelectorAll('[data-theta-input]')]
+        .map((input) => [input.dataset.thetaInput, input])
+    );
+    const thetaOutputs = Object.fromEntries(
+      [...thetaExplorer.querySelectorAll('[data-theta-output]')]
+        .map((output) => [output.dataset.thetaOutput, output])
+    );
+    const thetaValue = thetaExplorer.querySelector('[data-theta-value]');
+    const thetaVerdict = thetaExplorer.querySelector('[data-theta-verdict]');
+    const thetaResult = thetaExplorer.querySelector('[data-theta-result]');
+    const thetaPresets = [...thetaExplorer.querySelectorAll('[data-theta-preset]')];
+    const presets = {
+      closed: { alpha: 1 / 3, xi: 1, elasticity: 21 },
+      open: { alpha: 1 / 3, xi: 1, elasticity: 5 },
+      boundary: { alpha: 0.25, xi: 1, elasticity: 5 }
+    };
+
+    function updateTheta() {
+      const alpha = Number(thetaInputs.alpha.value);
+      const xi = Number(thetaInputs.xi.value);
+      const elasticity = Number(thetaInputs.elasticity.value);
+      const theta = alpha * xi * (elasticity - 1);
+      thetaOutputs.alpha.textContent = alpha.toFixed(3);
+      thetaOutputs.xi.textContent = xi.toFixed(2);
+      thetaOutputs.elasticity.textContent = elasticity.toFixed(2);
+      thetaValue.textContent = theta.toFixed(3);
+
+      if (theta > 1.0005) {
+        thetaResult.dataset.regime = 'superlinear';
+        thetaVerdict.textContent = '目标无上界；有限正驻点是局部最小值。';
+      } else if (theta < 0.9995) {
+        thetaResult.dataset.regime = 'sublinear';
+        thetaVerdict.textContent = '线性成本控制这条尾部偏离；完整动态存在性仍需另证。';
+      } else {
+        thetaResult.dataset.regime = 'boundary';
+        thetaVerdict.textContent = '边界情形取决于 −q + βC 的符号，不能只看指数。';
+      }
+    }
+
+    thetaPresets.forEach((button) => {
+      button.addEventListener('click', () => {
+        const preset = presets[button.dataset.thetaPreset];
+        Object.entries(preset).forEach(([name, value]) => {
+          thetaInputs[name].value = String(value);
+        });
+        thetaPresets.forEach((candidate) => candidate.classList.toggle('active', candidate === button));
+        updateTheta();
+      });
+    });
+    Object.values(thetaInputs).forEach((input) => {
+      input.addEventListener('input', () => {
+        thetaPresets.forEach((button) => button.classList.remove('active'));
+        updateTheta();
+      });
+    });
+    updateTheta();
+  }
+
   document.querySelector('[data-action="print"]')?.addEventListener('click', () => {
     const details = document.querySelector('.analysis-disclosure');
     if (details) details.open = true;
